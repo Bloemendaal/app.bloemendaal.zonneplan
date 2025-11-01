@@ -1,0 +1,29 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ last updated at",
+			"variables": {
+				"todo": "TODO"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "We'll send you an email with a link you can use to log in directly.",
+			"email": "Email address",
+			"submit": "Send email link"
+		},
+		"polling": {
+			"title": "Confirm your email address...",
+			"subtitle": "Open your email on a computer or phone and click the confirm email button. The pairing will continue automatically afterwards.",
+			"email": "Email sent to:",
+			"back": "Change email address",
+			"error": {
+				"timeout": "Timed out waiting for email confirmation. Please try again.",
+				"invalid_email": "The email address provided is invalid. Please try again.",
+				"unknown": "An unknown error occurred. Please try again."
+			}
+		}
+	}
+}

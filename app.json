@@ -1,0 +1,243 @@
+{
+  "_comment": "This file is generated. Please edit .homeycompose/app.json instead.",
+  "id": "app.bloemendaal.zonneplan",
+  "version": "1.0.0",
+  "compatibility": ">=12.4.5",
+  "sdk": 3,
+  "platforms": [
+    "local"
+  ],
+  "name": "Zonneplan",
+  "description": {
+    "en": "Adds support for all Zonneplan devices to Homey."
+  },
+  "bugs": {
+    "url": "https://github.com/Bloemendaal/app.bloemendaal.zonneplan/issues"
+  },
+  "contributing": {
+    "donate": {
+      "githubSponsors": {
+        "username": "Bloemendaal"
+      }
+    }
+  },
+  "brandColor": "#00aa65",
+  "category": [
+    "energy"
+  ],
+  "permissions": [],
+  "source": "https://github.com/Bloemendaal/app.bloemendaal.zonneplan",
+  "support": "mailto:casperbloemendaal@gmail.com",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Casper Bloemendaal",
+    "email": "casperbloemendaal@gmail.com"
+  },
+  "esm": true,
+  "drivers": [
+    {
+      "name": "Zonneplan Charge",
+      "class": "evcharger",
+      "capabilities": [
+        "measure_power",
+        "evcharger_charging",
+        "evcharger_charging_state",
+        "meter_power.charged",
+        "meter_power.discharged"
+      ],
+      "capabilitiesOptions": {
+        "meter_power.charged": {
+          "title": {
+            "en": "Charged Energy"
+          }
+        },
+        "meter_power.discharged": {
+          "title": {
+            "en": "Discharged Energy"
+          }
+        }
+      },
+      "energy": {
+        "evCharger": true,
+        "meterPowerImportedCapability": "meter_power.charged",
+        "meterPowerExportedCapability": "meter_power.discharged"
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "icon": "icon.svg",
+      "images": {
+        "small": "/drivers/charge/assets/images/small.png",
+        "large": "/drivers/charge/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "email_verification"
+        },
+        {
+          "id": "polling"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "charge",
+      "settings": [
+        {
+          "type": "group",
+          "label": {
+            "en": "Login details",
+            "nl": "Inloggegevens",
+            "da": "Login-oplysninger",
+            "de": "Anmeldedaten",
+            "es": "Detalles de inicio de sesión",
+            "fr": "Détails de connexion",
+            "it": "Dettagli di accesso",
+            "no": "Innloggingsdetaljer",
+            "sv": "Inloggningsuppgifter",
+            "pl": "Dane logowania",
+            "ru": "Детали входа",
+            "ko": "로그인 정보"
+          },
+          "children": [
+            {
+              "id": "email",
+              "type": "text",
+              "label": {
+                "en": "E-mail",
+                "nl": "E-mailadres",
+                "da": "E-mail",
+                "de": "E-Mail",
+                "es": "Correo electrónico",
+                "fr": "E-mail",
+                "it": "E-mail",
+                "no": "E-post",
+                "sv": "E-post",
+                "pl": "E-mail",
+                "ru": "Эл. почта",
+                "ko": "이메일"
+              },
+              "value": "",
+              "hint": {
+                "en": "The e-mail that you use in the Zonneplan App."
+              }
+            }
+          ]
+        },
+        {
+          "type": "group",
+          "label": {
+            "en": "Behavior settings",
+            "nl": "Gedragsinstellingen",
+            "da": "Adfærdsindstillinger",
+            "de": "Verhaltenseinstellungen",
+            "es": "Ajustes de comportamiento",
+            "fr": "Paramètres de comportement",
+            "it": "Impostazioni di comportamento",
+            "no": "Adferdsinnstillinger",
+            "sv": "Beteendeinställningar",
+            "pl": "Ustawienia zachowania",
+            "ru": "Настройки поведения",
+            "ko": "동작 설정"
+          },
+          "children": [
+            {
+              "id": "pollingInterval",
+              "type": "number",
+              "label": {
+                "en": "Polling interval",
+                "nl": "Ververstijd",
+                "da": "Afstemningsinterval",
+                "de": "Abrufintervall",
+                "es": "Intervalo de sondeo",
+                "fr": "Intervalle d'interrogation",
+                "it": "Intervallo di polling",
+                "no": "Polling-intervall",
+                "sv": "Intervall för avstämning",
+                "pl": "Interwał odpytywania",
+                "ru": "Интервал опроса",
+                "ko": "폴링 간격"
+              },
+              "value": 10,
+              "min": 1,
+              "step": 1,
+              "units": {
+                "en": "minutes",
+                "nl": "minuten",
+                "da": "minutter",
+                "de": "Minuten",
+                "es": "minutos",
+                "fr": "minutes",
+                "it": "minuti",
+                "no": "minutter",
+                "sv": "minuter",
+                "pl": "minuty",
+                "ru": "минуты",
+                "ko": "분"
+              },
+              "hint": {
+                "en": "Interval in minutes to poll Zonneplan for new data. Lowering this value may result in a temporary ban on your IP."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "timestamp": {
+      "type": "number",
+      "title": {
+        "en": "Last updated at",
+        "nl": "Laatst bijgewerkt om",
+        "da": "Sidst opdateret kl.",
+        "de": "Zuletzt aktualisiert um",
+        "es": "Última actualización a las",
+        "fr": "Dernière mise à jour à",
+        "it": "Ultimo aggiornamento alle",
+        "no": "Sist oppdatert kl.",
+        "sv": "Senast uppdaterad kl.",
+        "pl": "Ostatnia aktualizacja o",
+        "ru": "Последнее обновление в",
+        "ko": "마지막 업데이트 시간"
+      },
+      "units": {
+        "en": "milliseconds since epoch",
+        "nl": "milliseconden sinds epoch",
+        "da": "millisekunder siden epoke",
+        "de": "Millisekunden seit Epoche",
+        "es": "milisegundos desde época",
+        "fr": "millisecondes depuis l'époque",
+        "it": "millisecondi dall'epoca",
+        "no": "millisekunder siden epoke",
+        "sv": "millisekunder sedan epoken",
+        "pl": "milisekund od epoki",
+        "ru": "миллисекунд с эпохи",
+        "ko": "에포크 이후 밀리초"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": null,
+      "icon": "/assets/capabilities/timestamp.svg",
+      "insights": false,
+      "min": 0,
+      "step": 1,
+      "decimals": 0
+    }
+  }
+}

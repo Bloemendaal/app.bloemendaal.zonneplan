@@ -1,0 +1,9 @@
+{
+	"[json]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "biomejs.biome"
+	},
+	"livePreview.defaultPreviewPath": "/drivers/charge/pair/email_verification.html"
+}

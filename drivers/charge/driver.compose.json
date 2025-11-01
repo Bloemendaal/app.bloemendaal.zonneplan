@@ -1,0 +1,50 @@
+{
+	"name": "Zonneplan Charge",
+	"class": "evcharger",
+	"capabilities": [
+		"measure_power",
+		"evcharger_charging",
+		"evcharger_charging_state",
+		"meter_power.charged",
+		"meter_power.discharged"
+	],
+	"capabilitiesOptions": {
+		"meter_power.charged": {
+			"title": { "en": "Charged Energy" }
+		},
+		"meter_power.discharged": {
+			"title": { "en": "Discharged Energy" }
+		}
+	},
+	"energy": {
+		"evCharger": true,
+		"meterPowerImportedCapability": "meter_power.charged",
+		"meterPowerExportedCapability": "meter_power.discharged"
+	},
+	"platforms": ["local"],
+	"connectivity": ["cloud"],
+	"icon": "icon.svg",
+	"images": {
+		"small": "{{driverAssetsPath}}/images/small.png",
+		"large": "{{driverAssetsPath}}/images/large.png"
+	},
+	"pair": [
+		{
+			"id": "email_verification"
+		},
+		{
+			"id": "polling"
+		},
+		{
+			"id": "list_devices",
+			"template": "list_devices",
+			"navigation": {
+				"next": "add_devices"
+			}
+		},
+		{
+			"id": "add_devices",
+			"template": "add_devices"
+		}
+	]
+}

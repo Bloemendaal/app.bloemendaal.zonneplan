@@ -1,0 +1,23 @@
+{
+	"name": "app.bloemendaal.zonneplan",
+	"type": "module",
+	"version": "1.0.0",
+	"scripts": {
+		"build": "tsc",
+		"start": "homey app run",
+		"format": "biome format --write",
+		"lint": "biome lint --write",
+		"check": "biome check --write"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.3.0",
+		"@tsconfig/node18": "^18.2.4",
+		"@types/homey": "npm:homey-apps-sdk-v3-types@^0.3.12",
+		"@types/node": "^24.9.1",
+		"typescript": "^5.9.3"
+	},
+	"dependencies": {
+		"axios": "^1.13.1",
+		"undici": "<7.13.0"
+	}
+}
