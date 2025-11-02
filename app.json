@@ -79,6 +79,10 @@
       },
       "pair": [
         {
+          "id": "loading",
+          "template": "loading"
+        },
+        {
           "id": "email_verification"
         },
         {

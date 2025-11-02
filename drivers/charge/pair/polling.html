@@ -38,7 +38,7 @@
 				emailDisplay.textContent = email;
 			});
 
-			Homey.emit("polling_error", (data) => {
+			Homey.emit("polling_error").then((data) => {
 				Homey.alert(data.message);
 			});
 
