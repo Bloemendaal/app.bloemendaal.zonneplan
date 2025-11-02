@@ -1,104 +1,38 @@
-import Homey from "homey";
+import type {
+	AccountResponse,
+	PvInstallationContract,
+} from "../../src/user.mjs";
+import ZonneplanDevice from "../zonneplan-device.mjs";
 
-const DEFAULT_POLLING_INTERVAL_MINUTES = 10;
+export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
+	public async refresh(accountResponse: AccountResponse): Promise<void> {
+		const contract = this.getContract(accountResponse);
 
-interface OnSettingsParams {
-	oldSettings: { [key: string]: boolean | string | number | undefined | null };
-	newSettings: { [key: string]: boolean | string | number | undefined | null };
-	changedKeys: string[];
-}
+		if (!contract) {
+			this.error("Contract not found in account response");
+			return;
+		}
 
-export default class PvDevice extends Homey.Device {
-	private intervalHandle: NodeJS.Timeout | null = null;
+		const meta = contract.meta;
 
-	public async onInit(): Promise<void> {
-		// const vehicle = await this.getVehicle();
-		// vehicle.onSettingsUpdate(this.setSettings.bind(this));
+		// Update measure_power (current power generation in Watts)
+		// For solar panels, power should be negative to indicate generation
+		if (meta.last_measured_power_value !== null) {
+			await this.setCapabilityValue(
+				"measure_power",
+				-meta.last_measured_power_value,
+			).catch(this.error);
+		}
 
-		// await Promise.all(
-		// 	this.capabilities.map((capability) =>
-		// 		capability.addCapabilities(capabilities),
-		// 	),
-		// );
-
-		// await Promise.all(
-		// 	this.capabilities.map((capability) =>
-		// 		capability.registerCapabilityListeners(capabilities),
-		// 	),
-		// );
-
-		await this.setCapabilities();
-
-		this.startInterval(
-			this.getSettings().pollingInterval || DEFAULT_POLLING_INTERVAL_MINUTES,
+		// Update meter_power (total energy generated in kWh)
+		// Convert from Wh to kWh by dividing by 1000
+		const totalEnergyKwh = meta.total_power_measured / 1000;
+		await this.setCapabilityValue("meter_power", totalEnergyKwh).catch(
+			this.error,
 		);
-	}
 
-	public async onSettings({
-		newSettings,
-		changedKeys,
-	}: OnSettingsParams): Promise<void> {
-		if (changedKeys.includes("pollingInterval")) {
-			const interval = +(
-				newSettings.pollingInterval || DEFAULT_POLLING_INTERVAL_MINUTES
-			);
-
-			this.startInterval(interval);
-		}
-	}
-
-	public async onDeleted(): Promise<void> {
-		if (this.intervalHandle) {
-			clearInterval(this.intervalHandle);
-		}
-	}
-
-	// public async getVehicle(): Promise<Vehicle> {
-	// 	if (this.vehicle) {
-	// 		return this.vehicle;
-	// 	}
-
-	// 	try {
-	// 		const vehicles = await User.fromSettings(
-	// 			this.getSettings(),
-	// 		).getVehicles();
-
-	// 		const vehicle = vehicles.find(
-	// 			(vehicle) => vehicle.vin === this.getData().id,
-	// 		);
-
-	// 		if (!vehicle) {
-	// 			throw new Error("Vehicle not found");
-	// 		}
-
-	// 		this.vehicle = vehicle;
-	// 		return vehicle;
-	// 	} catch (error) {
-	// 		this.error("An error occurred while fetching the vehicle");
-	// 		throw error;
-	// 	}
-	// }
-
-	public async setCapabilities(): Promise<void> {
-		// if (!capabilities) {
-		// 	const vehicle = await this.getVehicle();
-		// 	capabilities = await vehicle.getVehicleCapabilities();
-		// }
-		// await Promise.all(
-		// 	this.capabilities.map((capability) =>
-		// 		capability.setCapabilityValues(capabilities),
-		// 	),
-		// );
-	}
-
-	private startInterval(intervalInMinutes: number): void {
-		if (this.intervalHandle) {
-			clearInterval(this.intervalHandle);
-		}
-
-		this.intervalHandle = setInterval(
-			() => this.setCapabilities(),
-			intervalInMinutes * 60 * 1000,
+		this.log(
+			`Updated capabilities - Power: ${meta.last_measured_power_value}W, Total: ${totalEnergyKwh}kWh`,
 		);
 	}
 }

@@ -2,6 +2,7 @@ import Homey from "homey";
 import type { PairSession } from "homey/lib/Driver.js";
 import type { LoginResponse } from "../src/user.mjs";
 import User, { type AccountResponse } from "../src/user.mjs";
+import ZonneplanDevice from "./zonneplan-device.mjs";
 
 const POLLING_INTERVAL = 5000;
 
@@ -11,7 +12,7 @@ interface PollingOptions {
 	onFailure(reason: "expired" | "unknown"): Promise<void> | void;
 }
 
-export interface ZonneplanDevice {
+export interface ZonneplanDeviceData {
 	name: string;
 	data: {
 		contractUuid: string;
@@ -24,6 +25,14 @@ export interface ZonneplanDevice {
 
 export default abstract class ZonneplanDriver extends Homey.Driver {
 	private pollingInterval: NodeJS.Timeout | null = null;
+
+	public async refresh(accountResponse: AccountResponse): Promise<void> {
+		const refreshes = this.getDevices()
+			.filter((device) => device instanceof ZonneplanDevice)
+			.map((device) => device.refresh(accountResponse));
+
+		await Promise.all(refreshes);
+	}
 
 	public async onUninit(): Promise<void> {
 		this.stopPolling();
@@ -109,7 +118,7 @@ export default abstract class ZonneplanDriver extends Homey.Driver {
 
 	protected abstract toDevices(
 		accountResponse: AccountResponse,
-	): ZonneplanDevice[];
+	): ZonneplanDeviceData[];
 
 	private stopPolling(): void {
 		if (this.pollingInterval) {

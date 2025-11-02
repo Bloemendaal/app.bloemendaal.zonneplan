@@ -1,8 +1,10 @@
 import type { AccountResponse } from "../../src/user.mjs";
-import ZonneplanDriver, { type ZonneplanDevice } from "../zonneplan-driver.mjs";
+import ZonneplanDriver, {
+	type ZonneplanDeviceData,
+} from "../zonneplan-driver.mjs";
 
 export default class PvDriver extends ZonneplanDriver {
-	protected toDevices(accountResponse: AccountResponse): ZonneplanDevice[] {
+	protected toDevices(accountResponse: AccountResponse): ZonneplanDeviceData[] {
 		return accountResponse.address_groups.flatMap((group) =>
 			group.connections.flatMap((connection) =>
 				connection.contracts

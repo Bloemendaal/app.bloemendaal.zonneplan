@@ -1,104 +1,62 @@
-import Homey from "homey";
+import type { ChargePointContract } from "../../src/charge-point.mjs";
+import type { AccountResponse } from "../../src/user.mjs";
+import ZonneplanDevice from "../zonneplan-device.mjs";
 
-const DEFAULT_POLLING_INTERVAL_MINUTES = 10;
+export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
+	public async refresh(accountResponse: AccountResponse): Promise<void> {
+		const contract = this.getContract(accountResponse);
 
-interface OnSettingsParams {
-	oldSettings: { [key: string]: boolean | string | number | undefined | null };
-	newSettings: { [key: string]: boolean | string | number | undefined | null };
-	changedKeys: string[];
-}
+		if (!contract) {
+			this.error("Contract not found in account response");
+			return;
+		}
 
-export default class ChargeDevice extends Homey.Device {
-	private intervalHandle: NodeJS.Timeout | null = null;
+		const state = contract.state;
+		const meta = contract.meta;
 
-	public async onInit(): Promise<void> {
-		// const vehicle = await this.getVehicle();
-		// vehicle.onSettingsUpdate(this.setSettings.bind(this));
-
-		// await Promise.all(
-		// 	this.capabilities.map((capability) =>
-		// 		capability.addCapabilities(capabilities),
-		// 	),
-		// );
-
-		// await Promise.all(
-		// 	this.capabilities.map((capability) =>
-		// 		capability.registerCapabilityListeners(capabilities),
-		// 	),
-		// );
-
-		await this.setCapabilities();
-
-		this.startInterval(
-			this.getSettings().pollingInterval || DEFAULT_POLLING_INTERVAL_MINUTES,
+		// Update measure_power (current power in Watts)
+		await this.setCapabilityValue("measure_power", state.power_actual).catch(
+			this.error,
 		);
-	}
 
-	public async onSettings({
-		newSettings,
-		changedKeys,
-	}: OnSettingsParams): Promise<void> {
-		if (changedKeys.includes("pollingInterval")) {
-			const interval = +(
-				newSettings.pollingInterval || DEFAULT_POLLING_INTERVAL_MINUTES
-			);
+		// Update evcharger_charging (boolean indicating if charging)
+		const isCharging = state.charging_manually || state.charging_automatically;
+		await this.setCapabilityValue("evcharger_charging", isCharging).catch(
+			this.error,
+		);
 
-			this.startInterval(interval);
+		// Update evcharger_charging_state (charging state string)
+		// Map the state to Homey's expected values: 'charging', 'connected', 'disconnected'
+		let chargingState: "charging" | "connected" | "disconnected" =
+			"disconnected";
+		if (isCharging) {
+			chargingState = "charging";
+		} else if (state.state === "Standby" || state.state === "Connected") {
+			chargingState = "connected";
 		}
-	}
+		await this.setCapabilityValue(
+			"evcharger_charging_state",
+			chargingState,
+		).catch(this.error);
 
-	public async onDeleted(): Promise<void> {
-		if (this.intervalHandle) {
-			clearInterval(this.intervalHandle);
-		}
-	}
-
-	// public async getVehicle(): Promise<Vehicle> {
-	// 	if (this.vehicle) {
-	// 		return this.vehicle;
-	// 	}
-
-	// 	try {
-	// 		const vehicles = await User.fromSettings(
-	// 			this.getSettings(),
-	// 		).getVehicles();
-
-	// 		const vehicle = vehicles.find(
-	// 			(vehicle) => vehicle.vin === this.getData().id,
-	// 		);
-
-	// 		if (!vehicle) {
-	// 			throw new Error("Vehicle not found");
-	// 		}
-
-	// 		this.vehicle = vehicle;
-	// 		return vehicle;
-	// 	} catch (error) {
-	// 		this.error("An error occurred while fetching the vehicle");
-	// 		throw error;
-	// 	}
-	// }
-
-	public async setCapabilities(): Promise<void> {
-		// if (!capabilities) {
-		// 	const vehicle = await this.getVehicle();
-		// 	capabilities = await vehicle.getVehicleCapabilities();
-		// }
-		// await Promise.all(
-		// 	this.capabilities.map((capability) =>
-		// 		capability.setCapabilityValues(capabilities),
-		// 	),
-		// );
-	}
-
-	private startInterval(intervalInMinutes: number): void {
-		if (this.intervalHandle) {
-			clearInterval(this.intervalHandle);
+		// Update meter_power.charged (total charged energy in kWh)
+		// Convert from Wh to kWh if meta has cumulative data
+		if (meta.charged_energy !== null && meta.charged_energy !== undefined) {
+			const chargedEnergyKwh = meta.charged_energy / 1000;
+			await this.setCapabilityValue(
+				"meter_power.charged",
+				chargedEnergyKwh,
+			).catch(this.error);
 		}
 
-		this.intervalHandle = setInterval(
-			() => this.setCapabilities(),
-			intervalInMinutes * 60 * 1000,
+		// Note: meter_power.discharged is for vehicle-to-grid, which might not be available
+		// Set to 0 if not supported
+		await this.setCapabilityValue("meter_power.discharged", 0).catch(
+			this.error,
+		);
+
+		this.log(
+			`Updated capabilities - Power: ${state.power_actual}W, State: ${chargingState}, Charging: ${isCharging}`,
 		);
 	}
 }

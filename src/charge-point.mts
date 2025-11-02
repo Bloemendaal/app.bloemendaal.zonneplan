@@ -7,6 +7,7 @@ import type {
 	PossiblyUnknownString,
 	Response,
 } from "./types.mjs";
+import type { BaseContractData } from "./user.mjs";
 
 export type ChargePointStateType = "Standby" | PossiblyUnknownString;
 
@@ -70,23 +71,18 @@ export interface ChargePointMeta {
 	last_measured_at: DateTimeString | null;
 	show_in_contract_screen: boolean;
 	charge_timeline: ChargeTimelineEntry[];
-	session_charging_cost_total: unknown | null;
-	session_flex_result: unknown | null;
-	session_charged_energy: unknown | null;
-	session_average_cost_in_cents: unknown | null;
-	charging_cost_total: unknown | null;
-	flex_result: unknown | null;
-	charged_energy: unknown | null;
-	average_cost_in_cents: unknown | null;
+	session_charging_cost_total: number | null;
+	session_flex_result: number | null;
+	session_charged_energy: number | null;
+	session_average_cost_in_cents: number | null;
+	charging_cost_total: number | null;
+	flex_result: number | null;
+	charged_energy: number | null;
+	average_cost_in_cents: number | null;
 }
 
-export interface ChargePointContract {
-	uuid: string;
-	label: string;
-	type: "charge_point_installation";
-	start_date: DateTimeString;
-	end_date: DateTimeString | null;
-	meta: ChargePointMeta;
+export interface ChargePointContract
+	extends BaseContractData<"charge_point_installation", ChargePointMeta> {
 	state: ChargePointState;
 	charge_schedules: ChargeSchedule[];
 }
