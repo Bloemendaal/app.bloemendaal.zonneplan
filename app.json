@@ -75,7 +75,8 @@
       "icon": "icon.svg",
       "images": {
         "small": "/drivers/charge/assets/images/small.png",
-        "large": "/drivers/charge/assets/images/large.png"
+        "large": "/drivers/charge/assets/images/large.png",
+        "xlarge": "/drivers/charge/assets/images/xlarge.png"
       },
       "pair": [
         {
@@ -121,7 +122,8 @@
       "icon": "icon.svg",
       "images": {
         "small": "/drivers/pv/assets/images/small.png",
-        "large": "/drivers/pv/assets/images/large.png"
+        "large": "/drivers/pv/assets/images/large.png",
+        "xlarge": "/drivers/pv/assets/images/xlarge.png"
       },
       "pair": [
         {
