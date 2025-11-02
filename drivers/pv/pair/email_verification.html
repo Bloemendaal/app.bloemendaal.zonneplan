@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<form id="form" class="homey-form">
+            <header class="homey-header">
+                <h1 class="homey-title" data-i18n="pair.email_verification.title"></h1>
+                <p class="homey-subtitle" data-i18n="pair.email_verification.subtitle"></p>
+            </header>
+
+			<fieldset class="homey-form-fieldset">
+				<div class="homey-form-group">
+					<label class="homey-form-label" for="email" data-i18n="pair.email_verification.email"></label>
+					<input id="email" type="email" class="homey-form-input" />
+				</div>
+				<div class="homey-form-group">
+                    <button
+                        id="submit"
+                        type="submit"
+                        class="homey-button-primary-full"
+                        data-i18n="pair.email_verification.submit"
+                    ></button>
+                </div>
+			</fieldset>
+        </form>
+
+		<script type="application/javascript">
+            document.getElementById("form").addEventListener("submit", async (event) => {
+                event.preventDefault();
+                
+                const email = document.getElementById("email")?.value.trim();
+				const submit = document.getElementById("submit");
+                
+				if (!email) {
+					Homey.alert("Please enter an email address");
+					return;
+				}
+
+                submit.disabled = true;
+
+				try {
+					await Homey.emit("submit_email", { email });
+				} finally {
+					submit.disabled = false;
+				}
+            });
+		</script>
+	</body>
+</html>
