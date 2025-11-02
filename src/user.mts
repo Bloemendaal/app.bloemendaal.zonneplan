@@ -1,4 +1,6 @@
 import Authenticatable, { type TokensResponse } from "./authenticatable.mjs";
+import type { ChargePointContract } from "./charge-point.mjs";
+import type { PvInstallationContract } from "./pv-installation.mjs";
 import type {
 	DateString,
 	DateTimeString,
@@ -51,28 +53,6 @@ export interface BaseContractData<T extends string, M extends object> {
 	meta: M;
 }
 
-export interface PvInstallationMeta {
-	identifier: string;
-	name: string;
-	panel_count: Integer;
-	panel_type: unknown | null;
-	installation_wp: Integer;
-	panel_wp: Integer;
-	first_measured_at: DateTimeString | null;
-	last_measured_at: DateTimeString | null;
-	last_measured_power_value: Integer | null;
-	total_power_measured: Integer;
-	sgn_serial_number: string;
-	module_firmware_version: string;
-	inverter_firmware_version: string;
-	show_in_contract_screen: boolean;
-	enable_pv_analysis: boolean;
-	dynamic_control_enabled: boolean;
-	expected_surplus_kwh: Integer;
-	power_limit_active: boolean;
-	current_scenario: unknown | null;
-}
-
 export interface P1InstallationMeta {
 	electricity_meter_code: string;
 	electricity_meter_identifier: string;
@@ -109,36 +89,12 @@ export interface ElectricitGasMeta {
 	monthly_advanced_deposit_amount: unknown | null;
 }
 
-export type ChargeSchedule = unknown;
-
-export interface ChargeTimelineEntry {
-	start_time: DateTimeString;
-	end_time: DateTimeString;
-}
-
-export interface ChargePointInstallationMeta {
-	serial_number: string;
-	identifier: string;
-	first_measured_at: DateTimeString | null;
-	last_measured_at: DateTimeString | null;
-	show_in_contract_screen: boolean;
-	charge_timeline: ChargeTimelineEntry[];
-}
-
-interface ChargePointContractData
-	extends BaseContractData<
-		"charge_point_installation",
-		ChargePointInstallationMeta
-	> {
-	charge_schedules: ChargeSchedule[];
-}
-
 export type ContractData =
-	| BaseContractData<"pv_installation", PvInstallationMeta>
+	| PvInstallationContract
 	| BaseContractData<"p1_installation", P1InstallationMeta>
 	| BaseContractData<"electricity", ElectricitGasMeta>
 	| BaseContractData<"gas", ElectricitGasMeta>
-	| ChargePointContractData;
+	| ChargePointContract;
 
 export interface ConnectionData {
 	uuid: string;
