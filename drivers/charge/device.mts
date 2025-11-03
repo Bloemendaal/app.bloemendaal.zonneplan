@@ -46,9 +46,11 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 		await this.setCapabilityValue("evcharger_charging_state", chargingState);
 
 		// meter_power.charged: Total charged energy in kWh
-		// Convert from Wh to kWh if meta.charged_energy is in Wh
 		if (meta.charged_energy !== null) {
-			await this.setCapabilityValue("meter_power.charged", meta.charged_energy);
+			await this.setCapabilityValue(
+				"meter_power.charged",
+				meta.charged_energy / 1000,
+			);
 		}
 	}
 }
