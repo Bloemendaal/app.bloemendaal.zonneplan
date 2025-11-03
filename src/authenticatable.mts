@@ -81,6 +81,6 @@ export default abstract class Authenticatable {
 
 		const now = Date.now();
 
-		return expiresAt * 1000 - now < TOKEN_EXPIRY_BUFFER_MS;
+		return expiresAt - now < TOKEN_EXPIRY_BUFFER_MS;
 	}
 }
