@@ -1,62 +1,54 @@
 import type { ChargePointContract } from "../../src/charge-point.mjs";
-import type { AccountResponse } from "../../src/user.mjs";
+import ChargePoint from "../../src/charge-point.mjs";
 import ZonneplanDevice from "../zonneplan-device.mjs";
 
 export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
-	public async refresh(accountResponse: AccountResponse): Promise<void> {
-		const contract = this.getContract(accountResponse);
+	public async refresh(): Promise<void> {
+		const { connectionUuid, contractUuid } = this.getData();
+
+		const chargePoint = new ChargePoint(
+			this.homey,
+			connectionUuid,
+			contractUuid,
+		);
+
+		const data = await chargePoint.getChargePoint();
+
+		const [contract] = data.contracts;
 
 		if (!contract) {
-			this.error("Contract not found in account response");
+			this.error(
+				`No contract data available for charge point ${connectionUuid} / ${contractUuid}`,
+			);
 			return;
 		}
 
-		const state = contract.state;
-		const meta = contract.meta;
+		const { state, meta } = contract;
 
-		// Update measure_power (current power in Watts)
-		await this.setCapabilityValue("measure_power", state.power_actual).catch(
-			this.error,
-		);
+		// measure_power: Current power in Watts
+		await this.setCapabilityValue("measure_power", state.power_actual);
 
-		// Update evcharger_charging (boolean indicating if charging)
+		// evcharger_charging: Boolean indicating if currently charging
 		const isCharging = state.charging_manually || state.charging_automatically;
-		await this.setCapabilityValue("evcharger_charging", isCharging).catch(
-			this.error,
-		);
+		await this.setCapabilityValue("evcharger_charging", isCharging);
 
-		// Update evcharger_charging_state (charging state string)
-		// Map the state to Homey's expected values: 'charging', 'connected', 'disconnected'
-		let chargingState: "charging" | "connected" | "disconnected" =
-			"disconnected";
-		if (isCharging) {
-			chargingState = "charging";
-		} else if (state.state === "Standby" || state.state === "Connected") {
-			chargingState = "connected";
+		// evcharger_charging_state: State of the charger
+		// Valid values: plugged_in_charging, plugged_in_discharging, plugged_in_paused, plugged_in, plugged_out
+		let chargingState: string;
+		if (state.plugged_in_at === null) {
+			chargingState = "plugged_out";
+		} else if (state.charging_manually || state.charging_automatically) {
+			chargingState = "plugged_in_charging";
+		} else {
+			// Plugged in but not charging (paused or waiting)
+			chargingState = "plugged_in_paused";
 		}
-		await this.setCapabilityValue(
-			"evcharger_charging_state",
-			chargingState,
-		).catch(this.error);
+		await this.setCapabilityValue("evcharger_charging_state", chargingState);
 
-		// Update meter_power.charged (total charged energy in kWh)
-		// Convert from Wh to kWh if meta has cumulative data
-		if (meta.charged_energy !== null && meta.charged_energy !== undefined) {
-			const chargedEnergyKwh = meta.charged_energy / 1000;
-			await this.setCapabilityValue(
-				"meter_power.charged",
-				chargedEnergyKwh,
-			).catch(this.error);
+		// meter_power.charged: Total charged energy in kWh
+		// Convert from Wh to kWh if meta.charged_energy is in Wh
+		if (meta.charged_energy !== null) {
+			await this.setCapabilityValue("meter_power.charged", meta.charged_energy);
 		}
-
-		// Note: meter_power.discharged is for vehicle-to-grid, which might not be available
-		// Set to 0 if not supported
-		await this.setCapabilityValue("meter_power.discharged", 0).catch(
-			this.error,
-		);
-
-		this.log(
-			`Updated capabilities - Power: ${state.power_actual}W, State: ${chargingState}, Charging: ${isCharging}`,
-		);
 	}
 }

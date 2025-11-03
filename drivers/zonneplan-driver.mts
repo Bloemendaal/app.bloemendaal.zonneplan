@@ -29,7 +29,7 @@ export default abstract class ZonneplanDriver extends Homey.Driver {
 	public async refresh(accountResponse: AccountResponse): Promise<void> {
 		const refreshes = this.getDevices()
 			.filter((device) => device instanceof ZonneplanDevice)
-			.map((device) => device.refresh(accountResponse));
+			.map((device) => device.refresh(accountResponse).catch(this.error));
 
 		await Promise.all(refreshes);
 	}

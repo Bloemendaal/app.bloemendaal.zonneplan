@@ -39,8 +39,6 @@ export interface ChargeTimelineEntry {
 	end_time: DateTimeString;
 }
 
-export type ChargeSchedule = unknown;
-
 export interface ChargePointState {
 	connectivity_state: boolean;
 	state: ChargePointStateType;
@@ -56,7 +54,7 @@ export interface ChargePointState {
 	dynamic_charging_flex_enabled: boolean;
 	dynamic_charging_flex_suppressed: boolean;
 	dynamic_load_balancing_health: DynamicLoadBalancingHealth;
-	charge_schedules: ChargeSchedule[];
+	charge_schedules: ChargeScheduleEntry[];
 	dynamic_charging_user_constraints: DynamicChargingUserConstraints;
 	charge_point_session: ChargePointSession | null;
 	last_known_vehicle_uuid: string | null;
@@ -84,7 +82,7 @@ export interface ChargePointMeta {
 export interface ChargePointContract
 	extends BaseContractData<"charge_point_installation", ChargePointMeta> {
 	state: ChargePointState;
-	charge_schedules: ChargeSchedule[];
+	charge_schedules: ChargeScheduleEntry[];
 }
 
 export interface Vehicle {

@@ -7,6 +7,7 @@ const FETCH_EVERY_MINUTES = 5;
 
 export default class ZonneplanApp extends Homey.App {
 	private initTimeout: NodeJS.Timeout | null = null;
+	private refreshTimeout: NodeJS.Timeout | null = null;
 	private scheduleTimeout: NodeJS.Timeout | null = null;
 	private pollingInterval: NodeJS.Timeout | null = null;
 
@@ -36,8 +37,8 @@ export default class ZonneplanApp extends Homey.App {
 		const delay = target.getTime() - from.getTime();
 
 		if (delay > 10 * 1000) {
-			// We schedule the init interval because not all devices are initialized when this method is called
-			// Let's hope that all devices are initialized within 5 seconds
+			// We schedule the init interval because not all devices are initialized when this method is called.
+			// Let's hope that all devices are initialized within 5 seconds...
 			this.initTimeout = setTimeout(() => this.refreshDevices(), 5 * 1000);
 		}
 
@@ -55,6 +56,10 @@ export default class ZonneplanApp extends Homey.App {
 			clearInterval(this.initTimeout);
 		}
 
+		if (this.refreshTimeout) {
+			clearInterval(this.refreshTimeout);
+		}
+
 		if (this.scheduleTimeout) {
 			clearInterval(this.scheduleTimeout);
 		}
@@ -62,6 +67,18 @@ export default class ZonneplanApp extends Homey.App {
 		if (this.pollingInterval) {
 			clearInterval(this.pollingInterval);
 		}
+	}
+
+	/**
+	 * We request a refresh for all devices, but we delay it
+	 * slightly to allow multiple requests to be batched together.
+	 */
+	public requestRefresh(): void {
+		if (this.refreshTimeout) {
+			clearTimeout(this.refreshTimeout);
+		}
+
+		this.refreshTimeout = setTimeout(() => this.refreshDevices(), 3 * 1000);
 	}
 
 	private async refreshDevices(): Promise<void> {

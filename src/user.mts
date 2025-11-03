@@ -1,5 +1,8 @@
 import Authenticatable, { type TokensResponse } from "./authenticatable.mjs";
-import type { ChargePointContract } from "./charge-point.mjs";
+import type {
+	ChargeScheduleEntry,
+	ChargeTimelineEntry,
+} from "./charge-point.mjs";
 import type {
 	DateString,
 	DateTimeString,
@@ -121,6 +124,20 @@ export interface ElectricityContract
 
 export interface GasContract
 	extends BaseContractData<"gas", ElectricitGasMeta> {}
+
+export interface ChargePointMeta {
+	serial_number: string;
+	identifier: string;
+	first_measured_at: DateTimeString | null;
+	last_measured_at: DateTimeString | null;
+	show_in_contract_screen: boolean;
+	charge_timeline: ChargeTimelineEntry[];
+}
+
+export interface ChargePointContract
+	extends BaseContractData<"charge_point_installation", ChargePointMeta> {
+	charge_schedules: ChargeScheduleEntry[];
+}
 
 export type ContractData =
 	| PvInstallationContract

@@ -1,4 +1,5 @@
 import Homey from "homey";
+import ZonneplanApp from "../app.mjs";
 import type {
 	AccountResponse,
 	ConnectionData,
@@ -9,6 +10,12 @@ export default abstract class ZonneplanDevice<
 	T extends ContractData,
 > extends Homey.Device {
 	public abstract refresh(accountResponse: AccountResponse): Promise<void>;
+
+	public onAdded(): void {
+		if (this.homey.app instanceof ZonneplanApp) {
+			this.homey.app.requestRefresh();
+		}
+	}
 
 	protected getConnection(
 		accountResponse: AccountResponse,
