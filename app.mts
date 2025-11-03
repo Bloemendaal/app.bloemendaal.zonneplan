@@ -6,34 +6,9 @@ const OFFSET_MINUTES = 2;
 const FETCH_EVERY_MINUTES = 5;
 
 export default class ZonneplanApp extends Homey.App {
+	private initTimeout: NodeJS.Timeout | null = null;
+	private scheduleTimeout: NodeJS.Timeout | null = null;
 	private pollingInterval: NodeJS.Timeout | null = null;
-	private scheduleInvertal: NodeJS.Timeout | null = null;
-
-	public async onInit(): Promise<void> {
-		await this.refreshDevices();
-		this.scheduleRefreshInterval();
-	}
-
-	public async onUninit(): Promise<void> {
-		if (this.scheduleInvertal) {
-			clearInterval(this.scheduleInvertal);
-		}
-
-		if (this.pollingInterval) {
-			clearInterval(this.pollingInterval);
-		}
-	}
-
-	private async refreshDevices(): Promise<void> {
-		const user = new User(this.homey);
-		const accountResponse = await user.getAccount();
-
-		const refreshes = Object.values(this.homey.drivers.getDrivers())
-			.filter((driver) => driver instanceof ZonneplanDriver)
-			.map((driver) => driver.refresh(accountResponse));
-
-		await Promise.all(refreshes);
-	}
 
 	/**
 	 * The SGNs send their data every 5 minutes, however, there might be
@@ -41,7 +16,7 @@ export default class ZonneplanApp extends Homey.App {
 	 * the app fetches the latest data after it has been updated, we
 	 * schedule a refresh interval slightly longer than 5 minutes.
 	 */
-	private scheduleRefreshInterval(): void {
+	public async onInit(): Promise<void> {
 		const from = new Date();
 		const norm = this.positiveModulo(OFFSET_MINUTES, FETCH_EVERY_MINUTES);
 
@@ -60,13 +35,44 @@ export default class ZonneplanApp extends Homey.App {
 
 		const delay = target.getTime() - from.getTime();
 
-		this.scheduleInvertal = setTimeout(() => {
+		if (delay > 10 * 1000) {
+			// We schedule the init interval because not all devices are initialized when this method is called
+			// Let's hope that all devices are initialized within 5 seconds
+			this.initTimeout = setTimeout(() => this.refreshDevices(), 5 * 1000);
+		}
+
+		this.scheduleTimeout = setTimeout(() => {
 			this.refreshDevices();
 			this.pollingInterval = setInterval(
 				() => this.refreshDevices(),
 				FETCH_EVERY_MINUTES * 60 * 1000,
 			);
 		}, delay);
+	}
+
+	public async onUninit(): Promise<void> {
+		if (this.initTimeout) {
+			clearInterval(this.initTimeout);
+		}
+
+		if (this.scheduleTimeout) {
+			clearInterval(this.scheduleTimeout);
+		}
+
+		if (this.pollingInterval) {
+			clearInterval(this.pollingInterval);
+		}
+	}
+
+	private async refreshDevices(): Promise<void> {
+		const user = new User(this.homey);
+		const accountResponse = await user.getAccount();
+
+		const refreshes = Object.values(this.homey.drivers.getDrivers())
+			.filter((driver) => driver instanceof ZonneplanDriver)
+			.map((driver) => driver.refresh(accountResponse));
+
+		await Promise.all(refreshes);
 	}
 
 	private positiveModulo(value: number, modulo: number): number {
