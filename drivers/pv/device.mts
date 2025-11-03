@@ -20,7 +20,7 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 		if (meta.last_measured_power_value !== null) {
 			await this.setCapabilityValue(
 				"measure_power",
-				-meta.last_measured_power_value,
+				meta.last_measured_power_value,
 			).catch(this.error);
 		}
 
