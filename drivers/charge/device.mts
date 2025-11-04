@@ -52,7 +52,9 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 	/**
 	 * To figure out the cumulative charged energy charged since we started measuring,
 	 * we need to know the year of the first measurement and then call the API for eachta
-	 * year. However, to prevent spamming the API, we store the years that have already passed.
+	 * year. However, to prevent spamming the API, we store the years that have already
+	 * passed. The timestamp that this year was set, must be in a year after that year
+	 * to ensure we know it has actually passed.
 	 */
 	private async setMeterPower(
 		chargePoint: ChargePoint,
@@ -68,33 +70,38 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 		let cumulativeChargedEnergy = 0;
 
 		for (let year = firstMeasuredInYear; year <= currentYear; year++) {
-			const hasCapability = this.hasCapability(`meter_power.charged.${year}`);
+			const capability = `meter_power.charged.${year}`;
+			const hasCapability = this.hasCapability(capability);
 
 			if (!hasCapability) {
-				await this.addCapability(`meter_power.charged.${year}`);
-				await this.setCapabilityOptions(`meter_power.charged.${year}`, {
+				await this.addCapability(capability);
+				await this.setCapabilityOptions(capability, {
 					title: this.homey.__("capabilities.meter_power_charged_year.title", {
 						year: year.toString(),
 					}),
 				});
+
+				await this.addCapability(`timestamp.${capability}`);
+				await this.setCapabilityOptions(`timestamp.${capability}`, {
+					unit: "years",
+				});
 			}
 
-			let meterPower = this.getCapabilityValue(`meter_power.charged.${year}`);
+			let meterPower = this.getCapabilityValue(capability);
 
 			if (
 				!hasCapability ||
 				year === currentYear ||
-				typeof meterPower !== "number"
+				typeof meterPower !== "number" ||
+				(this.getCapabilityValue(`timestamp.${capability}`) ?? 0) < year
 			) {
 				const [chart] = await chargePoint.getMonthlyCharts(`${year}-01-01`);
 
 				// Convert Wh to kWh
 				meterPower = (chart?.total ?? 0) / 1000;
 
-				await this.setCapabilityValue(
-					`meter_power.charged.${year}`,
-					meterPower,
-				);
+				await this.setCapabilityValue(capability, meterPower);
+				await this.setCapabilityValue(`timestamp.${capability}`, currentYear);
 			}
 
 			cumulativeChargedEnergy += meterPower;
