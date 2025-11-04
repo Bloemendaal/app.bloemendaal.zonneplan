@@ -5,6 +5,7 @@ import type {
 	ConnectionData,
 	ContractData,
 } from "../src/user.mjs";
+import type ZonneplanFlow from "./zonneplan-flow.mjs";
 
 export default abstract class ZonneplanDevice<
 	T extends ContractData,
@@ -15,6 +16,14 @@ export default abstract class ZonneplanDevice<
 		if (this.homey.app instanceof ZonneplanApp) {
 			this.homey.app.requestRefresh();
 		}
+	}
+
+	public async onInit(): Promise<void> {
+		await Promise.all(this.getFlows().map((flow) => flow.register()));
+	}
+
+	protected getFlows(): ZonneplanFlow<ZonneplanDevice<T>>[] {
+		return [];
 	}
 
 	protected getConnection(

@@ -10,6 +10,52 @@
 			"title": "Charged Energy in __year__"
 		}
 	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Start dynamic charging session",
+				"titleFormatted": "Start dynamic charging until [[end_time]], charge [[value]] [[unit]][[vehicle]]",
+				"hint": "Schedule smart charging with a specific goal and end time",
+				"args": {
+					"end_time": {
+						"title": "Desired end time",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Unit",
+						"values": {
+							"kilometers": "Kilometers",
+							"percentage": "Percentage"
+						}
+					},
+					"value": {
+						"title": "Amount",
+						"placeholder": "Enter amount"
+					},
+					"vehicle": {
+						"title": "Vehicle",
+						"placeholder": "Select vehicle (optional)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Stop dynamic charging session",
+				"hint": "Stop the current dynamic charging session"
+			},
+			"enable_plug_and_charge": {
+				"title": "Enable plug & charge",
+				"hint": "Automatically start charging when the car is plugged in"
+			},
+			"disable_plug_and_charge": {
+				"title": "Disable plug & charge",
+				"hint": "Require manual start or schedule to charge"
+			},
+			"enable_always_flex": {
+				"title": "Enable always flex mode",
+				"hint": "Always use flexible smart charging"
+			}
+		}
+	},
 	"pair": {
 		"email_verification": {
 			"title": "Zonneplan",

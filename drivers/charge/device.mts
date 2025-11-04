@@ -4,22 +4,29 @@ import type {
 } from "../../src/charge-point.mjs";
 import ChargePoint from "../../src/charge-point.mjs";
 import ZonneplanDevice from "../zonneplan-device.mjs";
+import type ZonneplanFlow from "../zonneplan-flow.mjs";
+import { DisablePlugAndChargeFlow } from "./flows/disable-plug-and-charge-flow.mjs";
+import { EnableAlwaysFlexFlow } from "./flows/enable-always-flex-flow.mjs";
+import { EnablePlugAndChargeFlow } from "./flows/enable-plug-and-charge-flow.mjs";
+import { StartDynamicChargingFlow } from "./flows/start-dynamic-charging-flow.mjs";
+import { StopDynamicChargingFlow } from "./flows/stop-dynamic-charging-flow.mjs";
 
 export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
-	public async refresh(): Promise<void> {
+	public getChargePoint(): ChargePoint {
 		const { connectionUuid, contractUuid } = this.getData();
 
-		const chargePoint = new ChargePoint(
-			this.homey,
-			connectionUuid,
-			contractUuid,
-		);
+		return new ChargePoint(this.homey, connectionUuid, contractUuid);
+	}
+
+	public async refresh(): Promise<void> {
+		const chargePoint = this.getChargePoint();
 
 		const data = await chargePoint.getChargePoint();
 
 		const [contract] = data.contracts;
 
 		if (!contract) {
+			const { connectionUuid, contractUuid } = this.getData();
 			this.error(
 				`No contract data available for charge point ${connectionUuid} / ${contractUuid}`,
 			);
@@ -47,6 +54,16 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 			chargingState = "plugged_in_paused";
 		}
 		await this.setCapabilityValue("evcharger_charging_state", chargingState);
+	}
+
+	protected override getFlows(): ZonneplanFlow<ChargeDevice>[] {
+		return [
+			new StartDynamicChargingFlow(this),
+			new StopDynamicChargingFlow(this),
+			new EnablePlugAndChargeFlow(this),
+			new DisablePlugAndChargeFlow(this),
+			new EnableAlwaysFlexFlow(this),
+		];
 	}
 
 	/**

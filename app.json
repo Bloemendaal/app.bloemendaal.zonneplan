@@ -38,6 +38,157 @@
     "email": "casperbloemendaal@gmail.com"
   },
   "esm": true,
+  "flow": {
+    "actions": [
+      {
+        "id": "start_dynamic_charging",
+        "title": {
+          "en": "Start dynamic charging session"
+        },
+        "titleFormatted": {
+          "en": "Start dynamic charging until [[end_date]] [[end_time]], charge [[value]] [[unit]][[vehicle]]"
+        },
+        "hint": {
+          "en": "Schedule smart charging with a specific goal and end time"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          },
+          {
+            "type": "date",
+            "name": "end_date",
+            "title": {
+              "en": "Desired end date"
+            },
+            "placeholder": {
+              "en": "05-11-2025"
+            }
+          },
+          {
+            "type": "time",
+            "name": "end_time",
+            "title": {
+              "en": "Desired end time"
+            },
+            "placeholder": {
+              "en": "08:00"
+            }
+          },
+          {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+              "en": "Unit"
+            },
+            "values": [
+              {
+                "id": "kilometers",
+                "title": {
+                  "en": "Kilometers"
+                }
+              },
+              {
+                "id": "percentage",
+                "title": {
+                  "en": "Percentage"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Amount"
+            },
+            "placeholder": {
+              "en": "Enter amount"
+            },
+            "min": 0,
+            "max": 500
+          },
+          {
+            "type": "autocomplete",
+            "name": "vehicle",
+            "title": {
+              "en": "Vehicle"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "Select vehicle (optional)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "stop_dynamic_charging",
+        "title": {
+          "en": "Stop dynamic charging session"
+        },
+        "hint": {
+          "en": "Stop the current dynamic charging session"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
+      },
+      {
+        "id": "enable_plug_and_charge",
+        "title": {
+          "en": "Enable plug & charge"
+        },
+        "hint": {
+          "en": "Automatically start charging when the car is plugged in"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
+      },
+      {
+        "id": "disable_plug_and_charge",
+        "title": {
+          "en": "Disable plug & charge"
+        },
+        "hint": {
+          "en": "Require manual start or schedule to charge"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
+      },
+      {
+        "id": "enable_always_flex",
+        "title": {
+          "en": "Enable always flex mode"
+        },
+        "hint": {
+          "en": "Always use flexible smart charging"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
+      }
+    ]
+  },
   "drivers": [
     {
       "name": "Charge",
