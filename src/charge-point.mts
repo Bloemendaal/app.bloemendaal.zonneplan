@@ -220,11 +220,21 @@ export default class ChargePoint extends Authenticatable {
 		);
 	}
 
-	public async getCharts(date: DateString): Promise<ChartData[]> {
+	public async getDailyCharts(date: DateString): Promise<ChartData[]> {
 		const client = await this.getClient();
 
 		const response = await client.get<Response<ChartData[]>>(
 			`/contracts/${this.contractUuid}/charge_point_installation/charts/days?date=${date}`,
+		);
+
+		return response.data.data;
+	}
+
+	public async getMonthlyCharts(date: DateString): Promise<ChartData[]> {
+		const client = await this.getClient();
+
+		const response = await client.get<Response<ChartData[]>>(
+			`/contracts/${this.contractUuid}/charge_point_installation/charts/months?date=${date}`,
 		);
 
 		return response.data.data;

@@ -5,6 +5,9 @@
 			"variables": {
 				"todo": "TODO"
 			}
+		},
+		"meter_power_charged_year": {
+			"title": "Charged Energy in __year__"
 		}
 	},
 	"pair": {
