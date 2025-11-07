@@ -1,3 +1,4 @@
+export type Float = number;
 export type Integer = number;
 export type DateString = string;
 export type TimeString = string;

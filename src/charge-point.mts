@@ -9,11 +9,14 @@ import type {
 } from "./types.mjs";
 import type { BaseContractData } from "./user.mjs";
 
-export type ChargePointStateType = "Standby" | PossiblyUnknownString;
+export type ChargePointStateType =
+	| "Standby"
+	| "Charging"
+	| PossiblyUnknownString;
 
 export type DynamicLoadBalancingHealth = "HEALTHY" | PossiblyUnknownString;
 
-export type StartMode = "AlwaysFlex" | PossiblyUnknownString;
+export type StartMode = "AlwaysFlex" | "StartWithApp" | "PlugAndCharge";
 
 export interface DynamicChargingUserConstraints {
 	desired_distance_in_kilometers: Integer | null;
@@ -35,6 +38,7 @@ export interface ChargeScheduleEntry {
 }
 
 export interface ChargeTimelineEntry {
+	delivery_wh: Integer;
 	start_time: DateTimeString;
 	end_time: DateTimeString;
 }
@@ -160,6 +164,39 @@ export default class ChargePoint extends Authenticatable {
 		return response.data.data;
 	}
 
+	/**
+	 * When called, the charging will be started immediately, it's the start button in the app.
+	 */
+	public async startBoost(): Promise<void> {
+		const client = await this.getClient();
+
+		await client.post(
+			`/connections/${this.connectionUuid}/charge-points/${this.contractUuid}/actions/start_boost`,
+		);
+	}
+
+	/**
+	 * When called, the charging will be stopped immediately, it's the stop button in the app visible when any type of charging is currently active.
+	 */
+	public async stopCharging(): Promise<void> {
+		const client = await this.getClient();
+
+		await client.post(
+			`/connections/${this.connectionUuid}/charge-points/${this.contractUuid}/actions/stop_charging`,
+		);
+	}
+
+	/**
+	 * When manually stopped with the stopCharging method, the powerplay charging is suppressed until this method is called.
+	 */
+	public async unsuppressAlwaysFlex(): Promise<void> {
+		const client = await this.getClient();
+
+		await client.post(
+			`/connections/${this.connectionUuid}/charge-points/${this.contractUuid}/actions/unsuppress_always_flex`,
+		);
+	}
+
 	public async startDynamicChargingSession(
 		params: StartDynamicChargingSessionParams,
 	): Promise<void> {
@@ -196,6 +233,20 @@ export default class ChargePoint extends Authenticatable {
 		);
 	}
 
+	/**
+	 * Set the starting mode of the charger as the app does.
+	 */
+	public async setMode(startMode: StartMode): Promise<void> {
+		if (startMode === "AlwaysFlex") {
+			await this.enableAlwaysFlex();
+		} else if (startMode === "PlugAndCharge") {
+			await this.enablePlugAndCharge();
+		} else if (startMode === "StartWithApp") {
+			await this.disableAlwaysFlex();
+			await this.disablePlugAndCharge();
+		}
+	}
+
 	public async enablePlugAndCharge(): Promise<void> {
 		const client = await this.getClient();
 
@@ -217,6 +268,14 @@ export default class ChargePoint extends Authenticatable {
 
 		await client.post(
 			`/connections/${this.connectionUuid}/charge-points/${this.contractUuid}/actions/enable_always_flex`,
+		);
+	}
+
+	public async disableAlwaysFlex(): Promise<void> {
+		const client = await this.getClient();
+
+		await client.post(
+			`/connections/${this.connectionUuid}/charge-points/${this.contractUuid}/actions/disable_always_flex`,
 		);
 	}
 
