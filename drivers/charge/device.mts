@@ -5,17 +5,38 @@ import type {
 import ChargePoint from "../../src/charge-point.mjs";
 import ZonneplanDevice from "../zonneplan-device.mjs";
 import type ZonneplanFlow from "../zonneplan-flow.mjs";
+import { DisableAlwaysFlexFlow } from "./flows/disable-always-flex-flow.mjs";
 import { DisablePlugAndChargeFlow } from "./flows/disable-plug-and-charge-flow.mjs";
 import { EnableAlwaysFlexFlow } from "./flows/enable-always-flex-flow.mjs";
 import { EnablePlugAndChargeFlow } from "./flows/enable-plug-and-charge-flow.mjs";
+import { SetModeFlow } from "./flows/set-mode-flow.mjs";
+import { StartBoostFlow } from "./flows/start-boost-flow.mjs";
 import { StartDynamicChargingFlow } from "./flows/start-dynamic-charging-flow.mjs";
+import { StopChargingFlow } from "./flows/stop-charging-flow.mjs";
 import { StopDynamicChargingFlow } from "./flows/stop-dynamic-charging-flow.mjs";
+import { UnsuppressAlwaysFlexFlow } from "./flows/unsuppress-always-flex-flow.mjs";
 
 export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 	public getChargePoint(): ChargePoint {
 		const { connectionUuid, contractUuid } = this.getData();
 
 		return new ChargePoint(this.homey, connectionUuid, contractUuid);
+	}
+
+	public async onInit(): Promise<void> {
+		await super.onInit();
+
+		this.registerCapabilityListener("evcharger_charging", async (value) => {
+			const chargePoint = this.getChargePoint();
+
+			if (value) {
+				await chargePoint.startBoost();
+			} else {
+				await chargePoint.stopCharging();
+			}
+
+			this.requestRefresh();
+		});
 	}
 
 	public async refresh(): Promise<void> {
@@ -38,21 +59,24 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 		await this.setMeterPower(chargePoint, meta);
 		await this.setCapabilityValue("measure_power", state.power_actual);
 
-		// evcharger_charging: Boolean indicating if currently charging
 		const isCharging = state.charging_manually || state.charging_automatically;
 		await this.setCapabilityValue("evcharger_charging", isCharging);
 
-		// evcharger_charging_state: State of the charger
-		// Valid values: plugged_in_charging, plugged_in_discharging, plugged_in_paused, plugged_in, plugged_out
-		let chargingState: string;
+		let chargingState:
+			| "plugged_in_charging"
+			| "plugged_in_discharging"
+			| "plugged_in_paused"
+			| "plugged_in"
+			| "plugged_out";
+
 		if (state.plugged_in_at === null) {
 			chargingState = "plugged_out";
-		} else if (state.charging_manually || state.charging_automatically) {
+		} else if (isCharging) {
 			chargingState = "plugged_in_charging";
 		} else {
-			// Plugged in but not charging (paused or waiting)
 			chargingState = "plugged_in_paused";
 		}
+
 		await this.setCapabilityValue("evcharger_charging_state", chargingState);
 	}
 
@@ -63,6 +87,11 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 			new EnablePlugAndChargeFlow(this),
 			new DisablePlugAndChargeFlow(this),
 			new EnableAlwaysFlexFlow(this),
+			new DisableAlwaysFlexFlow(this),
+			new SetModeFlow(this),
+			new StartBoostFlow(this),
+			new StopChargingFlow(this),
+			new UnsuppressAlwaysFlexFlow(this),
 		];
 	}
 

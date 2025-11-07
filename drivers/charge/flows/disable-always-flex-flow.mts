@@ -1,9 +1,9 @@
 import ZonneplanFlow from "../../zonneplan-flow.mjs";
 import type ChargeDevice from "../device.mjs";
 
-export class StopDynamicChargingFlow extends ZonneplanFlow<ChargeDevice> {
+export class DisableAlwaysFlexFlow extends ZonneplanFlow<ChargeDevice> {
 	public async register(): Promise<void> {
-		const card = this.device.homey.flow.getActionCard("stop_dynamic_charging");
+		const card = this.device.homey.flow.getActionCard("disable_always_flex");
 
 		card.registerRunListener(async () => {
 			await this.handleAction();
@@ -12,8 +12,8 @@ export class StopDynamicChargingFlow extends ZonneplanFlow<ChargeDevice> {
 
 	private async handleAction(): Promise<void> {
 		const chargePoint = this.device.getChargePoint();
-		await chargePoint.stopDynamicChargingSession();
-		this.device.log("Stopped dynamic charging session");
+		await chargePoint.disableAlwaysFlex();
+		this.device.log("Disabled always flex mode");
 		this.device.requestRefresh();
 	}
 }

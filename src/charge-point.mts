@@ -12,6 +12,7 @@ import type { BaseContractData } from "./user.mjs";
 export type ChargePointStateType =
 	| "Standby"
 	| "Charging"
+	| "VehicleDetected"
 	| PossiblyUnknownString;
 
 export type DynamicLoadBalancingHealth = "HEALTHY" | PossiblyUnknownString;

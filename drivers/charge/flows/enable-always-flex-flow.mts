@@ -14,5 +14,6 @@ export class EnableAlwaysFlexFlow extends ZonneplanFlow<ChargeDevice> {
 		const chargePoint = this.device.getChargePoint();
 		await chargePoint.enableAlwaysFlex();
 		this.device.log("Enabled always flex mode");
+		this.device.requestRefresh();
 	}
 }

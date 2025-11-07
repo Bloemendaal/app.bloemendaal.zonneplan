@@ -186,6 +186,116 @@
             "filter": "driver_id=charge"
           }
         ]
+      },
+      {
+        "id": "disable_always_flex",
+        "title": {
+          "en": "Disable always flex mode"
+        },
+        "hint": {
+          "en": "Disable flexible smart charging mode"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
+      },
+      {
+        "id": "set_mode",
+        "title": {
+          "en": "Set charge mode"
+        },
+        "titleFormatted": {
+          "en": "Set charge mode to [[mode]]"
+        },
+        "hint": {
+          "en": "Set the starting mode of the charger"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          },
+          {
+            "type": "dropdown",
+            "name": "mode",
+            "title": {
+              "en": "Mode"
+            },
+            "values": [
+              {
+                "id": "AlwaysFlex",
+                "title": {
+                  "en": "Always Flex"
+                }
+              },
+              {
+                "id": "PlugAndCharge",
+                "title": {
+                  "en": "Plug & Charge"
+                }
+              },
+              {
+                "id": "StartWithApp",
+                "title": {
+                  "en": "Start with App"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "start_boost",
+        "title": {
+          "en": "Start boost charging"
+        },
+        "hint": {
+          "en": "Start charging immediately"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
+      },
+      {
+        "id": "stop_charging",
+        "title": {
+          "en": "Stop charging"
+        },
+        "hint": {
+          "en": "Stop the current charging session"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
+      },
+      {
+        "id": "unsuppress_always_flex",
+        "title": {
+          "en": "Unsuppress always flex"
+        },
+        "hint": {
+          "en": "Resume always flex mode after it was suppressed"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
       }
     ]
   },

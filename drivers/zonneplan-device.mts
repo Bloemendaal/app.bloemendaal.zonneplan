@@ -13,13 +13,19 @@ export default abstract class ZonneplanDevice<
 	public abstract refresh(accountResponse: AccountResponse): Promise<void>;
 
 	public onAdded(): void {
-		if (this.homey.app instanceof ZonneplanApp) {
-			this.homey.app.requestRefresh();
-		}
+		this.requestRefresh();
 	}
 
 	public async onInit(): Promise<void> {
-		await Promise.all(this.getFlows().map((flow) => flow.register()));
+		for (const flow of this.getFlows()) {
+			await flow.register();
+		}
+	}
+
+	public requestRefresh(delay = 3000): void {
+		if (this.homey.app instanceof ZonneplanApp) {
+			this.homey.app.requestRefresh(delay);
+		}
 	}
 
 	protected getFlows(): ZonneplanFlow<ZonneplanDevice<T>>[] {

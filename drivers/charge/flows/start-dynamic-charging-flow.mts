@@ -48,6 +48,7 @@ export class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice> {
 
 		await chargePoint.startDynamicChargingSession(params);
 		this.device.log("Started dynamic charging session", params);
+		this.device.requestRefresh();
 	}
 
 	private async handleVehicleAutocomplete(

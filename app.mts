@@ -73,12 +73,12 @@ export default class ZonneplanApp extends Homey.App {
 	 * We request a refresh for all devices, but we delay it
 	 * slightly to allow multiple requests to be batched together.
 	 */
-	public requestRefresh(): void {
+	public requestRefresh(delay = 3000): void {
 		if (this.refreshTimeout) {
 			clearTimeout(this.refreshTimeout);
 		}
 
-		this.refreshTimeout = setTimeout(() => this.refreshDevices(), 3 * 1000);
+		this.refreshTimeout = setTimeout(() => this.refreshDevices(), delay);
 	}
 
 	private async refreshDevices(): Promise<void> {

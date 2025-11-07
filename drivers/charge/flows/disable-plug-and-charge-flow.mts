@@ -16,5 +16,6 @@ export class DisablePlugAndChargeFlow extends ZonneplanFlow<ChargeDevice> {
 		const chargePoint = this.device.getChargePoint();
 		await chargePoint.disablePlugAndCharge();
 		this.device.log("Disabled plug and charge");
+		this.device.requestRefresh();
 	}
 }
