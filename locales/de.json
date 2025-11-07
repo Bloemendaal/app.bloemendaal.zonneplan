@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ zuletzt aktualisiert um"
+		},
+		"meter_power_charged_year": {
+			"title": "Geladene Energie in __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Importierter Strom in __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Exportierter Strom in __year__"
+		},
+		"meter_gas_year": {
+			"title": "Gasverbrauch in __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "Dieses Ladegerät konnte (länger) nicht gefunden werden. Überprüfen Sie Ihr Zonneplan-Konto oder entfernen Sie das Ladegerät.",
+				"cable_not_connected": "Das Ladegerät ist nicht mit einem Fahrzeug verbunden. Bitte verbinden Sie das Fahrzeug mit dem Ladegerät und versuchen Sie es erneut."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "Diese Solaranlage konnte (länger) nicht gefunden werden. Überprüfen Sie Ihr Zonneplan-Konto oder entfernen Sie die Anlage."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Starte dynamische Ladesitzung",
+				"titleFormatted": "Dynamisches Laden bis [[end_time]] starten, laden [[value]] [[unit]][[vehicle]]",
+				"hint": "Planen Sie intelligentes Laden mit einem bestimmten Ziel und Endzeit",
+				"args": {
+					"end_time": {
+						"title": "Gewünschte Endzeit",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Einheit",
+						"values": {
+							"kilometers": "Kilometer",
+							"percentage": "Prozentsatz"
+						}
+					},
+					"value": {
+						"title": "Menge",
+						"placeholder": "Menge eingeben"
+					},
+					"vehicle": {
+						"title": "Fahrzeug",
+						"placeholder": "Fahrzeug auswählen (optional)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Dynamische Ladesitzung beenden",
+				"hint": "Beenden Sie die aktuelle dynamische Ladesitzung"
+			},
+			"enable_plug_and_charge": {
+				"title": "Plug & Charge aktivieren",
+				"hint": "Laden automatisch starten, wenn das Auto angeschlossen wird"
+			},
+			"disable_plug_and_charge": {
+				"title": "Plug & Charge deaktivieren",
+				"hint": "Manuellen Start oder Planung zum Laden erforderlich"
+			},
+			"enable_always_flex": {
+				"title": "Immer Flex-Modus aktivieren",
+				"hint": "Immer flexibles intelligentes Laden verwenden"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "Wir senden Ihnen eine E-Mail mit einem Link, den Sie zur direkten Anmeldung verwenden können.",
+			"email": "E-Mail-Adresse",
+			"submit": "E-Mail-Link senden"
+		},
+		"polling": {
+			"title": "Bestätigen Sie Ihre E-Mail-Adresse...",
+			"subtitle": "Öffnen Sie Ihre E-Mails auf einem Computer oder Telefon und klicken Sie auf die E-Mail bestätigen Schaltfläche. Das Pairing wird danach automatisch fortgesetzt.",
+			"email": "E-Mail gesendet an:",
+			"back": "E-Mail-Adresse ändern",
+			"error": {
+				"timeout": "Zeitüberschreitung beim Warten auf E-Mail-Bestätigung. Bitte versuchen Sie es erneut.",
+				"invalid_email": "Die angegebene E-Mail-Adresse ist ungültig. Bitte versuchen Sie es erneut.",
+				"unknown": "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+			}
+		}
+	}
+}

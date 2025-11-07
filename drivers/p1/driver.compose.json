@@ -1,8 +1,5 @@
 {
-	"name": {
-		"en": "P1 Meter",
-		"nl": "P1 Meter"
-	},
+	"name": "Connect",
 	"class": "sensor",
 	"capabilities": [
 		"measure_power",
@@ -13,13 +10,33 @@
 		"meter_power.imported": {
 			"title": {
 				"en": "Imported Energy",
-				"nl": "Afgenomen energie"
+				"nl": "Afgenomen energie",
+				"da": "Importeret energi",
+				"de": "Importierte Energie",
+				"es": "Energía importada",
+				"fr": "Énergie importée",
+				"it": "Energia importata",
+				"no": "Importert energi",
+				"sv": "Importerad energi",
+				"pl": "Importowana energia",
+				"ru": "Импортированная энергия",
+				"ko": "수입 에너지"
 			}
 		},
 		"meter_power.exported": {
 			"title": {
 				"en": "Exported Energy",
-				"nl": "Teruggeleverde energie"
+				"nl": "Teruggeleverde energie",
+				"da": "Eksporteret energi",
+				"de": "Exportierte Energie",
+				"es": "Energía exportada",
+				"fr": "Énergie exportée",
+				"it": "Energia esportata",
+				"no": "Eksportert energi",
+				"sv": "Exporterad energi",
+				"pl": "Eksportowana energia",
+				"ru": "Экспортированная энергия",
+				"ko": "수출 에너지"
 			}
 		}
 	},

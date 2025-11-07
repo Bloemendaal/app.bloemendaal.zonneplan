@@ -3,52 +3,136 @@
 		{
 			"id": "start_dynamic_charging",
 			"title": {
-				"en": "Start dynamic charging session"
+				"en": "Start Powerplay charging session",
+				"nl": "Start Powerplay laadsessie",
+				"da": "Start dynamisk opladningssession",
+				"de": "Dynamische Ladesitzung starten",
+				"es": "Iniciar sesión de carga dinámica",
+				"fr": "Démarrer la session de charge dynamique",
+				"it": "Avvia sessione di carica dinamica",
+				"no": "Start dynamisk ladesesjon",
+				"sv": "Starta dynamisk laddningssession",
+				"pl": "Rozpocznij dynamiczną sesję ładowania",
+				"ru": "Начать сеанс динамической зарядки",
+				"ko": "동적 충전 세션 시작"
 			},
 			"titleFormatted": {
-				"en": "Start dynamic charging until [[end_date]] [[end_time]], charge [[value]] [[unit]][[vehicle]]"
+				"en": "Start Powerplay charging until [[end_date]] [[end_time]], charge [[value]] [[unit]][[vehicle]]",
+				"nl": "Start Powerplay laden tot [[end_date]] [[end_time]], laad [[value]] [[unit]][[vehicle]]",
+				"da": "Start dynamisk opladning indtil [[end_date]] [[end_time]], oplad [[value]] [[unit]][[vehicle]]",
+				"de": "Beginnen Sie das dynamische Laden bis [[end_date]] [[end_time]], laden Sie [[value]] [[unit]][[vehicle]]",
+				"es": "Comience la carga dinámica hasta [[end_date]] [[end_time]], cargue [[value]] [[unit]][[vehicle]]",
+				"fr": "Commencer la charge dynamique jusqu'à [[end_date]] [[end_time]], chargez [[value]] [[unit]][[vehicle]]",
+				"it": "Inizia la carica dinamica fino a [[end_date]] [[end_time]], carica [[value]] [[unit]][[vehicle]]",
+				"no": "Start dynamisk lading til [[end_date]] [[end_time]], lad [[value]] [[unit]][[vehicle]]",
+				"sv": "Starta dynamisk laddning till [[end_date]] [[end_time]], ladda [[value]] [[unit]][[vehicle]]",
+				"pl": "Rozpocznij ładowanie dynamiczne do [[end_date]] [[end_time]], naładuj [[value]] [[unit]][[vehicle]]",
+				"ru": "Начните динамическую зарядку до [[end_date]] [[end_time]], зарядить [[value]] [[unit]][[vehicle]]",
+				"ko": "[[end_date]] [[end_time]] 까지 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전"
 			},
 			"hint": {
-				"en": "Schedule smart charging with a specific goal and end time"
+				"en": "Schedule smart charging with a specific goal and end time",
+				"nl": "Plan slimme lading met een specifiek doel en eindtijd",
+				"da": "Planlæg smart opladning med et specifikt mål og sluttid",
+				"de": "Planen Sie das intelligente Laden mit einem spezifischen Ziel und Endzeitpunkt",
+				"es": "Programa carga inteligente con un objetivo específico y hora de finalización",
+				"fr": "Planifiez la charge intelligente avec un objectif spécifique et une heure de fin",
+				"it": "Pianifica la carica intelligente con un obiettivo specifico e un orario di fine",
+				"no": "Planlegg smart lading med et spesifikt mål og sluttid",
+				"sv": "Schemalägg smart laddning med ett specifikt mål och sluttid",
+				"pl": "Zaplanować inteligentne ładowanie z określonym celem i czasem zakończenia",
+				"ru": "Запланировать интеллектуальную зарядку с определенной целью и временем окончания",
+				"ko": "특정 목표와 종료 시간으로 스마트 충전 예약"
 			},
 			"args": [
 				{
 					"type": "date",
 					"name": "end_date",
 					"title": {
-						"en": "Desired end date"
+						"en": "Desired end date",
+						"nl": "Gewenste einddatum",
+						"da": "Ønsket slutdato",
+						"de": "Gewünschtes Enddatum",
+						"es": "Fecha de fin deseada",
+						"fr": "Date de fin souhaitée",
+						"it": "Data di fine desiderata",
+						"no": "Ønsket sluttdato",
+						"sv": "Önskat slutdatum",
+						"pl": "Pożądana data zakończenia",
+						"ru": "Желаемая дата окончания",
+						"ko": "원하는 종료 날짜"
 					},
-					"placeholder": {
-						"en": "05-11-2025"
-					}
+					"placeholder": "07-11-2022"
 				},
 				{
 					"type": "time",
 					"name": "end_time",
 					"title": {
-						"en": "Desired end time"
+						"en": "Desired end time",
+						"nl": "Gewenste eindtijd",
+						"da": "Ønsket sluttid",
+						"de": "Gewünschte Endzeit",
+						"es": "Hora de finalización deseada",
+						"fr": "Heure de fin souhaitée",
+						"it": "Orario di fine desiderato",
+						"no": "Ønsket sluttid",
+						"sv": "Önskad sluttid",
+						"pl": "Pożądana godzina zakończenia",
+						"ru": "Желаемое время окончания",
+						"ko": "원하는 종료 시간"
 					},
-					"placeholder": {
-						"en": "08:00"
-					}
+					"placeholder": "12:00"
 				},
 				{
 					"type": "dropdown",
 					"name": "unit",
 					"title": {
-						"en": "Unit"
+						"en": "Unit",
+						"nl": "Eenheid",
+						"da": "Enhed",
+						"de": "Einheit",
+						"es": "Unidad",
+						"fr": "Unité",
+						"it": "Unità",
+						"no": "Enhet",
+						"sv": "Enhet",
+						"pl": "Jednostka",
+						"ru": "Единица",
+						"ko": "단위"
 					},
 					"values": [
 						{
 							"id": "kilometers",
 							"title": {
-								"en": "Kilometers"
+								"en": "Kilometers",
+								"nl": "Kilometers",
+								"da": "Kilometer",
+								"de": "Kilometer",
+								"es": "Kilómetros",
+								"fr": "Kilomètres",
+								"it": "Chilometri",
+								"no": "Kilometer",
+								"sv": "Kilometer",
+								"pl": "Kilometry",
+								"ru": "Километры",
+								"ko": "킬로미터"
 							}
 						},
 						{
 							"id": "percentage",
 							"title": {
-								"en": "Percentage"
+								"en": "Percentage",
+								"nl": "Percentage",
+								"da": "Procentdel",
+								"de": "Prozentsatz",
+								"es": "Porcentaje",
+								"fr": "Pourcentage",
+								"it": "Percentuale",
+								"no": "Prosentandel",
+								"sv": "Procent",
+								"pl": "Procent",
+								"ru": "Процент",
+								"ko": "백분율"
 							}
 						}
 					]
@@ -57,10 +141,32 @@
 					"type": "number",
 					"name": "value",
 					"title": {
-						"en": "Amount"
+						"en": "Amount",
+						"nl": "Hoeveelheid",
+						"da": "Mængde",
+						"de": "Betrag",
+						"es": "Cantidad",
+						"fr": "Quantité",
+						"it": "Quantità",
+						"no": "Mengde",
+						"sv": "Mängd",
+						"pl": "Ilość",
+						"ru": "Количество",
+						"ko": "양"
 					},
 					"placeholder": {
-						"en": "Enter amount"
+						"en": "Enter amount",
+						"nl": "Voer hoeveelheid in",
+						"da": "Indtast mængde",
+						"de": "Menge eingeben",
+						"es": "Introduce la cantidad",
+						"fr": "Entrez le montant",
+						"it": "Inserisci quantità",
+						"no": "Angi mengde",
+						"sv": "Ange mängd",
+						"pl": "Wpisz ilość",
+						"ru": "Введите количество",
+						"ko": "양 입력"
 					},
 					"min": 0,
 					"max": 500
@@ -69,11 +175,33 @@
 					"type": "autocomplete",
 					"name": "vehicle",
 					"title": {
-						"en": "Vehicle"
+						"en": "Vehicle",
+						"nl": "Voertuig",
+						"da": "Køretøj",
+						"de": "Fahrzeug",
+						"es": "Vehículo",
+						"fr": "Véhicule",
+						"it": "Veicolo",
+						"no": "Kjøretøy",
+						"sv": "Fordon",
+						"pl": "Pojazd",
+						"ru": "Транспортное средство",
+						"ko": "차량"
 					},
 					"required": false,
 					"placeholder": {
-						"en": "Select vehicle (optional)"
+						"en": "Select vehicle (optional)",
+						"nl": "Selecteer voertuig (optioneel)",
+						"da": "Vælg køretøj (valgfrit)",
+						"de": "Fahrzeug auswählen (optional)",
+						"es": "Seleccionar vehículo (opcional)",
+						"fr": "Sélectionnez un véhicule (facultatif)",
+						"it": "Seleziona veicolo (opzionale)",
+						"no": "Velg kjøretøy (valgfritt)",
+						"sv": "Välj fordon (valfritt)",
+						"pl": "Wybierz pojazd (opcjonalnie)",
+						"ru": "Выберите транспортное средство (необязательно)",
+						"ko": "차량 선택 (선택 사항)"
 					}
 				}
 			]
@@ -81,83 +209,257 @@
 		{
 			"id": "stop_dynamic_charging",
 			"title": {
-				"en": "Stop dynamic charging session"
+				"en": "Stop Powerplay charging session",
+				"nl": "Stop Powerplay laadsessie",
+				"da": "Stop dynamisk opladningssession",
+				"de": "Dynamische Ladesitzung beenden",
+				"es": "Detener sesión de carga dinámica",
+				"fr": "Arrêter la session de charge dynamique",
+				"it": "Ferma sessione di ricarica dinamica",
+				"no": "Stopp dynamisk ladesesjon",
+				"sv": "Stoppa dynamisk laddningssession",
+				"pl": "Zatrzymaj dynamiczną sesję ładowania",
+				"ru": "Остановить сеанс динамической зарядки",
+				"ko": "동적 충전 세션 중지"
 			},
 			"hint": {
-				"en": "Stop the current dynamic charging session"
+				"en": "Stop the current Powerplay charging session",
+				"nl": "Stop de huidige Powerplay laadsessie",
+				"da": "Stop den aktuelle dynamiske opladningssession",
+				"de": "Beenden Sie die aktuelle dynamische Ladesitzung",
+				"es": "Detener la sesión de carga dinámica actual",
+				"fr": "Arrêtez la session de charge dynamique en cours",
+				"it": "Interrompi la sessione di ricarica dinamica in corso",
+				"no": "Stopp den nåværende dynamiske ladesesjonen",
+				"sv": "Stoppa den aktuella dynamiska laddningssessionen",
+				"pl": "Zatrzymaj bieżącą dynamiczną sesję ładowania",
+				"ru": "Остановите текущий сеанс динамической зарядки",
+				"ko": "현재 동적 충전 세션 중지"
 			}
 		},
 		{
 			"id": "enable_plug_and_charge",
 			"title": {
-				"en": "Enable plug & charge"
+				"en": "Enable plug & charge",
+				"nl": "Plug & Charge inschakelen",
+				"da": "Aktiver plug & charge",
+				"de": "Plug & Charge aktivieren",
+				"es": "Habilitar plug & charge",
+				"fr": "Activer plug & charge",
+				"it": "Abilita plug & charge",
+				"no": "Aktiver plugg og lad",
+				"sv": "Aktivera plug & charge",
+				"pl": "Włącz plug & charge",
+				"ru": "Включить plug & charge",
+				"ko": "플러그 앤 차지 활성화"
 			},
 			"hint": {
-				"en": "Automatically start charging when the car is plugged in"
+				"en": "Automatically start charging when the car is plugged in",
+				"nl": "Automatisch starten met opladen wanneer de auto is aangesloten",
+				"da": "Start automatisk opladning, når bilen er tilsluttet",
+				"de": "Laden Sie automatisch, wenn das Auto angeschlossen ist",
+				"es": "Iniciar carga automáticamente cuando el coche está enchufado",
+				"fr": "Démarrage automatique de la charge lorsque la voiture est branchée",
+				"it": "Avvia automaticamente la ricarica quando l'auto è collegata",
+				"no": "Start automatisk lading når bilen er koblet til",
+				"sv": "Starta laddningen automatiskt när bilen är ansluten",
+				"pl": "Automatycznie rozpocznij ładowanie po podłączeniu samochodu",
+				"ru": "Автоматически начинать зарядку при подключении автомобиля",
+				"ko": "차량을 연결하면 자동으로 충전 시작"
 			}
 		},
 		{
 			"id": "disable_plug_and_charge",
 			"title": {
-				"en": "Disable plug & charge"
+				"en": "Disable plug & charge",
+				"nl": "Plug & Charge uitschakelen",
+				"da": "Deaktiver plug & charge",
+				"de": "Plug & Charge deaktivieren",
+				"es": "Deshabilitar plug & charge",
+				"fr": "Désactiver plug & charge",
+				"it": "Disabilita plug & charge",
+				"no": "Deaktiver plugg og lad",
+				"sv": "Inaktivera plug & charge",
+				"pl": "Wyłącz plug & charge",
+				"ru": "Отключить plug & charge",
+				"ko": "플러그 앤 차지 비활성화"
 			},
 			"hint": {
-				"en": "Require manual start or schedule to charge"
+				"en": "Require manual start or schedule to charge",
+				"nl": "Vereist handmatige start of planning om op te laden",
+				"da": "Kræver manuel start eller tidsplan for opladning",
+				"de": "Manueller Start oder Ladezeitplan erforderlich",
+				"es": "Requerir inicio manual o programación para cargar",
+				"fr": "Nécessite un démarrage manuel ou une programmation pour charger",
+				"it": "Richiede avvio manuale o programmazione per caricare",
+				"no": "Krever manuell start eller planlegging for å lade",
+				"sv": "Kräver manuell start eller schemaläggning för att ladda",
+				"pl": "Wymaga ręcznego startu lub harmonogramu ładowania",
+				"ru": "Требуется ручной запуск или планирование для зарядки",
+				"ko": "수동 시작 또는 충전 일정 필요"
 			}
 		},
 		{
 			"id": "enable_always_flex",
 			"title": {
-				"en": "Enable always flex mode"
+				"en": "Enable Powerplay mode",
+				"nl": "Powerplay inschakelen",
+				"da": "Aktiver altid flex-mode",
+				"de": "Immer Flex-Modus aktivieren",
+				"es": "Habilitar modo siempre flex",
+				"fr": "Activer le mode toujours flexible",
+				"it": "Abilita modalità sempre flessibile",
+				"no": "Aktiver alltid fleksmodus",
+				"sv": "Aktivera alltid flexläge",
+				"pl": "Włącz tryb zawsze flex",
+				"ru": "Включить всегда гибкий режим",
+				"ko": "항상 유연한 모드 활성화"
 			},
 			"hint": {
-				"en": "Always use flexible smart charging"
+				"en": "Always use flexible smart charging",
+				"nl": "Gebruik altijd flexibel slim opladen",
+				"da": "Brug altid fleksibel smartopladning",
+				"de": "Immer flexibles intelligentes Laden verwenden",
+				"es": "Usar siempre carga inteligente flexible",
+				"fr": "Utilisez toujours la charge intelligente flexible",
+				"it": "Usa sempre la ricarica intelligente flessibile",
+				"no": "Bruk alltid fleksibel smart lading",
+				"sv": "Använd alltid flexibel smart laddning",
+				"pl": "Zawsze używaj elastycznego inteligentnego ładowania",
+				"ru": "Всегда используйте гибкую интеллектуальную зарядку",
+				"ko": "항상 유연한 스마트 충전 사용"
 			}
 		},
 		{
 			"id": "disable_always_flex",
 			"title": {
-				"en": "Disable always flex mode"
+				"en": "Disable Powerplay mode",
+				"nl": "Powerplay uitschakelen",
+				"da": "Deaktiver altid flex-mode",
+				"de": "Immer Flex-Modus deaktivieren",
+				"es": "Deshabilitar modo siempre flex",
+				"fr": "Désactiver le mode toujours flexible",
+				"it": "Disabilita modalità sempre flessibile",
+				"no": "Deaktiver alltid fleksmodus",
+				"sv": "Inaktivera alltid flexläge",
+				"pl": "Wyłącz tryb zawsze flex",
+				"ru": "Отключить всегда гибкий режим",
+				"ko": "항상 유연한 모드 비활성화"
 			},
 			"hint": {
-				"en": "Disable flexible smart charging mode"
+				"en": "Disable flexible smart charging mode",
+				"nl": "Schakel flexibel slim opladen uit",
+				"da": "Deaktiver fleksibel smartopladning",
+				"de": "Flexiblen Smart-Lademodus deaktivieren",
+				"es": "Deshabilitar modo de carga inteligente flexible",
+				"fr": "Désactiver le mode de charge intelligente flexible",
+				"it": "Disabilita modalità di ricarica intelligente flessibile",
+				"no": "Deaktiver fleksibel smart lademodus",
+				"sv": "Inaktivera flexibel smart laddningsläge",
+				"pl": "Wyłącz elastyczny tryb inteligentnego ładowania",
+				"ru": "Отключить гибкий режим интеллектуальной зарядки",
+				"ko": "유연한 스마트 충전 모드 비활성화"
 			}
 		},
 		{
 			"id": "set_mode",
 			"title": {
-				"en": "Set charge mode"
+				"en": "Set charge mode",
+				"nl": "Stel laadmodus in",
+				"da": "Indstil opladningstilstand",
+				"de": "Lademodus einstellen",
+				"es": "Establecer modo de carga",
+				"fr": "Définir le mode de charge",
+				"it": "Imposta modalità di carica",
+				"no": "Sett lade modus",
+				"sv": "Ställ in laddningsläge",
+				"pl": "Ustaw tryb ładowania",
+				"ru": "Установить режим зарядки",
+				"ko": "충전 모드 설정"
 			},
 			"titleFormatted": {
-				"en": "Set charge mode to [[mode]]"
+				"en": "Set charge mode to [[mode]]",
+				"nl": "Stel laadmodus in op [[mode]]",
+				"da": "Indstil opladningstilstand til [[mode]]",
+				"de": "Lademodus auf [[mode]] einstellen",
+				"es": "Establecer modo de carga en [[mode]]",
+				"fr": "Définir le mode de charge sur [[mode]]",
+				"it": "Imposta modalità di carica su [[mode]]",
+				"no": "Sett lade modus til [[mode]]",
+				"sv": "Ställ in laddningsläge till [[mode]]",
+				"pl": "Ustaw tryb ładowania na [[mode]]",
+				"ru": "Установить режим зарядки на [[mode]]",
+				"ko": "[[mode]] 로 충전 모드 설정"
 			},
 			"hint": {
-				"en": "Set the starting mode of the charger"
+				"en": "Set the starting mode of the charger",
+				"nl": "Stel de startmodus van de oplader in",
+				"da": "Indstil ladestarttilstanden",
+				"de": "Ladestartmodus einstellen",
+				"es": "Configurar el modo de inicio del cargador",
+				"fr": "Définir le mode de démarrage du chargeur",
+				"it": "Imposta la modalità di avvio del caricabatterie",
+				"no": "Sett startmodus for laderen",
+				"sv": "Ställ in laddarens startläge",
+				"pl": "Ustaw tryb rozpoczęcia ładowarki",
+				"ru": "Установите исходный режим зарядного устройства",
+				"ko": "충전기의 시작 모드 설정"
 			},
 			"args": [
 				{
 					"type": "dropdown",
 					"name": "mode",
 					"title": {
-						"en": "Mode"
+						"en": "Mode",
+						"nl": "Modus",
+						"da": "Tilstand",
+						"de": "Modus",
+						"es": "Modo",
+						"fr": "Mode",
+						"it": "Modalità",
+						"no": "Modus",
+						"sv": "Läge",
+						"pl": "Tryb",
+						"ru": "Режим",
+						"ko": "모드"
 					},
 					"values": [
 						{
 							"id": "AlwaysFlex",
-							"title": {
-								"en": "Always Flex"
-							}
+							"title": "Powerplay"
 						},
 						{
 							"id": "PlugAndCharge",
 							"title": {
-								"en": "Plug & Charge"
+								"en": "Plug & Charge",
+								"nl": "Plug & Charge",
+								"da": "Plug & Charge",
+								"de": "Plug & Charge",
+								"es": "Conectar y Cargar",
+								"fr": "Brancher & Charger",
+								"it": "Collega e Carica",
+								"no": "Plugg & Lad",
+								"sv": "Plug & Charge",
+								"pl": "Podłącz i ładuj",
+								"ru": "Подключай и заряжай",
+								"ko": "플러그 앤 차지"
 							}
 						},
 						{
 							"id": "StartWithApp",
 							"title": {
-								"en": "Start with App"
+								"en": "Start with App",
+								"nl": "Start met app",
+								"da": "Start med app",
+								"de": "Mit der App starten",
+								"es": "Comenzar con la aplicación",
+								"fr": "Commencer avec l'application",
+								"it": "Inizia con l'app",
+								"no": "Start med appen",
+								"sv": "Börja med app",
+								"pl": "Rozpocznij z aplikacją",
+								"ru": "Начать с приложения",
+								"ko": "앱으로 시작"
 							}
 						}
 					]
@@ -167,28 +469,94 @@
 		{
 			"id": "start_boost",
 			"title": {
-				"en": "Start boost charging"
+				"en": "Start boost charging",
+				"nl": "Start boost opladen",
+				"da": "Start boost opladning",
+				"de": "Boost-Ladevorgang starten",
+				"es": "Iniciar carga de refuerzo",
+				"fr": "Démarrer la charge boost",
+				"it": "Avvia ricarica boost",
+				"no": "Start boostlading",
+				"sv": "Starta boostladdning",
+				"pl": "Rozpocznij szybkie ładowanie",
+				"ru": "Начать ускоренную зарядку",
+				"ko": "부스트 충전 시작"
 			},
 			"hint": {
-				"en": "Start charging immediately"
+				"en": "Start charging immediately",
+				"nl": "Start direct met opladen",
+				"da": "Start opladning straks",
+				"de": "Sofort mit dem Laden beginnen",
+				"es": "Comenzar a cargar inmediatamente",
+				"fr": "Commencez immédiatement à charger",
+				"it": "Inizia subito a caricare",
+				"no": "Start lading umiddelbart",
+				"sv": "Börja ladda omedelbart",
+				"pl": "Rozpocznij ładowanie natychmiast",
+				"ru": "Начать зарядку немедленно",
+				"ko": "즉시 충전 시작"
 			}
 		},
 		{
 			"id": "stop_charging",
 			"title": {
-				"en": "Stop charging"
+				"en": "Stop charging",
+				"nl": "Stop met opladen",
+				"da": "Stop opladning",
+				"de": "Laden stoppen",
+				"es": "Detener la carga",
+				"fr": "Arrêter la charge",
+				"it": "Ferma la ricarica",
+				"no": "Stopp lading",
+				"sv": "Stoppa laddningen",
+				"pl": "Zatrzymaj ładowanie",
+				"ru": "Остановить зарядку",
+				"ko": "충전 중지"
 			},
 			"hint": {
-				"en": "Stop the current charging session"
+				"en": "Stop the current charging session",
+				"nl": "Stop de huidige laadsessie",
+				"da": "Stop den aktuelle opladningssession",
+				"de": "Beenden Sie die aktuelle Ladesitzung",
+				"es": "Detener la sesión de carga actual",
+				"fr": "Arrêtez la session de charge en cours",
+				"it": "Interrompi la sessione di ricarica in corso",
+				"no": "Stopp den nåværende ladesesjonen",
+				"sv": "Stoppa den aktuella laddningssessionen",
+				"pl": "Zatrzymaj bieżącą sesję ładowania",
+				"ru": "Остановите текущий сеанс зарядки",
+				"ko": "현재 충전 세션 중지"
 			}
 		},
 		{
 			"id": "unsuppress_always_flex",
 			"title": {
-				"en": "Unsuppress always flex"
+				"en": "Resume free charging",
+				"nl": "Gratis laden hervatten",
+				"da": "Genoptag gratis opladning",
+				"de": "Kostenloses Laden fortsetzen",
+				"es": "Reanudar carga gratuita",
+				"fr": "Reprendre la charge gratuite",
+				"it": "Riprendi la ricarica gratuita",
+				"no": "Gjenoppta gratis lading",
+				"sv": "Återuppta gratis laddning",
+				"pl": "Wznów bezpłatne ładowanie",
+				"ru": "Возобновить бесплатную зарядку",
+				"ko": "무료 충전 재개"
 			},
 			"hint": {
-				"en": "Resume always flex mode after it was suppressed"
+				"en": "Resume Powerplay mode after it was suppressed",
+				"nl": "Hervat Powerplay modus na uitschakeling",
+				"da": "Genoptag Powerplay-tilstand efter undertrykkelse",
+				"de": "Setzen Sie den Powerplay-Modus nach Unterdrückung fort",
+				"es": "Reanudar el modo Powerplay después de haber sido suprimido",
+				"fr": "Reprendre le mode Powerplay après sa suppression",
+				"it": "Riprendi la modalità Powerplay dopo che è stata soppressa",
+				"no": "Gjenoppta Powerplay-modus etter at den ble undertrykt",
+				"sv": "Återuppta Powerplay-läge efter att det undertryckts",
+				"pl": "Wznów tryb Powerplay po jego stłumieniu",
+				"ru": "Возобновить режим Powerplay после его подавления",
+				"ko": "억제된 후 Powerplay 모드 재개"
 			}
 		}
 	]

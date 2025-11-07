@@ -3,9 +3,33 @@
 		"id": "auto_unsuppress_always_flex",
 		"type": "checkbox",
 		"value": true,
-		"label": { "en": "Automatically resume Powerplay charging" },
+		"label": {
+			"en": "Automatically resume Powerplay charging",
+			"nl": "Automatisch Powerplay-laden hervatten",
+			"da": "Genoptag automatisk Powerplay-opladning",
+			"de": "Automatisches Fortsetzen des Powerplay-Ladens",
+			"es": "Reanudar automáticamente la carga de Powerplay",
+			"fr": "Reprendre automatiquement la charge Powerplay",
+			"it": "Riprendi automaticamente la ricarica Powerplay",
+			"no": "Automatisk gjenoppta Powerplay-lading",
+			"sv": "Återuppta automatiskt Powerplay-laddning",
+			"pl": "Automatyczne wznawianie ładowania Powerplay",
+			"ru": "Автоматически возобновить зарядку Powerplay",
+			"ko": "Powerplay 충전 자동 재개"
+		},
 		"hint": {
-			"en": "When you normally press the stop charging button in the app, Powerplay charging is suppressed until you manually resume it. Enabling this option will automatically resume Powerplay charging after a dynamic charging session ends."
+			"en": "When you normally press the stop charging button in the app, Powerplay charging is suppressed until you manually resume it. Enabling this option will do this automatically for you after you stop charging using the button in your device view.",
+			"nl": "Wanneer je normaal gesproken in de app op de stopknop drukt, wordt Powerplay-laden onderdrukt totdat je op gratis laden hervatten klikt. Als je deze optie inschakelt, wordt gratis laden automatisch hervat nadat je het laden hebt gestopt met de knop in je apparaatweergave.",
+			"da": "Når du normalt trykker på stop opladningsknappen i appen, undertrykkes Powerplay-opladning, indtil du manuelt genoptager den. Hvis du aktiverer denne mulighed, sker dette automatisk for dig, efter at du har stoppet opladningen ved hjælp af knappen i din enhedsvisning.",
+			"de": "Wenn Sie normalerweise in der App auf die Schaltfläche zum Stoppen des Ladevorgangs drücken, wird das Powerplay-Laden unterdrückt, bis Sie es manuell fortsetzen. Wenn Sie diese Option aktivieren, wird dies automatisch für Sie erledigt, nachdem Sie das Laden mit der Schaltfläche in Ihrer Geräteansicht gestoppt haben.",
+			"es": "Cuando normalmente presiona el botón de detener carga en la aplicación, se suprime la carga de Powerplay hasta que la reanude manualmente. Habilitar esta opción lo hará automáticamente después de que detenga la carga usando el botón en la vista de su dispositivo.",
+			"fr": "Lorsque vous appuyez normalement sur le bouton d'arrêt de la charge dans l'application, la charge Powerplay est supprimée jusqu'à ce que vous la repreniez manuellement. L'activation de cette option le fera automatiquement pour vous après avoir arrêté la charge à l'aide du bouton dans la vue de votre appareil.",
+			"it": "Quando si preme normalmente il pulsante di arresto della carica nell'app, la carica Powerplay viene soppressa fino a quando non la si riprende manualmente. Abilitando questa opzione lo farà automaticamente per te dopo aver interrotto la carica utilizzando il pulsante nella visualizzazione del dispositivo.",
+			"no": "Når du vanligvis trykker på stopp ladeknappen i appen, undertrykkes Powerplay-ladingen til du manuelt gjenopptar den. Aktivering av dette alternativet vil gjøre dette automatisk for deg etter at du har stoppet ladingen ved å bruke knappen i enhetsvisningen.",
+			"sv": "När du normalt trycker på stopp laddningsknappen i appen undertrycks Powerplay-laddning tills du manuellt återupptar den. Genom att aktivera detta alternativ görs detta automatiskt för dig efter att du har stoppat laddningen med knappen i din enhetsvy.",
+			"pl": "Gdy normalnie naciśniesz przycisk zatrzymania ładowania w aplikacji, ładowanie Powerplay jest tłumione, dopóki nie wznowisz go ręcznie. Włączenie tej opcji spowoduje automatyczne wykonanie tego za Ciebie po zatrzymaniu ładowania za pomocą przycisku w widoku urządzenia.",
+			"ru": "Когда вы обычно нажимаете кнопку остановки зарядки в приложении, зарядка Powerplay подавляется, пока вы не возобновите ее вручную. Включение этой опции сделает это автоматически для вас после остановки зарядки с помощью кнопки в представлении вашего устройства.",
+			"ko": "앱에서 충전 중지 버튼을 일반적으로 누르면 수동으로 다시 시작할 때까지 Powerplay 충전이 중단됩니다. 이 옵션을 활성화하면 장치 보기에서 버튼을 사용하여 충전을 중지한 후 자동으로 수행됩니다."
 		}
 	}
 ]

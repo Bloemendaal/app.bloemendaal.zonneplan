@@ -6,7 +6,18 @@
 	"platforms": ["local"],
 	"name": "Zonneplan",
 	"description": {
-		"en": "Adds support for all Zonneplan devices to Homey."
+		"en": "Zonneplan makes energy fairer, greener, and smarter",
+		"nl": "Zonneplan maakt energie eerlijker, groener en slimmer",
+		"da": "Zonneplan gør energi mere retfærdig, grønnere og smartere",
+		"de": "Zonneplan macht Energie fairer, grüner und smarter",
+		"es": "Zonneplan hace que la energía sea más justa, más ecológica y más inteligente",
+		"fr": "Zonneplan rend l'énergie plus juste, plus verte et plus intelligente",
+		"it": "Zonneplan rende l'energia più equa, più verde e più intelligente",
+		"no": "Zonneplan gjør energi mer rettferdig, grønnere og smartere",
+		"sv": "Zonneplan gör energi rättvisare, grönare och smartare",
+		"pl": "Zonneplan sprawia, że energia jest bardziej sprawiedliwa, zielona i inteligentna",
+		"ru": "Zonneplan делает энергию справедливее, зеленее и умнее",
+		"ko": "Zonneplan은 에너지를 더 공정하고, 더 친환경적이며, 더 스마트하게 만듭니다"
 	},
 	"bugs": {
 		"url": "https://github.com/Bloemendaal/app.bloemendaal.zonneplan/issues"

@@ -1,0 +1,3 @@
+Przekształć swój dom w inteligentniejszą, bardziej zrównoważoną przestrzeń życiową dzięki bezproblemowej integracji z urządzeniami Zonneplan. Monitoruj swoje panele słoneczne w czasie rzeczywistym, śledź stan baterii domowej, kontroluj harmonogram ładowania pojazdu elektrycznego i uzyskaj szczegółowe informacje z licznika P1 — wszystko z jednego centralnego miejsca.
+
+Wykorzystaj w pełni dynamiczne ładowanie, aby optymalizować koszty i zrównoważony rozwój, planując sesje ładowania pojazdu elektrycznego w najtańszych godzinach. Dzięki inteligentnej automatyzacji możesz tworzyć przepływy reagujące na wzorce produkcji i zużycia energii, co pomoże Ci maksymalnie wykorzystać energię słoneczną i zmniejszyć ślad węglowy, oszczędzając jednocześnie na kosztach energii.

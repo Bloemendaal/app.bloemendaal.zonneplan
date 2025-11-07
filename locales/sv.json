@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ uppdaterades senast kl"
+		},
+		"meter_power_charged_year": {
+			"title": "Laddad energi __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Importerad el __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Exporterad el __year__"
+		},
+		"meter_gas_year": {
+			"title": "Gasförbrukning __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "Denna laddare kunde (längre) inte hittas. Kontrollera ditt Zonneplan-konto eller ta bort laddaren.",
+				"cable_not_connected": "Laddaren är inte ansluten till ett fordon. Anslut fordonet till laddaren och försök igen."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "Detta solpanelsystem kunde (längre) inte hittas. Kontrollera ditt Zonneplan-konto eller ta bort systemet."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Starta dynamisk laddningssession",
+				"titleFormatted": "Starta dynamisk laddning till [[end_time]], ladda [[value]] [[unit]][[vehicle]]",
+				"hint": "Schemalägg smart laddning med ett specifikt mål och slutstid",
+				"args": {
+					"end_time": {
+						"title": "Önskad slutid",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Enhet",
+						"values": {
+							"kilometers": "Kilometer",
+							"percentage": "Procent"
+						}
+					},
+					"value": {
+						"title": "Belopp",
+						"placeholder": "Ange belopp"
+					},
+					"vehicle": {
+						"title": "Fordon",
+						"placeholder": "Välj fordon (valfritt)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Stoppa dynamisk laddningssession",
+				"hint": "Stoppa den aktuella dynamiska laddningssessionen"
+			},
+			"enable_plug_and_charge": {
+				"title": "Aktivera plug & charge",
+				"hint": "Starta laddning automatiskt när bilen är inkopplad"
+			},
+			"disable_plug_and_charge": {
+				"title": "Inaktivera plug & charge",
+				"hint": "Kräver manuell start eller schema för laddning"
+			},
+			"enable_always_flex": {
+				"title": "Aktivera alltid flex-läge",
+				"hint": "Använd alltid flexibel smart laddning"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "Vi skickar ett e-postmeddelande med en länk som du kan använda för att logga in direkt.",
+			"email": "E-postadress",
+			"submit": "Skicka e-postlänk"
+		},
+		"polling": {
+			"title": "Bekräfta din e-postadress...",
+			"subtitle": "Öppna din e-post på en dator eller telefon och klicka på bekräfta e-postknappen. Parkopplingen fortsätter automatiskt därefter.",
+			"email": "E-post skickad till:",
+			"back": "Ändra e-postadress",
+			"error": {
+				"timeout": "Tidsgräns uppnådd medan väntar på e-postbekräftelse. Försök igen.",
+				"invalid_email": "Den angivna e-postadressen är ogiltig. Försök igen.",
+				"unknown": "Ett okänt fel inträffade. Försök igen."
+			}
+		}
+	}
+}

@@ -1,1 +1,3 @@
-TODO
+Transform your home into a smarter, more sustainable living space with seamless integration of your Zonneplan devices. Monitor your solar panels in real-time, keep track of your home battery, control your EV charging schedule, and get detailed insights from your P1 meter—all from one central place.
+
+Take full advantage of dynamic charging to optimize costs and sustainability by scheduling your EV charging sessions during the most affordable hours. With intelligent automation, you can create flows that respond to your energy production and consumption patterns, helping you maximize self-consumption of solar energy and reduce your carbon footprint while saving on energy costs.

@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ mis à jour à"
+		},
+		"meter_power_charged_year": {
+			"title": "Énergie chargée en __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Électricité importée en __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Électricité exportée en __year__"
+		},
+		"meter_gas_year": {
+			"title": "Consommation de gaz en __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "Ce chargeur n'a pas pu (ou ne peut plus) être trouvé. Vérifiez votre compte Zonneplan ou retirez le chargeur.",
+				"cable_not_connected": "Le chargeur n'est pas connecté à un véhicule. Veuillez connecter le véhicule au chargeur et réessayer."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "Ce système de panneaux solaires n'a pas pu (ou ne peut plus) être trouvé. Vérifiez votre compte Zonneplan ou retirez le système."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Commencer une session de charge dynamique",
+				"titleFormatted": "Commencer la charge dynamique jusqu'à [[end_time]], charger [[value]] [[unit]][[vehicle]]",
+				"hint": "Programmer une charge intelligente avec un objectif spécifique et une heure de fin",
+				"args": {
+					"end_time": {
+						"title": "Heure de fin souhaitée",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Unité",
+						"values": {
+							"kilometers": "Kilomètres",
+							"percentage": "Pourcentage"
+						}
+					},
+					"value": {
+						"title": "Quantité",
+						"placeholder": "Entrer la quantité"
+					},
+					"vehicle": {
+						"title": "Véhicule",
+						"placeholder": "Sélectionner le véhicule (optionnel)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Arrêter la session de charge dynamique",
+				"hint": "Arrêter la session de charge dynamique actuelle"
+			},
+			"enable_plug_and_charge": {
+				"title": "Activer le mode plug & charge",
+				"hint": "Démarrer automatiquement la charge lorsque la voiture est branchée"
+			},
+			"disable_plug_and_charge": {
+				"title": "Désactiver le mode plug & charge",
+				"hint": "Requiert un démarrage manuel ou une programmation pour charger"
+			},
+			"enable_always_flex": {
+				"title": "Activer le mode flex toujours",
+				"hint": "Utiliser toujours la charge intelligente flexible"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "Nous vous enverrons un e-mail avec un lien que vous pourrez utiliser pour vous connecter directement.",
+			"email": "Adresse e-mail",
+			"submit": "Envoyer le lien par email"
+		},
+		"polling": {
+			"title": "Confirmez votre adresse e-mail...",
+			"subtitle": "Ouvrez votre email sur un ordinateur ou un téléphone et cliquez sur le bouton de confirmation d'email. L'appairage se poursuivra automatiquement par la suite.",
+			"email": "Email envoyé à :",
+			"back": "Changer d'adresse email",
+			"error": {
+				"timeout": "Délai d'attente de confirmation d'email écoulé. Veuillez réessayer.",
+				"invalid_email": "L'adresse email fournie est invalide. Veuillez réessayer.",
+				"unknown": "Une erreur inconnue s'est produite. Veuillez réessayer."
+			}
+		}
+	}
+}

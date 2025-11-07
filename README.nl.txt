@@ -1,0 +1,3 @@
+Verander je huis in een slimmer, duurzamer leefruimte met naadloze integratie van je Zonneplan-apparaten. Monitor je zonnepanelen in real-time, houd je thuisbatterij bij, beheer je EV-laadschema en krijg gedetailleerde inzichten van je P1-meter—allemaal vanuit één centrale plek.
+
+Profiteer optimaal van dynamisch laden om kosten en duurzaamheid te optimaliseren door je EV-laadsessies tijdens de voordeligste uren in te plannen. Met intelligente automatisering kun je stromen creëren die reageren op je energieproductie- en verbruikspatronen, waardoor je het zelfverbruik van zonne-energie maximaliseert en je ecologische voetafdruk vermindert, terwijl je energiekosten bespaart.

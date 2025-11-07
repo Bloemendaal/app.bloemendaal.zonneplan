@@ -9,10 +9,36 @@
 	],
 	"capabilitiesOptions": {
 		"meter_power.charged": {
-			"title": { "en": "Charged Energy" }
+			"title": {
+				"en": "Charged Energy",
+				"nl": "Opgeslagen Energie",
+				"da": "Opladet Energi",
+				"de": "Geladene Energie",
+				"es": "Energía Cargada",
+				"fr": "Énergie Chargée",
+				"it": "Energia Caricata",
+				"no": "Ladet Energi",
+				"sv": "Laddad Energi",
+				"pl": "Przechowywana Energia",
+				"ru": "Заряженная Энергия",
+				"ko": "충전된 에너지"
+			}
 		},
 		"meter_power.discharged": {
-			"title": { "en": "Discharged Energy" }
+			"title": {
+				"en": "Discharged Energy",
+				"nl": "Ontladen Energie",
+				"da": "Afladet Energi",
+				"de": "Entladene Energie",
+				"es": "Energía Descargada",
+				"fr": "Énergie Déchargée",
+				"it": "Energia Scaricata",
+				"no": "Utladet Energi",
+				"sv": "Urladdad Energi",
+				"pl": "Wykorzystana Energia",
+				"ru": "Разряженная Энергия",
+				"ko": "방전된 에너지"
+			}
 		}
 	},
 	"energy": {

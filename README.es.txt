@@ -1,0 +1,3 @@
+Transforma tu hogar en un espacio más inteligente y sostenible con la integración perfecta de tus dispositivos Zonneplan. Monitorea tus paneles solares en tiempo real, lleva un registro de tu batería doméstica, controla el horario de carga de tu vehículo eléctrico y obtén información detallada de tu medidor P1, todo desde un solo lugar central.
+
+Aprovecha al máximo la carga dinámica para optimizar los costos y la sostenibilidad programando las sesiones de carga de tu vehículo eléctrico durante las horas más económicas. Con una automatización inteligente, puedes crear flujos que respondan a tus patrones de producción y consumo de energía, ayudándote a maximizar el autoconsumo de energía solar y reducir tu huella de carbono mientras ahorras en costos de energía.

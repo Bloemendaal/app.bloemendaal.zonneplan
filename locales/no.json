@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ sist oppdatert kl."
+		},
+		"meter_power_charged_year": {
+			"title": "Ladet energi i __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Importert strøm i __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Eksportert strøm i __year__"
+		},
+		"meter_gas_year": {
+			"title": "Gassforbruk i __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "Denne laderen kunne ikke lenger bli funnet. Sjekk Zonneplan-kontoen din eller fjern laderen.",
+				"cable_not_connected": "Laderen er ikke koblet til et kjøretøy. Vennligst koble kjøretøyet til laderen og prøv igjen."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "Dette solcelleanlegget kunne ikke lenger bli funnet. Sjekk Zonneplan-kontoen din eller fjern anlegget."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Start dynamisk ladesesjon",
+				"titleFormatted": "Start dynamisk lading til [[end_time]], lad [[value]] [[unit]][[vehicle]]",
+				"hint": "Planlegg smart lading med et bestemt mål og sluttid",
+				"args": {
+					"end_time": {
+						"title": "Ønsket sluttid",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Enhet",
+						"values": {
+							"kilometers": "Kilometer",
+							"percentage": "Prosent"
+						}
+					},
+					"value": {
+						"title": "Mengde",
+						"placeholder": "Skriv inn mengde"
+					},
+					"vehicle": {
+						"title": "Kjøretøy",
+						"placeholder": "Velg kjøretøy (valgfritt)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Stopp dynamisk ladesesjon",
+				"hint": "Stopp den nåværende dynamiske ladesesjonen"
+			},
+			"enable_plug_and_charge": {
+				"title": "Aktiver plug & charge",
+				"hint": "Start lading automatisk når bilen er plugget inn"
+			},
+			"disable_plug_and_charge": {
+				"title": "Deaktiver plug & charge",
+				"hint": "Krev manuell start eller planlegging for å lade"
+			},
+			"enable_always_flex": {
+				"title": "Aktiver alltid flex-modus",
+				"hint": "Bruk alltid fleksibel smart lading"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "Vi sender deg en e-post med en lenke du kan bruke til å logge inn direkte.",
+			"email": "E-postadresse",
+			"submit": "Send e-postlenke"
+		},
+		"polling": {
+			"title": "Bekreft e-postadressen din...",
+			"subtitle": "Åpne e-posten din på en datamaskin eller telefon og klikk på bekreft e-post-knappen. Paringen vil fortsette automatisk etterpå.",
+			"email": "E-post sendt til:",
+			"back": "Endre e-postadresse",
+			"error": {
+				"timeout": "Ventetiden for e-postbekreftelsen er utløpt. Vennligst prøv igjen.",
+				"invalid_email": "E-postadressen er ugyldig. Vennligst prøv igjen.",
+				"unknown": "En ukjent feil oppstod. Vennligst prøv igjen."
+			}
+		}
+	}
+}

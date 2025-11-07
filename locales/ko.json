@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ 마지막 업데이트 시간"
+		},
+		"meter_power_charged_year": {
+			"title": "__year__ 충전 에너지"
+		},
+		"meter_power_imported_year": {
+			"title": "__year__ 수입 전력"
+		},
+		"meter_power_exported_year": {
+			"title": "__year__ 수출 전력"
+		},
+		"meter_gas_year": {
+			"title": "__year__ 가스 소비"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "이 충전기를 더 이상 찾을 수 없습니다. Zonneplan 계정을 확인하거나 충전기를 제거하세요.",
+				"cable_not_connected": "충전기가 차량에 연결되어 있지 않습니다. 차량을 충전기에 연결하고 다시 시도하세요."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "이 태양광 패널 시스템을 더 이상 찾을 수 없습니다. Zonneplan 계정을 확인하거나 시스템을 제거하세요."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "동적 충전 세션 시작",
+				"titleFormatted": "동적 충전 시작, [[end_time]]까지, [[value]] [[unit]][[vehicle]] 충전",
+				"hint": "특정 목표와 종료 시간을 설정해 스마트 충전을 예약하세요",
+				"args": {
+					"end_time": {
+						"title": "희망 종료 시간",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "단위",
+						"values": {
+							"kilometers": "킬로미터",
+							"percentage": "퍼센트"
+						}
+					},
+					"value": {
+						"title": "양",
+						"placeholder": "양을 입력하세요"
+					},
+					"vehicle": {
+						"title": "차량",
+						"placeholder": "차량 선택 (선택 사항)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "동적 충전 세션 중지",
+				"hint": "현재 동적 충전 세션을 중지합니다"
+			},
+			"enable_plug_and_charge": {
+				"title": "플러그 & 충전 활성화",
+				"hint": "차가 플러그인될 때 자동으로 충전 시작"
+			},
+			"disable_plug_and_charge": {
+				"title": "플러그 & 충전 비활성화",
+				"hint": "수동 시작 또는 예약하여 충전 필요"
+			},
+			"enable_always_flex": {
+				"title": "항상 유연 모드 활성화",
+				"hint": "항상 유연한 스마트 충전 사용"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "직접 로그인할 수 있는 링크를 포함한 이메일을 보내드립니다.",
+			"email": "이메일 주소",
+			"submit": "이메일 링크 전송"
+		},
+		"polling": {
+			"title": "이메일 주소 확인...",
+			"subtitle": "컴퓨터나 휴대폰에서 이메일을 열고 이메일 확인 버튼을 클릭하세요. 연결이 자동으로 계속 진행됩니다.",
+			"email": "보낸 이메일 주소:",
+			"back": "이메일 주소 변경",
+			"error": {
+				"timeout": "이메일 확인 대기 시간이 초과되었습니다. 다시 시도하세요.",
+				"invalid_email": "제공된 이메일 주소가 유효하지 않습니다. 다시 시도하세요.",
+				"unknown": "알 수 없는 오류가 발생했습니다. 다시 시도하세요."
+			}
+		}
+	}
+}

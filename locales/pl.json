@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ ostatnia aktualizacja o"
+		},
+		"meter_power_charged_year": {
+			"title": "Naładowana energia w __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Importowana elektryczność w __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Eksportowana elektryczność w __year__"
+		},
+		"meter_gas_year": {
+			"title": "Zużycie gazu w __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "Ładowarka nie mogła (i nie będzie już mogła) zostać znaleziona. Sprawdź swoje konto Zonneplan lub usuń ładowarkę.",
+				"cable_not_connected": "Ładowarka nie jest podłączona do pojazdu. Podłącz pojazd do ładowarki i spróbuj ponownie."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "System paneli słonecznych nie mógł (i nie będzie już mógł) zostać znaleziony. Sprawdź swoje konto Zonneplan lub usuń system."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Rozpocznij sesję dynamicznego ładowania",
+				"titleFormatted": "Rozpocznij dynamiczne ładowanie do [[end_time]], naładuj [[value]] [[unit]][[vehicle]]",
+				"hint": "Zaplanowanie inteligentnego ładowania z określonym celem i czasem zakończenia",
+				"args": {
+					"end_time": {
+						"title": "Żądany czas zakończenia",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Jednostka",
+						"values": {
+							"kilometers": "Kilometry",
+							"percentage": "Procent"
+						}
+					},
+					"value": {
+						"title": "Ilość",
+						"placeholder": "Wprowadź ilość"
+					},
+					"vehicle": {
+						"title": "Pojazd",
+						"placeholder": "Wybierz pojazd (opcjonalnie)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Zatrzymaj sesję dynamicznego ładowania",
+				"hint": "Zatrzymaj bieżącą sesję dynamicznego ładowania"
+			},
+			"enable_plug_and_charge": {
+				"title": "Włącz funkcję podłącz i ładuj",
+				"hint": "Automatycznie rozpocznij ładowanie po podłączeniu samochodu"
+			},
+			"disable_plug_and_charge": {
+				"title": "Wyłącz funkcję podłącz i ładuj",
+				"hint": "Wymagana ręczna inicjacja lub harmonogram ładowania"
+			},
+			"enable_always_flex": {
+				"title": "Włącz tryb zawsze elastyczny",
+				"hint": "Zawsze korzystaj z elastycznego inteligentnego ładowania"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "Wyślemy Ci email z linkiem, poprzez który możesz się bezpośrednio zalogować.",
+			"email": "Adres email",
+			"submit": "Wyślij link do emaila"
+		},
+		"polling": {
+			"title": "Potwierdź swój adres email...",
+			"subtitle": "Otwórz email na komputerze lub telefonie i kliknij przycisk potwierdzenia emaila. Parowanie będzie kontynuowane automatycznie.",
+			"email": "Email wysłany do:",
+			"back": "Zmień adres email",
+			"error": {
+				"timeout": "Przekroczono czas oczekiwania na potwierdzenie emaila. Spróbuj ponownie.",
+				"invalid_email": "Podany adres email jest nieprawidłowy. Spróbuj ponownie.",
+				"unknown": "Wystąpił nieznany błąd. Spróbuj ponownie."
+			}
+		}
+	}
+}

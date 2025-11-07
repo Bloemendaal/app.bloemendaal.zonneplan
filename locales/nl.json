@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ laatst bijgewerkt om"
+		},
+		"meter_power_charged_year": {
+			"title": "Opgeladen energie in __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Geïmporteerde elektriciteit in __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Uitgevoerde elektriciteit in __year__"
+		},
+		"meter_gas_year": {
+			"title": "Gasverbruik in __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "Deze oplader kon niet (langer) worden gevonden. Controleer je Zonneplan-account of verwijder de oplader.",
+				"cable_not_connected": "De oplader is niet aangesloten op een voertuig. Sluit het voertuig aan op de oplader en probeer het opnieuw."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "Dit zonnepanelen systeem kon niet (langer) worden gevonden. Controleer je Zonneplan-account of verwijder het systeem."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Start dynamische oplaadsessie",
+				"titleFormatted": "Start dynamisch opladen tot [[end_time]], laad [[value]] [[unit]][[vehicle]]",
+				"hint": "Plan slim opladen met een specifiek doel en eindtijd",
+				"args": {
+					"end_time": {
+						"title": "Gewenste eindtijd",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Eenheid",
+						"values": {
+							"kilometers": "Kilometers",
+							"percentage": "Percentage"
+						}
+					},
+					"value": {
+						"title": "Hoeveelheid",
+						"placeholder": "Voer hoeveelheid in"
+					},
+					"vehicle": {
+						"title": "Voertuig",
+						"placeholder": "Selecteer voertuig (optioneel)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Stop dynamische oplaadsessie",
+				"hint": "Stop de huidige dynamische oplaadsessie"
+			},
+			"enable_plug_and_charge": {
+				"title": "Plug & charge inschakelen",
+				"hint": "Automatisch opladen starten wanneer de auto is aangesloten"
+			},
+			"disable_plug_and_charge": {
+				"title": "Plug & charge uitschakelen",
+				"hint": "Handmatig starten of plannen van opladen vereist"
+			},
+			"enable_always_flex": {
+				"title": "Activeer altijd flexmodus",
+				"hint": "Altijd flexibel slim opladen gebruiken"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "We sturen je een e-mail met een link die je direct kunt gebruiken om in te loggen.",
+			"email": "E-mailadres",
+			"submit": "Verstuur e-maillink"
+		},
+		"polling": {
+			"title": "Bevestig je e-mailadres...",
+			"subtitle": "Open je e-mail op een computer of telefoon en klik op de bevestigingsknop in de e-mail. Het koppelen gaat daarna automatisch verder.",
+			"email": "E-mail verzonden naar:",
+			"back": "E-mailadres wijzigen",
+			"error": {
+				"timeout": "Time-out bij het wachten op e-mailbevestiging. Probeer het opnieuw.",
+				"invalid_email": "Het opgegeven e-mailadres is ongeldig. Probeer het opnieuw.",
+				"unknown": "Er is een onbekende fout opgetreden. Probeer het opnieuw."
+			}
+		}
+	}
+}

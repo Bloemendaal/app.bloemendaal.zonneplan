@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ sidst opdateret kl"
+		},
+		"meter_power_charged_year": {
+			"title": "Ladet Energi i __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Importeret elektricitet i __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Eksporteret elektricitet i __year__"
+		},
+		"meter_gas_year": {
+			"title": "Gasforbrug i __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "Denne oplader kunne ikke (længere) findes. Tjek din Zonneplan-konto eller fjern opladeren.",
+				"cable_not_connected": "Opladeren er ikke forbundet til et køretøj. Tilslut venligst køretøjet til opladeren og prøv igen."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "Dette solpanelsystem kunne ikke (længere) findes. Tjek din Zonneplan-konto eller fjern systemet."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Start dynamisk opladningssession",
+				"titleFormatted": "Start dynamisk opladning indtil [[end_time]], oplad [[value]] [[unit]][[vehicle]]",
+				"hint": "Planlæg smart opladning med et bestemt mål og sluttidspunkt",
+				"args": {
+					"end_time": {
+						"title": "Ønsket sluttidspunkt",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Enhed",
+						"values": {
+							"kilometers": "Kilometer",
+							"percentage": "Procent"
+						}
+					},
+					"value": {
+						"title": "Beløb",
+						"placeholder": "Indtast beløb"
+					},
+					"vehicle": {
+						"title": "Køretøj",
+						"placeholder": "Vælg køretøj (valgfrit)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Stop dynamisk opladningssession",
+				"hint": "Stop den aktuelle dynamiske opladningssession"
+			},
+			"enable_plug_and_charge": {
+				"title": "Aktivér plug & charge",
+				"hint": "Start automatisk opladning, når bilen tilsluttes"
+			},
+			"disable_plug_and_charge": {
+				"title": "Deaktiver plug & charge",
+				"hint": "Kræv manuel start eller tidsplan for opladning"
+			},
+			"enable_always_flex": {
+				"title": "Aktivér altid fleks-tilstand",
+				"hint": "Brug altid fleksibel smart opladning"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "Vi sender dig en e-mail med et link, du kan bruge til at logge ind direkte.",
+			"email": "E-mail adresse",
+			"submit": "Send e-maillink"
+		},
+		"polling": {
+			"title": "Bekræft din e-mailadresse...",
+			"subtitle": "Åbn din e-mail på en computer eller telefon og klik på bekræft e-mail-knappen. Parringen fortsætter automatisk bagefter.",
+			"email": "E-mail sendt til:",
+			"back": "Skift e-mailadresse",
+			"error": {
+				"timeout": "Timeout ved venten på e-mailbekræftelse. Prøv venligst igen.",
+				"invalid_email": "Den angivne e-mailadresse er ugyldig. Prøv venligst igen.",
+				"unknown": "Der opstod en ukendt fejl. Prøv venligst igen."
+			}
+		}
+	}
+}

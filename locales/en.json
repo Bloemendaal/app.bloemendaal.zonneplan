@@ -1,10 +1,7 @@
 {
 	"capabilities": {
 		"timestamp": {
-			"title": "__name__ last updated at",
-			"variables": {
-				"todo": "TODO"
-			}
+			"title": "__name__ last updated at"
 		},
 		"meter_power_charged_year": {
 			"title": "Charged Energy in __year__"

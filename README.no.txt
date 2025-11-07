@@ -1,0 +1,3 @@
+Gjør hjemmet ditt smartere og mer bærekraftig med sømløs integrasjon av dine Zonneplan-enheter. Overvåk solcellepanelene dine i sanntid, følg med på husbatteriet ditt, kontroller ladeplanen til elbilen din, og få detaljerte innsikter fra P1-måleren—alt fra ett sentralt sted.
+
+Dra full nytte av dynamisk lading for å optimalisere kostnader og bærekraft ved å planlegge ladeøktene til elbilen din i de mest økonomiske timene. Med intelligent automatisering kan du lage flyter som reagerer på energiproduksjonen og forbruksmønstrene dine, noe som hjelper deg med å maksimere egenforbruket av solenergi og redusere ditt karbonavtrykk samtidig som du sparer på energikostnadene.

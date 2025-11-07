@@ -1,0 +1,97 @@
+{
+	"capabilities": {
+		"timestamp": {
+			"title": "__name__ aggiornato l'ultima volta a"
+		},
+		"meter_power_charged_year": {
+			"title": "Energia caricata nel __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Elettricità importata nel __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Elettricità esportata nel __year__"
+		},
+		"meter_gas_year": {
+			"title": "Consumo di gas nel __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "Questo caricatore non è stato più trovato. Controlla il tuo account Zonneplan o rimuovi il caricatore.",
+				"cable_not_connected": "Il caricatore non è collegato a un veicolo. Collega il veicolo al caricatore e riprova."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "Questo sistema di pannelli solari non è stato più trovato. Controlla il tuo account Zonneplan o rimuovi il sistema."
+			}
+		}
+	},
+	"flow": {
+		"actions": {
+			"start_dynamic_charging": {
+				"title": "Avvia sessione di carica dinamica",
+				"titleFormatted": "Avvia carica dinamica fino a [[end_time]], carica [[value]] [[unit]][[vehicle]]",
+				"hint": "Programma carica intelligente con obiettivo specifico e tempo di fine",
+				"args": {
+					"end_time": {
+						"title": "Ora di fine desiderata",
+						"placeholder": "08:00"
+					},
+					"unit": {
+						"title": "Unità",
+						"values": {
+							"kilometers": "Chilometri",
+							"percentage": "Percentuale"
+						}
+					},
+					"value": {
+						"title": "Quantità",
+						"placeholder": "Inserisci quantità"
+					},
+					"vehicle": {
+						"title": "Veicolo",
+						"placeholder": "Seleziona veicolo (opzionale)"
+					}
+				}
+			},
+			"stop_dynamic_charging": {
+				"title": "Ferma sessione di carica dinamica",
+				"hint": "Ferma la sessione di carica dinamica attuale"
+			},
+			"enable_plug_and_charge": {
+				"title": "Abilita plug & charge",
+				"hint": "Avvia automaticamente la carica quando l'auto è collegata"
+			},
+			"disable_plug_and_charge": {
+				"title": "Disabilita plug & charge",
+				"hint": "Richiede avvio manuale o programmazione per carica"
+			},
+			"enable_always_flex": {
+				"title": "Abilita modalità sempre flessibile",
+				"hint": "Usa sempre la carica intelligente flessibile"
+			}
+		}
+	},
+	"pair": {
+		"email_verification": {
+			"title": "Zonneplan",
+			"subtitle": "Ti invieremo un'email con un link che puoi utilizzare per accedere direttamente.",
+			"email": "Indirizzo email",
+			"submit": "Invia link email"
+		},
+		"polling": {
+			"title": "Conferma il tuo indirizzo email...",
+			"subtitle": "Apri la tua email su un computer o telefono e clicca sul pulsante per confermare l'email. Il processo di abbinamento continuerà automaticamente.",
+			"email": "Email inviata a:",
+			"back": "Cambia indirizzo email",
+			"error": {
+				"timeout": "Tempo scaduto in attesa della conferma email. Riprova.",
+				"invalid_email": "L'indirizzo email fornito non è valido. Riprova.",
+				"unknown": "Si è verificato un errore sconosciuto. Riprova."
+			}
+		}
+	}
+}
