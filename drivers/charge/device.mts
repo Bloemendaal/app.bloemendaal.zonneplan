@@ -28,11 +28,29 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 
 		this.registerCapabilityListener("evcharger_charging", async (value) => {
 			const chargePoint = this.getChargePoint();
+			const data = await chargePoint.getChargePoint();
+			const [contract] = data.contracts;
+
+			if (!contract) {
+				this.error(this.__("devices.charge.errors.not_found"));
+				return;
+			}
+
+			const isConnected = contract.state.plugged_in_at !== null;
+
+			if (!isConnected) {
+				this.error(this.__("devices.charge.errors.cable_not_connected"));
+				return;
+			}
 
 			if (value) {
 				await chargePoint.startBoost();
 			} else {
 				await chargePoint.stopCharging();
+
+				if (this.getSettings().auto_unsuppress_always_flex) {
+					await chargePoint.unsuppressAlwaysFlex();
+				}
 			}
 
 			this.requestRefresh();
@@ -47,16 +65,13 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 		const [contract] = data.contracts;
 
 		if (!contract) {
-			const { connectionUuid, contractUuid } = this.getData();
-			this.error(
-				`No contract data available for charge point ${connectionUuid} / ${contractUuid}`,
-			);
+			this.error(this.__("devices.charge.errors.not_found"));
 			return;
 		}
 
 		const { state, meta } = contract;
 
-		await this.setMeterPower(chargePoint, meta);
+		await this.setMeterPower(chargePoint, meta).catch(this.error);
 		await this.setCapabilityValue("measure_power", state.power_actual);
 
 		const isCharging = state.charging_manually || state.charging_automatically;
@@ -122,7 +137,7 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 			if (!hasCapability) {
 				await this.addCapability(capability);
 				await this.setCapabilityOptions(capability, {
-					title: this.homey.__("capabilities.meter_power_charged_year.title", {
+					title: this.__("capabilities.meter_power_charged_year.title", {
 						year: year.toString(),
 					}),
 				});

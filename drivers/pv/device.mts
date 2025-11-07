@@ -9,7 +9,7 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 		const contract = this.getContract(accountResponse);
 
 		if (!contract) {
-			this.error("Contract not found in account response");
+			this.error(this.__("devices.pv.errors.not_found"));
 			return;
 		}
 
@@ -29,10 +29,6 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 		const totalEnergyKwh = meta.total_power_measured / 1000;
 		await this.setCapabilityValue("meter_power", totalEnergyKwh).catch(
 			this.error,
-		);
-
-		this.log(
-			`Updated capabilities - Power: ${meta.last_measured_power_value}W, Total: ${totalEnergyKwh}kWh`,
 		);
 	}
 }

@@ -13,7 +13,6 @@ export class DisableAlwaysFlexFlow extends ZonneplanFlow<ChargeDevice> {
 	private async handleAction(): Promise<void> {
 		const chargePoint = this.device.getChargePoint();
 		await chargePoint.disableAlwaysFlex();
-		this.device.log("Disabled always flex mode");
 		this.device.requestRefresh();
 	}
 }

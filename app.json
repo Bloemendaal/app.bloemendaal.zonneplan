@@ -355,7 +355,87 @@
           "template": "add_devices"
         }
       ],
-      "id": "charge"
+      "id": "charge",
+      "settings": [
+        {
+          "id": "auto_unsuppress_always_flex",
+          "type": "checkbox",
+          "value": true,
+          "label": {
+            "en": "Automatically resume Powerplay charging"
+          },
+          "hint": {
+            "en": "When you normally press the stop charging button in the app, Powerplay charging is suppressed until you manually resume it. Enabling this option will automatically resume Powerplay charging after a dynamic charging session ends."
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "en": "P1 Meter",
+        "nl": "P1 Meter"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "measure_power",
+        "meter_power.imported",
+        "meter_power.exported"
+      ],
+      "capabilitiesOptions": {
+        "meter_power.imported": {
+          "title": {
+            "en": "Imported Energy",
+            "nl": "Afgenomen energie"
+          }
+        },
+        "meter_power.exported": {
+          "title": {
+            "en": "Exported Energy",
+            "nl": "Teruggeleverde energie"
+          }
+        }
+      },
+      "energy": {
+        "cumulative": true,
+        "cumulativeImportedCapability": "meter_power.imported",
+        "cumulativeExportedCapability": "meter_power.exported"
+      },
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "icon": "icon.svg",
+      "images": {
+        "small": "/drivers/p1/assets/images/small.png",
+        "large": "/drivers/p1/assets/images/large.png",
+        "xlarge": "/drivers/p1/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "loading",
+          "template": "loading"
+        },
+        {
+          "id": "email_verification"
+        },
+        {
+          "id": "polling"
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "p1"
     },
     {
       "name": "Zonnepanelen",

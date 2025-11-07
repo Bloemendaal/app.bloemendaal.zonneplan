@@ -1,0 +1,11 @@
+[
+	{
+		"id": "auto_unsuppress_always_flex",
+		"type": "checkbox",
+		"value": true,
+		"label": { "en": "Automatically resume Powerplay charging" },
+		"hint": {
+			"en": "When you normally press the stop charging button in the app, Powerplay charging is suppressed until you manually resume it. Enabling this option will automatically resume Powerplay charging after a dynamic charging session ends."
+		}
+	}
+]

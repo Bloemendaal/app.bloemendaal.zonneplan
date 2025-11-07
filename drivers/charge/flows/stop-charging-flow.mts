@@ -13,7 +13,6 @@ export class StopChargingFlow extends ZonneplanFlow<ChargeDevice> {
 	private async handleAction(): Promise<void> {
 		const chargePoint = this.device.getChargePoint();
 		await chargePoint.stopCharging();
-		this.device.log("Stopped charging");
 		this.device.requestRefresh();
 	}
 }

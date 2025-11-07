@@ -13,7 +13,6 @@ export class StartBoostFlow extends ZonneplanFlow<ChargeDevice> {
 	private async handleAction(): Promise<void> {
 		const chargePoint = this.device.getChargePoint();
 		await chargePoint.startBoost();
-		this.device.log("Started boost charging");
 		this.device.requestRefresh();
 	}
 }

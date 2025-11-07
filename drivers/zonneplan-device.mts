@@ -65,4 +65,8 @@ export default abstract class ZonneplanDevice<
 
 		return null;
 	}
+
+	protected __(key: string | object, tags?: object): string {
+		return this.homey.__(key, tags);
+	}
 }

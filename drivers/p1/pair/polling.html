@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			.flex {
+				gap: 10px;
+				display: flex;
+			}
+		</style>
+	</head>
+	<body>
+        <div class="homey-form">
+            <header class="homey-header">
+                <h1 class="homey-title" data-i18n="pair.polling.title"></h1>
+                <p class="homey-subtitle" data-i18n="pair.polling.subtitle"></p>
+            </header>
+			<fieldset class="homey-form-fieldset">
+				<div class="flex">
+					<p data-i18n="pair.polling.email"></p>
+					<strong id="email-display"></strong>
+				</div>
+				<div class="homey-form-group">
+					<button
+						id="back"
+						type="button"
+						class="homey-button-secondary-shadow-full"
+						data-i18n="pair.polling.back"
+					></button>
+				</div>
+			</fieldset>
+        </div>
+
+		<script type="application/javascript">
+			const emailDisplay = document.getElementById("email-display");
+			const backButton = document.getElementById("back");
+
+			Homey.emit("get_email").then((email) => {
+				emailDisplay.textContent = email;
+			});
+
+			Homey.emit("polling_error").then((data) => {
+				Homey.alert(data.message);
+			});
+
+			backButton.addEventListener("click", async () => {
+				await Homey.emit("cancel_polling");
+				Homey.showView("email_verification");
+			});
+		</script>
+	</body>
+</html>

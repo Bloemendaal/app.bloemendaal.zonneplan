@@ -8,6 +8,28 @@
 		},
 		"meter_power_charged_year": {
 			"title": "Charged Energy in __year__"
+		},
+		"meter_power_imported_year": {
+			"title": "Imported electricity in __year__"
+		},
+		"meter_power_exported_year": {
+			"title": "Exported electricity in __year__"
+		},
+		"meter_gas_year": {
+			"title": "Gas Consumption in __year__"
+		}
+	},
+	"devices": {
+		"charge": {
+			"errors": {
+				"not_found": "This charger could not (longer) be found. Check your Zonneplan account or remove the charger.",
+				"cable_not_connected": "The charger is not connected to a vehicle. Please connect the vehicle to the charger and try again."
+			}
+		},
+		"pv": {
+			"errors": {
+				"not_found": "This solar panel system could not (longer) be found. Check your Zonneplan account or remove the system."
+			}
 		}
 	},
 	"flow": {

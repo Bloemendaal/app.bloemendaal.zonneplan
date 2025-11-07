@@ -72,7 +72,7 @@ export default abstract class ZonneplanDriver extends Homey.Driver {
 							await session.showView("list_devices");
 						} catch {
 							await session.emit("polling_error", {
-								message: this.homey.__(`pair.polling.error.unknown`),
+								message: this.__(`pair.polling.error.unknown`),
 							});
 
 							await session.showView("email_verification");
@@ -80,7 +80,7 @@ export default abstract class ZonneplanDriver extends Homey.Driver {
 					},
 					onFailure: async (reason) => {
 						await session.emit("polling_error", {
-							message: this.homey.__(`pair.polling.error.${reason}`),
+							message: this.__(`pair.polling.error.${reason}`),
 						});
 
 						await session.showView("email_verification");
@@ -119,6 +119,10 @@ export default abstract class ZonneplanDriver extends Homey.Driver {
 	protected abstract toDevices(
 		accountResponse: AccountResponse,
 	): ZonneplanDeviceData[];
+
+	protected __(key: string | object, tags?: object): string {
+		return this.homey.__(key, tags);
+	}
 
 	private stopPolling(): void {
 		if (this.pollingInterval) {
