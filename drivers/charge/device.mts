@@ -48,7 +48,10 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 			} else {
 				await chargePoint.stopCharging();
 
-				if (this.getSettings().auto_unsuppress_always_flex) {
+				if (
+					contract.state.dynamic_charging_flex_enabled &&
+					this.getSettings().auto_unsuppress_always_flex
+				) {
 					await chargePoint.unsuppressAlwaysFlex();
 				}
 			}
