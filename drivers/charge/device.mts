@@ -32,15 +32,13 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 			const [contract] = data.contracts;
 
 			if (!contract) {
-				this.error(this.__("devices.charge.errors.not_found"));
-				return;
+				throw new Error(this.__("devices.charge.errors.not_found"));
 			}
 
 			const isConnected = contract.state.plugged_in_at !== null;
 
 			if (!isConnected) {
-				this.error(this.__("devices.charge.errors.cable_not_connected"));
-				return;
+				throw new Error(this.__("devices.charge.errors.cable_not_connected"));
 			}
 
 			if (value) {
