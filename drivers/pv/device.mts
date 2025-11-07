@@ -9,8 +9,7 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 		const contract = this.getContract(accountResponse);
 
 		if (!contract) {
-			this.error(this.__("devices.pv.errors.not_found"));
-			return;
+			throw new Error(this.__("devices.pv.errors.not_found"));
 		}
 
 		const meta = contract.meta;
