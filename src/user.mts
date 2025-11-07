@@ -139,12 +139,39 @@ export interface ChargePointContract
 	charge_schedules: ChargeScheduleEntry[];
 }
 
+export interface HomeBatteryMeta {
+	identifier: string;
+	first_measured_at: DateTimeString | null;
+	last_measured_at: DateTimeString | null;
+	state_of_charge: Integer;
+	power_ac: Integer;
+	inverter_state: "Operative" | PossiblyUnknownString;
+	battery_state: "Operative" | PossiblyUnknownString;
+	dynamic_charging_enabled: boolean;
+	home_optimization_enabled: boolean;
+	home_optimization_active: boolean;
+	dynamic_load_balancing_enabled: boolean;
+	dynamic_load_balancing_overload_active: boolean;
+	grid_congestion_active: boolean;
+	manual_control_enabled: boolean;
+	manual_control_state: unknown | null;
+	self_consumption_enabled: boolean;
+	cycle_count: Integer;
+	show_in_contract_screen: boolean;
+	reserve_discharge_cutoff_wh: Integer | null;
+	backup_power_capable: boolean;
+}
+
+export interface HomeBatteryContract
+	extends BaseContractData<"home_battery_installation", HomeBatteryMeta> {}
+
 export type ContractData =
 	| PvInstallationContract
 	| P1InstallationContract
 	| ElectricityContract
 	| GasContract
-	| ChargePointContract;
+	| ChargePointContract
+	| HomeBatteryContract;
 
 export interface ConnectionData {
 	uuid: string;
