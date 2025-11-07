@@ -6,7 +6,6 @@ const OFFSET_MINUTES = 2;
 const FETCH_EVERY_MINUTES = 5;
 
 export default class ZonneplanApp extends Homey.App {
-	private initTimeout: NodeJS.Timeout | null = null;
 	private refreshTimeout: NodeJS.Timeout | null = null;
 	private scheduleTimeout: NodeJS.Timeout | null = null;
 	private pollingInterval: NodeJS.Timeout | null = null;
@@ -39,23 +38,19 @@ export default class ZonneplanApp extends Homey.App {
 		if (delay > 10 * 1000) {
 			// We schedule the init interval because not all devices are initialized when this method is called.
 			// Let's hope that all devices are initialized within 5 seconds...
-			this.initTimeout = setTimeout(() => this.refreshDevices(), 5 * 1000);
+			this.requestRefresh(5000);
 		}
 
 		this.scheduleTimeout = setTimeout(() => {
-			this.refreshDevices();
+			this.requestRefresh();
 			this.pollingInterval = setInterval(
-				() => this.refreshDevices(),
+				() => this.requestRefresh(),
 				FETCH_EVERY_MINUTES * 60 * 1000,
 			);
 		}, delay);
 	}
 
 	public async onUninit(): Promise<void> {
-		if (this.initTimeout) {
-			clearInterval(this.initTimeout);
-		}
-
 		if (this.refreshTimeout) {
 			clearInterval(this.refreshTimeout);
 		}
