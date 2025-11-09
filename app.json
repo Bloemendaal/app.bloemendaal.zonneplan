@@ -373,20 +373,20 @@
   "flow": {
     "actions": [
       {
-        "id": "start_dynamic_charging",
+        "id": "start_dynamic_charging_based_on_absolute_date_time",
         "title": {
-          "en": "Start Powerplay charging session",
-          "nl": "Start Powerplay laadsessie",
-          "da": "Start dynamisk opladningssession",
-          "de": "Dynamische Ladesitzung starten",
-          "es": "Iniciar sesión de carga dinámica",
-          "fr": "Démarrer la session de charge dynamique",
-          "it": "Avvia sessione di carica dinamica",
-          "no": "Start dynamisk ladesesjon",
-          "sv": "Starta dynamisk laddningssession",
-          "pl": "Rozpocznij dynamiczną sesję ładowania",
-          "ru": "Начать сеанс динамической зарядки",
-          "ko": "동적 충전 세션 시작"
+          "en": "Start Powerplay charging (absolute date and time)",
+          "nl": "Start Powerplay laden (absolute datum en tijd)",
+          "da": "Start dynamisk opladning (absolut dato og tid)",
+          "de": "Dynamische Ladesitzung starten (absolute Datum und Uhrzeit)",
+          "es": "Iniciar sesión de carga dinámica (fecha y hora absolutas)",
+          "fr": "Démarrer la session de charge dynamique (date et heure absolues)",
+          "it": "Avvia sessione di carica dinamica (data e ora assolute)",
+          "no": "Start dynamisk ladesesjon (absolutt dato og tid)",
+          "sv": "Starta dynamisk laddningssession (absolut datum och tid)",
+          "pl": "Rozpocznij dynamiczną sesję ładowania (absolutna data i godzina)",
+          "ru": "Начать сеанс динамической зарядки (абсолютная дата и время)",
+          "ko": "동적 충전 세션 시작 (절대 날짜 및 시간)"
         },
         "titleFormatted": {
           "en": "Start Powerplay charging until [[end_date]] [[end_time]], charge [[value]] [[unit]][[vehicle]]",
@@ -459,6 +459,698 @@
               "ko": "원하는 종료 시간"
             },
             "placeholder": "12:00"
+          },
+          {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "da": "Enhed",
+              "de": "Einheit",
+              "es": "Unidad",
+              "fr": "Unité",
+              "it": "Unità",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Jednostka",
+              "ru": "Единица",
+              "ko": "단위"
+            },
+            "values": [
+              {
+                "id": "kilometers",
+                "title": {
+                  "en": "Kilometers",
+                  "nl": "Kilometers",
+                  "da": "Kilometer",
+                  "de": "Kilometer",
+                  "es": "Kilómetros",
+                  "fr": "Kilomètres",
+                  "it": "Chilometri",
+                  "no": "Kilometer",
+                  "sv": "Kilometer",
+                  "pl": "Kilometry",
+                  "ru": "Километры",
+                  "ko": "킬로미터"
+                }
+              },
+              {
+                "id": "percentage",
+                "title": {
+                  "en": "Percentage",
+                  "nl": "Percentage",
+                  "da": "Procentdel",
+                  "de": "Prozentsatz",
+                  "es": "Porcentaje",
+                  "fr": "Pourcentage",
+                  "it": "Percentuale",
+                  "no": "Prosentandel",
+                  "sv": "Procent",
+                  "pl": "Procent",
+                  "ru": "Процент",
+                  "ko": "백분율"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Amount",
+              "nl": "Hoeveelheid",
+              "da": "Mængde",
+              "de": "Betrag",
+              "es": "Cantidad",
+              "fr": "Quantité",
+              "it": "Quantità",
+              "no": "Mengde",
+              "sv": "Mängd",
+              "pl": "Ilość",
+              "ru": "Количество",
+              "ko": "양"
+            },
+            "placeholder": {
+              "en": "Enter amount",
+              "nl": "Voer hoeveelheid in",
+              "da": "Indtast mængde",
+              "de": "Menge eingeben",
+              "es": "Introduce la cantidad",
+              "fr": "Entrez le montant",
+              "it": "Inserisci quantità",
+              "no": "Angi mengde",
+              "sv": "Ange mängd",
+              "pl": "Wpisz ilość",
+              "ru": "Введите количество",
+              "ko": "양 입력"
+            },
+            "min": 0,
+            "max": 500
+          },
+          {
+            "type": "autocomplete",
+            "name": "vehicle",
+            "title": {
+              "en": "Vehicle",
+              "nl": "Voertuig",
+              "da": "Køretøj",
+              "de": "Fahrzeug",
+              "es": "Vehículo",
+              "fr": "Véhicule",
+              "it": "Veicolo",
+              "no": "Kjøretøy",
+              "sv": "Fordon",
+              "pl": "Pojazd",
+              "ru": "Транспортное средство",
+              "ko": "차량"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "Select vehicle (optional)",
+              "nl": "Selecteer voertuig (optioneel)",
+              "da": "Vælg køretøj (valgfrit)",
+              "de": "Fahrzeug auswählen (optional)",
+              "es": "Seleccionar vehículo (opcional)",
+              "fr": "Sélectionnez un véhicule (facultatif)",
+              "it": "Seleziona veicolo (opzionale)",
+              "no": "Velg kjøretøy (valgfritt)",
+              "sv": "Välj fordon (valfritt)",
+              "pl": "Wybierz pojazd (opcjonalnie)",
+              "ru": "Выберите транспортное средство (необязательно)",
+              "ko": "차량 선택 (선택 사항)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "start_dynamic_charging_based_on_relative_time",
+        "title": {
+          "en": "Start Powerplay charging (relative time)",
+          "nl": "Start Powerplay laden (relatieve tijd)",
+          "da": "Start dynamisk opladning (relativ tid)",
+          "de": "Dynamische Ladesitzung starten (relative Zeit)",
+          "es": "Iniciar sesión de carga dinámica (tiempo relativo)",
+          "fr": "Démarrer la session de charge dynamique (temps relatif)",
+          "it": "Avvia sessione di carica dinamica (tempo relativo)",
+          "no": "Start dynamisk ladesesjon (relativ tid)",
+          "sv": "Starta dynamisk laddningssession (relativ tid)",
+          "pl": "Rozpocznij dynamiczną sesję ładowania (czas względny)",
+          "ru": "Начать сеанс динамической зарядки (относительное время)",
+          "ko": "동적 충전 세션 시작 (상대 시간)"
+        },
+        "titleFormatted": {
+          "en": "Start Powerplay charging in [[length_from_now]] [[length_unit]], charge [[value]] [[unit]][[vehicle]]",
+          "nl": "Start Powerplay laden over [[length_from_now]] [[length_unit]], laad [[value]] [[unit]][[vehicle]]",
+          "da": "Start dynamisk opladning om [[length_from_now]] [[length_unit]], oplad [[value]] [[unit]][[vehicle]]",
+          "de": "Beginnen Sie das dynamische Laden in [[length_from_now]] [[length_unit]], laden Sie [[value]] [[unit]][[vehicle]]",
+          "es": "Comience la carga dinámica en [[length_from_now]] [[length_unit]], cargue [[value]] [[unit]][[vehicle]]",
+          "fr": "Commencer la charge dynamique dans [[length_from_now]] [[length_unit]], chargez [[value]] [[unit]][[vehicle]]",
+          "it": "Inizia la carica dinamica in [[length_from_now]] [[length_unit]], carica [[value]] [[unit]][[vehicle]]",
+          "no": "Start dynamisk lading om [[length_from_now]] [[length_unit]], lad [[value]] [[unit]][[vehicle]]",
+          "sv": "Starta dynamisk laddning om [[length_from_now]] [[length_unit]], ladda [[value]] [[unit]][[vehicle]]",
+          "pl": "Rozpocznij ładowanie dynamiczne za [[length_from_now]] [[length_unit]], naładuj [[value]] [[unit]][[vehicle]]",
+          "ru": "Начните динамическую зарядку через [[length_from_now]] [[length_unit]], зарядить [[value]] [[unit]][[vehicle]]",
+          "ko": "[[length_from_now]] [[length_unit]] 후 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전"
+        },
+        "hint": {
+          "en": "Schedule smart charging with a specific goal and relative end time",
+          "nl": "Plan slimme lading met een specifiek doel en relatieve eindtijd",
+          "da": "Planlæg smart opladning med et specifikt mål og relativ sluttid",
+          "de": "Planen Sie das intelligente Laden mit einem spezifischen Ziel und relativer Endzeitpunkt",
+          "es": "Programa carga inteligente con un objetivo específico y tiempo relativo de finalización",
+          "fr": "Planifiez la charge intelligente avec un objectif spécifique et une heure de fin relative",
+          "it": "Pianifica la carica intelligente con un obiettivo specifico e un orario di fine relativo",
+          "no": "Planlegg smart lading med et spesifikt mål og relativ sluttid",
+          "sv": "Schemalägg smart laddning med ett specifikt mål och relativ sluttid",
+          "pl": "Zaplanować inteligentne ładowanie z określonym celem i względnym czasem zakończenia",
+          "ru": "Запланировать интеллектуальную зарядку с определенной целью и относительным временем окончания",
+          "ko": "특정 목표와 상대 종료 시간으로 스마트 충전 예약"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          },
+          {
+            "type": "number",
+            "name": "length_from_now",
+            "title": {
+              "en": "Time from now",
+              "nl": "Tijd vanaf nu",
+              "da": "Tid fra nu",
+              "de": "Zeit ab jetzt",
+              "es": "Tiempo desde ahora",
+              "fr": "Temps à partir de maintenant",
+              "it": "Tempo da ora",
+              "no": "Tid fra nå",
+              "sv": "Tid från nu",
+              "pl": "Czas od teraz",
+              "ru": "Время с настоящего момента",
+              "ko": "지금부터의 시간"
+            },
+            "placeholder": {
+              "en": "Enter duration",
+              "nl": "Voer duur in",
+              "da": "Indtast varighed",
+              "de": "Dauer eingeben",
+              "es": "Introduce la duración",
+              "fr": "Entrez la durée",
+              "it": "Inserisci durata",
+              "no": "Angi varighet",
+              "sv": "Ange varaktighet",
+              "pl": "Wpisz czas trwania",
+              "ru": "Введите продолжительность",
+              "ko": "기간 입력"
+            },
+            "min": 1,
+            "max": 168
+          },
+          {
+            "type": "dropdown",
+            "name": "length_unit",
+            "title": {
+              "en": "Time unit",
+              "nl": "Tijdseenheid",
+              "da": "Tidsenhed",
+              "de": "Zeiteinheit",
+              "es": "Unidad de tiempo",
+              "fr": "Unité de temps",
+              "it": "Unità di tempo",
+              "no": "Tidsenhet",
+              "sv": "Tidsenhet",
+              "pl": "Jednostka czasu",
+              "ru": "Единица времени",
+              "ko": "시간 단위"
+            },
+            "values": [
+              {
+                "id": "minutes",
+                "title": {
+                  "en": "Minutes",
+                  "nl": "Minuten",
+                  "da": "Minutter",
+                  "de": "Minuten",
+                  "es": "Minutos",
+                  "fr": "Minutes",
+                  "it": "Minuti",
+                  "no": "Minutter",
+                  "sv": "Minuter",
+                  "pl": "Minuty",
+                  "ru": "Минуты",
+                  "ko": "분"
+                }
+              },
+              {
+                "id": "hours",
+                "title": {
+                  "en": "Hours",
+                  "nl": "Uren",
+                  "da": "Timer",
+                  "de": "Stunden",
+                  "es": "Horas",
+                  "fr": "Heures",
+                  "it": "Ore",
+                  "no": "Timer",
+                  "sv": "Timmar",
+                  "pl": "Godziny",
+                  "ru": "Часы",
+                  "ko": "시간"
+                }
+              }
+            ]
+          },
+          {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "da": "Enhed",
+              "de": "Einheit",
+              "es": "Unidad",
+              "fr": "Unité",
+              "it": "Unità",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Jednostka",
+              "ru": "Единица",
+              "ko": "단위"
+            },
+            "values": [
+              {
+                "id": "kilometers",
+                "title": {
+                  "en": "Kilometers",
+                  "nl": "Kilometers",
+                  "da": "Kilometer",
+                  "de": "Kilometer",
+                  "es": "Kilómetros",
+                  "fr": "Kilomètres",
+                  "it": "Chilometri",
+                  "no": "Kilometer",
+                  "sv": "Kilometer",
+                  "pl": "Kilometry",
+                  "ru": "Километры",
+                  "ko": "킬로미터"
+                }
+              },
+              {
+                "id": "percentage",
+                "title": {
+                  "en": "Percentage",
+                  "nl": "Percentage",
+                  "da": "Procentdel",
+                  "de": "Prozentsatz",
+                  "es": "Porcentaje",
+                  "fr": "Pourcentage",
+                  "it": "Percentuale",
+                  "no": "Prosentandel",
+                  "sv": "Procent",
+                  "pl": "Procent",
+                  "ru": "Процент",
+                  "ko": "백분율"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Amount",
+              "nl": "Hoeveelheid",
+              "da": "Mængde",
+              "de": "Betrag",
+              "es": "Cantidad",
+              "fr": "Quantité",
+              "it": "Quantità",
+              "no": "Mengde",
+              "sv": "Mängd",
+              "pl": "Ilość",
+              "ru": "Количество",
+              "ko": "양"
+            },
+            "placeholder": {
+              "en": "Enter amount",
+              "nl": "Voer hoeveelheid in",
+              "da": "Indtast mængde",
+              "de": "Menge eingeben",
+              "es": "Introduce la cantidad",
+              "fr": "Entrez le montant",
+              "it": "Inserisci quantità",
+              "no": "Angi mengde",
+              "sv": "Ange mängd",
+              "pl": "Wpisz ilość",
+              "ru": "Введите количество",
+              "ko": "양 입력"
+            },
+            "min": 0,
+            "max": 500
+          },
+          {
+            "type": "autocomplete",
+            "name": "vehicle",
+            "title": {
+              "en": "Vehicle",
+              "nl": "Voertuig",
+              "da": "Køretøj",
+              "de": "Fahrzeug",
+              "es": "Vehículo",
+              "fr": "Véhicule",
+              "it": "Veicolo",
+              "no": "Kjøretøy",
+              "sv": "Fordon",
+              "pl": "Pojazd",
+              "ru": "Транспортное средство",
+              "ko": "차량"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "Select vehicle (optional)",
+              "nl": "Selecteer voertuig (optioneel)",
+              "da": "Vælg køretøj (valgfrit)",
+              "de": "Fahrzeug auswählen (optional)",
+              "es": "Seleccionar vehículo (opcional)",
+              "fr": "Sélectionnez un véhicule (facultatif)",
+              "it": "Seleziona veicolo (opzionale)",
+              "no": "Velg kjøretøy (valgfritt)",
+              "sv": "Välj fordon (valfritt)",
+              "pl": "Wybierz pojazd (opcjonalnie)",
+              "ru": "Выберите транспортное средство (необязательно)",
+              "ko": "차량 선택 (선택 사항)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "start_dynamic_charging_based_on_relative_days",
+        "title": {
+          "en": "Start Powerplay charging (relative days with an absolute time)",
+          "nl": "Start Powerplay laden (relatieve dagen met een absolute tijd)",
+          "da": "Start dynamisk opladning (relative dage med et absolut tidspunkt)",
+          "de": "Dynamische Ladesitzung starten (relative Tage mit absoluter Zeit)",
+          "es": "Iniciar sesión de carga dinámica (días relativos con hora absoluta)",
+          "fr": "Démarrer la session de charge dynamique (jours relatifs avec heure absolue)",
+          "it": "Avvia sessione di carica dinamica (giorni relativi con orario assoluto)",
+          "no": "Start dynamisk ladesesjon (relative dager med absolutt tid)",
+          "sv": "Starta dynamisk laddningssession (relativa dagar med absolut tid)",
+          "pl": "Rozpocznij dynamiczną sesję ładowania (dni względne z czasem bezwzględnym)",
+          "ru": "Начать сеанс динамической зарядки (относительные дни с абсолютным временем)",
+          "ko": "동적 충전 세션 시작 (상대 일수)"
+        },
+        "titleFormatted": {
+          "en": "Start Powerplay charging in [[days_from_now]] days at [[time]], charge [[value]] [[unit]][[vehicle]]",
+          "nl": "Start Powerplay laden over [[days_from_now]] dagen om [[time]], laad [[value]] [[unit]][[vehicle]]",
+          "da": "Start dynamisk opladning om [[days_from_now]] dage kl. [[time]], oplad [[value]] [[unit]][[vehicle]]",
+          "de": "Beginnen Sie das dynamische Laden in [[days_from_now]] Tagen um [[time]], laden Sie [[value]] [[unit]][[vehicle]]",
+          "es": "Comience la carga dinámica en [[days_from_now]] días a las [[time]], cargue [[value]] [[unit]][[vehicle]]",
+          "fr": "Commencer la charge dynamique dans [[days_from_now]] jours à [[time]], chargez [[value]] [[unit]][[vehicle]]",
+          "it": "Inizia la carica dinamica in [[days_from_now]] giorni alle [[time]], carica [[value]] [[unit]][[vehicle]]",
+          "no": "Start dynamisk lading om [[days_from_now]] dager kl. [[time]], lad [[value]] [[unit]][[vehicle]]",
+          "sv": "Starta dynamisk laddning om [[days_from_now]] dagar kl. [[time]], ladda [[value]] [[unit]][[vehicle]]",
+          "pl": "Rozpocznij ładowanie dynamiczne za [[days_from_now]] dni o [[time]], naładuj [[value]] [[unit]][[vehicle]]",
+          "ru": "Начните динамическую зарядку через [[days_from_now]] дней в [[time]], зарядить [[value]] [[unit]][[vehicle]]",
+          "ko": "[[days_from_now]] 일 후 [[time]] 에 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전"
+        },
+        "hint": {
+          "en": "Schedule smart charging with a specific goal for a certain number of days from now",
+          "nl": "Plan slimme lading met een specifiek doel voor een bepaald aantal dagen vanaf nu",
+          "da": "Planlæg smart opladning med et specifikt mål om et bestemt antal dage",
+          "de": "Planen Sie das intelligente Laden mit einem spezifischen Ziel für eine bestimmte Anzahl von Tagen",
+          "es": "Programa carga inteligente con un objetivo específico para cierto número de días desde ahora",
+          "fr": "Planifiez la charge intelligente avec un objectif spécifique pour un certain nombre de jours",
+          "it": "Pianifica la carica intelligente con un obiettivo specifico per un certo numero di giorni",
+          "no": "Planlegg smart lading med et spesifikt mål for et visst antall dager",
+          "sv": "Schemalägg smart laddning med ett specifikt mål för ett visst antal dagar",
+          "pl": "Zaplanować inteligentne ładowanie z określonym celem na określoną liczbę dni",
+          "ru": "Запланировать интеллектуальную зарядку с определенной целью на определенное количество дней",
+          "ko": "특정 목표로 며칠 후 스마트 충전 예약"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          },
+          {
+            "type": "number",
+            "name": "days_from_now",
+            "title": {
+              "en": "Days from now",
+              "nl": "Dagen vanaf nu",
+              "da": "Dage fra nu",
+              "de": "Tage ab jetzt",
+              "es": "Días desde ahora",
+              "fr": "Jours à partir de maintenant",
+              "it": "Giorni da ora",
+              "no": "Dager fra nå",
+              "sv": "Dagar från nu",
+              "pl": "Dni od teraz",
+              "ru": "Дни с настоящего момента",
+              "ko": "지금부터 며칠"
+            },
+            "placeholder": {
+              "en": "Enter number of days",
+              "nl": "Voer aantal dagen in",
+              "da": "Indtast antal dage",
+              "de": "Anzahl der Tage eingeben",
+              "es": "Introduce el número de días",
+              "fr": "Entrez le nombre de jours",
+              "it": "Inserisci numero di giorni",
+              "no": "Angi antall dager",
+              "sv": "Ange antal dagar",
+              "pl": "Wpisz liczbę dni",
+              "ru": "Введите количество дней",
+              "ko": "일수 입력"
+            },
+            "min": 1,
+            "max": 7
+          },
+          {
+            "type": "time",
+            "name": "time",
+            "title": {
+              "en": "Time of day",
+              "nl": "Tijdstip",
+              "da": "Tidspunkt på dagen",
+              "de": "Uhrzeit",
+              "es": "Hora del día",
+              "fr": "Heure de la journée",
+              "it": "Ora del giorno",
+              "no": "Tidspunkt på dagen",
+              "sv": "Tid på dagen",
+              "pl": "Pora dnia",
+              "ru": "Время суток",
+              "ko": "시간"
+            },
+            "placeholder": "12:00"
+          },
+          {
+            "type": "dropdown",
+            "name": "unit",
+            "title": {
+              "en": "Unit",
+              "nl": "Eenheid",
+              "da": "Enhed",
+              "de": "Einheit",
+              "es": "Unidad",
+              "fr": "Unité",
+              "it": "Unità",
+              "no": "Enhet",
+              "sv": "Enhet",
+              "pl": "Jednostka",
+              "ru": "Единица",
+              "ko": "단위"
+            },
+            "values": [
+              {
+                "id": "kilometers",
+                "title": {
+                  "en": "Kilometers",
+                  "nl": "Kilometers",
+                  "da": "Kilometer",
+                  "de": "Kilometer",
+                  "es": "Kilómetros",
+                  "fr": "Kilomètres",
+                  "it": "Chilometri",
+                  "no": "Kilometer",
+                  "sv": "Kilometer",
+                  "pl": "Kilometry",
+                  "ru": "Километры",
+                  "ko": "킬로미터"
+                }
+              },
+              {
+                "id": "percentage",
+                "title": {
+                  "en": "Percentage",
+                  "nl": "Percentage",
+                  "da": "Procentdel",
+                  "de": "Prozentsatz",
+                  "es": "Porcentaje",
+                  "fr": "Pourcentage",
+                  "it": "Percentuale",
+                  "no": "Prosentandel",
+                  "sv": "Procent",
+                  "pl": "Procent",
+                  "ru": "Процент",
+                  "ko": "백분율"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "value",
+            "title": {
+              "en": "Amount",
+              "nl": "Hoeveelheid",
+              "da": "Mængde",
+              "de": "Betrag",
+              "es": "Cantidad",
+              "fr": "Quantité",
+              "it": "Quantità",
+              "no": "Mengde",
+              "sv": "Mängd",
+              "pl": "Ilość",
+              "ru": "Количество",
+              "ko": "양"
+            },
+            "placeholder": {
+              "en": "Enter amount",
+              "nl": "Voer hoeveelheid in",
+              "da": "Indtast mængde",
+              "de": "Menge eingeben",
+              "es": "Introduce la cantidad",
+              "fr": "Entrez le montant",
+              "it": "Inserisci quantità",
+              "no": "Angi mengde",
+              "sv": "Ange mängd",
+              "pl": "Wpisz ilość",
+              "ru": "Введите количество",
+              "ko": "양 입력"
+            },
+            "min": 0,
+            "max": 500
+          },
+          {
+            "type": "autocomplete",
+            "name": "vehicle",
+            "title": {
+              "en": "Vehicle",
+              "nl": "Voertuig",
+              "da": "Køretøj",
+              "de": "Fahrzeug",
+              "es": "Vehículo",
+              "fr": "Véhicule",
+              "it": "Veicolo",
+              "no": "Kjøretøy",
+              "sv": "Fordon",
+              "pl": "Pojazd",
+              "ru": "Транспортное средство",
+              "ko": "차량"
+            },
+            "required": false,
+            "placeholder": {
+              "en": "Select vehicle (optional)",
+              "nl": "Selecteer voertuig (optioneel)",
+              "da": "Vælg køretøj (valgfrit)",
+              "de": "Fahrzeug auswählen (optional)",
+              "es": "Seleccionar vehículo (opcional)",
+              "fr": "Sélectionnez un véhicule (facultatif)",
+              "it": "Seleziona veicolo (opzionale)",
+              "no": "Velg kjøretøy (valgfritt)",
+              "sv": "Välj fordon (valfritt)",
+              "pl": "Wybierz pojazd (opcjonalnie)",
+              "ru": "Выберите транспортное средство (необязательно)",
+              "ko": "차량 선택 (선택 사항)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "start_dynamic_charging_based_on_string",
+        "title": {
+          "en": "Start Powerplay charging (date string)",
+          "nl": "Start Powerplay laden (datum tekst)",
+          "da": "Start dynamisk opladning (datostreng)",
+          "de": "Dynamische Ladesitzung starten (Datumszeichenfolge)",
+          "es": "Iniciar sesión de carga dinámica (cadena de fecha)",
+          "fr": "Démarrer la session de charge dynamique (chaîne de date)",
+          "it": "Avvia sessione di carica dinamica (stringa di data)",
+          "no": "Start dynamisk ladesesjon (datostreng)",
+          "sv": "Starta dynamisk laddningssession (datumsträng)",
+          "pl": "Rozpocznij dynamiczną sesję ładowania (ciąg daty)",
+          "ru": "Начать сеанс динамической зарядки (строка даты)",
+          "ko": "동적 충전 세션 시작 (날짜 문자열)"
+        },
+        "titleFormatted": {
+          "en": "Start Powerplay charging until [[end_date_time]], charge [[value]] [[unit]][[vehicle]]",
+          "nl": "Start Powerplay laden tot [[end_date_time]], laad [[value]] [[unit]][[vehicle]]",
+          "da": "Start dynamisk opladning indtil [[end_date_time]], oplad [[value]] [[unit]][[vehicle]]",
+          "de": "Beginnen Sie das dynamische Laden bis [[end_date_time]], laden Sie [[value]] [[unit]][[vehicle]]",
+          "es": "Comience la carga dinámica hasta [[end_date_time]], cargue [[value]] [[unit]][[vehicle]]",
+          "fr": "Commencer la charge dynamique jusqu'à [[end_date_time]], chargez [[value]] [[unit]][[vehicle]]",
+          "it": "Inizia la carica dinamica fino a [[end_date_time]], carica [[value]] [[unit]][[vehicle]]",
+          "no": "Start dynamisk lading til [[end_date_time]], lad [[value]] [[unit]][[vehicle]]",
+          "sv": "Starta dynamisk laddning till [[end_date_time]], ladda [[value]] [[unit]][[vehicle]]",
+          "pl": "Rozpocznij ładowanie dynamiczne do [[end_date_time]], naładuj [[value]] [[unit]][[vehicle]]",
+          "ru": "Начните динамическую зарядку до [[end_date_time]], зарядить [[value]] [[unit]][[vehicle]]",
+          "ko": "[[end_date_time]] 까지 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전"
+        },
+        "hint": {
+          "en": "Schedule smart charging with a specific goal and end time (using date string or token)",
+          "nl": "Plan slimme lading met een specifiek doel en eindtijd (gebruik datum tekst of token)",
+          "da": "Planlæg smart opladning med et specifikt mål og sluttid (ved hjælp af datostreng eller token)",
+          "de": "Planen Sie das intelligente Laden mit einem spezifischen Ziel und Endzeitpunkt (mit Datumszeichenfolge oder Token)",
+          "es": "Programa carga inteligente con un objetivo específico y hora de finalización (usando cadena de fecha o token)",
+          "fr": "Planifiez la charge intelligente avec un objectif spécifique et une heure de fin (en utilisant une chaîne de date ou un jeton)",
+          "it": "Pianifica la carica intelligente con un obiettivo specifico e un orario di fine (usando stringa di data o token)",
+          "no": "Planlegg smart lading med et spesifikt mål og sluttid (ved hjelp av datostreng eller token)",
+          "sv": "Schemalägg smart laddning med ett specifikt mål och sluttid (använd datumsträng eller token)",
+          "pl": "Zaplanować inteligentne ładowanie z określonym celem i czasem zakończenia (używając ciągu daty lub tokenu)",
+          "ru": "Запланировать интеллектуальную зарядку с определенной целью и временем окончания (используя строку даты или токен)",
+          "ko": "특정 목표와 종료 시간으로 스마트 충전 예약 (날짜 문자열 또는 토큰 사용)"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          },
+          {
+            "type": "text",
+            "name": "end_date_time",
+            "title": {
+              "en": "End date and time",
+              "nl": "Einddatum en tijd",
+              "da": "Slutdato og tid",
+              "de": "Enddatum und -zeit",
+              "es": "Fecha y hora de finalización",
+              "fr": "Date et heure de fin",
+              "it": "Data e ora di fine",
+              "no": "Sluttdato og tid",
+              "sv": "Slutdatum och tid",
+              "pl": "Data i godzina zakończenia",
+              "ru": "Дата и время окончания",
+              "ko": "종료 날짜 및 시간"
+            },
+            "placeholder": {
+              "en": "2025-11-09T12:00:00",
+              "nl": "2025-11-09T12:00:00",
+              "da": "2025-11-09T12:00:00",
+              "de": "2025-11-09T12:00:00",
+              "es": "2025-11-09T12:00:00",
+              "fr": "2025-11-09T12:00:00",
+              "it": "2025-11-09T12:00:00",
+              "no": "2025-11-09T12:00:00",
+              "sv": "2025-11-09T12:00:00",
+              "pl": "2025-11-09T12:00:00",
+              "ru": "2025-11-09T12:00:00",
+              "ko": "2025-11-09T12:00:00"
+            }
           },
           {
             "type": "dropdown",

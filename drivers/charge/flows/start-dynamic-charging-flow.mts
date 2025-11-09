@@ -3,43 +3,139 @@ import type { DateString, TimeString } from "../../../src/types.mjs";
 import ZonneplanFlow from "../../zonneplan-flow.mjs";
 import type ChargeDevice from "../device.mjs";
 
+interface VehicleOption {
+	id: string;
+	name: string;
+	image?: string;
+}
+
 export class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice> {
 	public async register(): Promise<void> {
-		const card = this.device.homey.flow.getActionCard("start_dynamic_charging");
+		const cards = [
+			this.device.homey.flow
+				.getActionCard("start_dynamic_charging_based_on_absolute_date_time")
+				.registerRunListener(this.handleAbsoluteDateTimeAction.bind(this)),
+			this.device.homey.flow
+				.getActionCard("start_dynamic_charging_based_on_relative_time")
+				.registerRunListener(this.handleRelativeTimeAction.bind(this)),
+			this.device.homey.flow
+				.getActionCard("start_dynamic_charging_based_on_relative_days")
+				.registerRunListener(this.handleRelativeDaysAction.bind(this)),
+			this.device.homey.flow
+				.getActionCard("start_dynamic_charging_based_on_string")
+				.registerRunListener(this.handleStringAction.bind(this)),
+		];
 
-		card.registerRunListener(async (args) => {
-			await this.handleAction(args);
-		});
-
-		card.registerArgumentAutocompleteListener("vehicle", async (query) => {
-			return this.handleVehicleAutocomplete(query);
-		});
+		for (const card of cards) {
+			card.registerArgumentAutocompleteListener(
+				"vehicle",
+				this.handleVehicleAutocomplete.bind(this),
+			);
+		}
 	}
 
-	private async handleAction(args: {
+	private async handleAbsoluteDateTimeAction(args: {
 		end_date: DateString;
 		end_time: TimeString;
 		unit: "kilometers" | "percentage";
 		value: number;
-		vehicle?: { id: string; name: string };
+		vehicle?: VehicleOption;
 	}): Promise<void> {
-		const chargePoint = this.device.getChargePoint();
-
 		const [day, month, year] = args.end_date.split("-").map(Number);
 		const [hours, minutes] = args.end_time.split(":").map(Number);
 
-		// Create datetime from date and time
 		const endTime = new Date(year, month - 1, day, hours, minutes, 0, 0);
+
+		return this.handleAction({
+			endTime,
+			unit: args.unit,
+			value: args.value,
+			vehicle: args.vehicle,
+		});
+	}
+
+	private async handleRelativeTimeAction(args: {
+		length_from_now: number;
+		length_unit: "minutes" | "hours";
+		value: number;
+		unit: "kilometers" | "percentage";
+		vehicle?: VehicleOption;
+	}): Promise<void> {
+		const endTime = new Date();
+
+		if (args.length_unit === "minutes") {
+			endTime.setMinutes(endTime.getMinutes() + args.length_from_now);
+		}
+
+		if (args.length_unit === "hours") {
+			endTime.setHours(endTime.getHours() + args.length_from_now);
+		}
+
+		return this.handleAction({
+			endTime,
+			unit: args.unit,
+			value: args.value,
+			vehicle: args.vehicle,
+		});
+	}
+
+	private async handleRelativeDaysAction(args: {
+		days_from_now: number;
+		time: TimeString;
+		value: number;
+		unit: "kilometers" | "percentage";
+		vehicle?: VehicleOption;
+	}): Promise<void> {
+		const endTime = new Date();
+
+		const [hours, minutes] = args.time.split(":").map(Number);
+
+		endTime.setDate(endTime.getDate() + args.days_from_now);
+		endTime.setHours(hours);
+		endTime.setMinutes(minutes);
+		endTime.setSeconds(0);
+		endTime.setMilliseconds(0);
+
+		return this.handleAction({
+			endTime,
+			unit: args.unit,
+			value: args.value,
+			vehicle: args.vehicle,
+		});
+	}
+
+	private async handleStringAction(args: {
+		end_date_time: string;
+		value: number;
+		unit: "kilometers" | "percentage";
+		vehicle?: VehicleOption;
+	}): Promise<void> {
+		const endTime = new Date(args.end_date_time);
+
+		return this.handleAction({
+			endTime,
+			unit: args.unit,
+			value: args.value,
+			vehicle: args.vehicle,
+		});
+	}
+
+	private async handleAction(args: {
+		endTime: Date;
+		value: number;
+		unit: "kilometers" | "percentage";
+		vehicle?: VehicleOption;
+	}): Promise<void> {
+		const chargePoint = this.device.getChargePoint();
 
 		const params: StartDynamicChargingSessionParams = {
 			user_constraints: {
-				desired_end_time: endTime.toISOString(),
+				desired_end_time: args.endTime.toISOString(),
 				unit: args.unit,
 				value: Math.round(args.value),
 			},
 		};
 
-		// Add vehicle if selected
 		if (args.vehicle) {
 			params.vehicle = {
 				vehicle_uuid: args.vehicle.id,
@@ -52,12 +148,10 @@ export class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice> {
 
 	private async handleVehicleAutocomplete(
 		query: string,
-	): Promise<{ id: string; name: string; image?: string }[]> {
+	): Promise<VehicleOption[]> {
 		const chargePoint = this.device.getChargePoint();
-		const data = await chargePoint.getChargePoint();
-		const vehicles = data.vehicles;
+		const { vehicles } = await chargePoint.getChargePoint();
 
-		// Filter vehicles based on query
 		const filteredVehicles = vehicles.filter((vehicle) =>
 			vehicle.label.toLowerCase().includes(query.toLowerCase()),
 		);
