@@ -58,6 +58,9 @@ cd app.bloemendaal.zonneplan
 # Install dependencies
 npm install
 
+# Globally install Homey CLI
+npm install --global --no-optional homey
+
 # Run the app on your Homey
 homey app run
 ```
