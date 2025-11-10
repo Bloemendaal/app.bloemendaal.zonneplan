@@ -5,16 +5,16 @@ import type {
 import ChargePoint from "../../src/charge-point.mjs";
 import ZonneplanDevice from "../zonneplan-device.mjs";
 import type ZonneplanFlow from "../zonneplan-flow.mjs";
-import { DisableAlwaysFlexFlow } from "./flows/disable-always-flex-flow.mjs";
-import { DisablePlugAndChargeFlow } from "./flows/disable-plug-and-charge-flow.mjs";
-import { EnableAlwaysFlexFlow } from "./flows/enable-always-flex-flow.mjs";
-import { EnablePlugAndChargeFlow } from "./flows/enable-plug-and-charge-flow.mjs";
-import { SetModeFlow } from "./flows/set-mode-flow.mjs";
-import { StartBoostFlow } from "./flows/start-boost-flow.mjs";
-import { StartDynamicChargingFlow } from "./flows/start-dynamic-charging-flow.mjs";
-import { StopChargingFlow } from "./flows/stop-charging-flow.mjs";
-import { StopDynamicChargingFlow } from "./flows/stop-dynamic-charging-flow.mjs";
-import { UnsuppressAlwaysFlexFlow } from "./flows/unsuppress-always-flex-flow.mjs";
+import DisableAlwaysFlexFlow from "./flows/disable-always-flex-flow.mjs";
+import DisablePlugAndChargeFlow from "./flows/disable-plug-and-charge-flow.mjs";
+import EnableAlwaysFlexFlow from "./flows/enable-always-flex-flow.mjs";
+import EnablePlugAndChargeFlow from "./flows/enable-plug-and-charge-flow.mjs";
+import SetModeFlow from "./flows/set-mode-flow.mjs";
+import StartBoostFlow from "./flows/start-boost-flow.mjs";
+import StartDynamicChargingFlow from "./flows/start-dynamic-charging-flow.mjs";
+import StopChargingFlow from "./flows/stop-charging-flow.mjs";
+import StopDynamicChargingFlow from "./flows/stop-dynamic-charging-flow.mjs";
+import UnsuppressAlwaysFlexFlow from "./flows/unsuppress-always-flex-flow.mjs";
 
 export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 	public getChargePoint(): ChargePoint {

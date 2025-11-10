@@ -1,7 +1,7 @@
 import ZonneplanFlow from "../../zonneplan-flow.mjs";
 import type ChargeDevice from "../device.mjs";
 
-export class UnsuppressAlwaysFlexFlow extends ZonneplanFlow<ChargeDevice> {
+export default class UnsuppressAlwaysFlexFlow extends ZonneplanFlow<ChargeDevice> {
 	public async register(): Promise<void> {
 		const card = this.device.homey.flow.getActionCard("unsuppress_always_flex");
 

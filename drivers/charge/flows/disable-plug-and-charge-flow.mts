@@ -1,7 +1,7 @@
 import ZonneplanFlow from "../../zonneplan-flow.mjs";
 import type ChargeDevice from "../device.mjs";
 
-export class DisablePlugAndChargeFlow extends ZonneplanFlow<ChargeDevice> {
+export default class DisablePlugAndChargeFlow extends ZonneplanFlow<ChargeDevice> {
 	public async register(): Promise<void> {
 		const card = this.device.homey.flow.getActionCard(
 			"disable_plug_and_charge",

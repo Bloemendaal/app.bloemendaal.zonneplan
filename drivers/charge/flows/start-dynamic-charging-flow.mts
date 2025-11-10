@@ -9,7 +9,7 @@ interface VehicleOption {
 	image?: string;
 }
 
-export class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice> {
+export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice> {
 	public async register(): Promise<void> {
 		const cards = [
 			this.device.homey.flow
