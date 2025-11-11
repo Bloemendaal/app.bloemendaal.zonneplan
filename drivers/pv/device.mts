@@ -9,10 +9,16 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 		const contract = this.getContract(accountResponse);
 
 		if (!contract) {
-			throw new Error(this.__("devices.pv.errors.not_found"));
+			await this.setUnavailable(this.__("devices.pv.errors.not_found")).catch(
+				this.error,
+			);
+
+			return;
 		}
 
 		const meta = contract.meta;
+
+		await this.setAvailable().catch(this.error);
 
 		// Update measure_power (current power generation in Watts)
 		// For solar panels, power should be negative to indicate generation

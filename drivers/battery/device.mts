@@ -17,11 +17,16 @@ export default class BatteryDevice extends ZonneplanDevice<HomeBatteryContract> 
 		const [contract] = data.contracts;
 
 		if (!contract) {
-			throw new Error(this.__("devices.battery.errors.not_found"));
+			await this.setUnavailable(
+				this.__("devices.battery.errors.not_found"),
+			).catch(this.error);
+
+			return;
 		}
 
 		const { meta } = contract;
 
+		await this.setAvailable().catch(this.error);
 		await this.setMeterPower(homeBattery, meta).catch(this.error);
 		await this.setCapabilityValue("measure_power", meta.power_ac);
 		await this.setCapabilityValue("measure_battery", meta.state_of_charge);

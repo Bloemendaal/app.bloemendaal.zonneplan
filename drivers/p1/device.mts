@@ -16,11 +16,16 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 		const contract = this.getContract(accountResponse);
 
 		if (!contract) {
-			throw new Error(this.__("devices.p1.errors.not_found"));
+			await this.setUnavailable(this.__("devices.p1.errors.not_found")).catch(
+				this.error,
+			);
+
+			return;
 		}
 
 		const { meta } = contract;
 
+		await this.setAvailable().catch(this.error);
 		await this.setMeterPower(meta).catch(this.error);
 		await this.setMeterGas(meta).catch(this.error);
 

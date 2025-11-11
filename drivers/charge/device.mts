@@ -32,9 +32,14 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 			const [contract] = data.contracts;
 
 			if (!contract) {
-				throw new Error(this.__("devices.charge.errors.not_found"));
+				await this.setUnavailable(
+					this.__("devices.charge.errors.not_found"),
+				).catch(this.error);
+
+				return;
 			}
 
+			await this.setAvailable().catch(this.error);
 			const isConnected = contract.state.plugged_in_at !== null;
 
 			if (!isConnected) {
@@ -66,12 +71,16 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 		const [contract] = data.contracts;
 
 		if (!contract) {
-			this.error(this.__("devices.charge.errors.not_found"));
+			await this.setUnavailable(
+				this.__("devices.charge.errors.not_found"),
+			).catch(this.error);
+
 			return;
 		}
 
 		const { state, meta } = contract;
 
+		await this.setAvailable().catch(this.error);
 		await this.setMeterPower(chargePoint, meta).catch(this.error);
 		await this.setCapabilityValue("measure_power", state.power_actual);
 
