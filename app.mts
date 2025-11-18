@@ -39,8 +39,8 @@ export default class ZonneplanApp extends Homey.App {
 		const delay = target.getTime() - from.getTime();
 
 		// Do not await these calls, they act as a sleep timer
-		this.requestRefresh(500, 3000);
-		this.requestRefresh(delay, delay + 10000);
+		this.requestRefresh(500, 3000).catch(this.error);
+		this.requestRefresh(delay, delay + 10000).catch(this.error);
 
 		this.scheduleTimeout = setTimeout(() => {
 			this.scheduler.startInterval(FETCH_EVERY_MINUTES * 60 * 1000, {
