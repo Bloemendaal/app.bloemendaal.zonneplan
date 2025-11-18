@@ -51,6 +51,8 @@ export default class ZonneplanApp extends Homey.App {
 	}
 
 	public async onUninit(): Promise<void> {
+		this.scheduler.destroy();
+
 		if (this.scheduleTimeout) {
 			clearInterval(this.scheduleTimeout);
 		}
