@@ -13,7 +13,7 @@ export default abstract class ZonneplanDevice<
 	public abstract refresh(accountResponse: AccountResponse): Promise<void>;
 
 	public onAdded(): void {
-		this.requestRefresh();
+		this.requestRefresh(500, 3000);
 	}
 
 	public async onInit(): Promise<void> {
@@ -22,9 +22,13 @@ export default abstract class ZonneplanDevice<
 		}
 	}
 
-	public requestRefresh(delay = 3000): void {
+	/**
+	 * Refreshes all devices. Awaiting this method will act as
+	 * a sleep timer until the refresh is complete (or failed).
+	 */
+	public async requestRefresh(minimum: number, maximum: number): Promise<void> {
 		if (this.homey.app instanceof ZonneplanApp) {
-			this.homey.app.requestRefresh(delay);
+			await this.homey.app.requestRefresh(minimum, maximum);
 		}
 	}
 

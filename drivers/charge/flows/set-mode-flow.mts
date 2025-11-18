@@ -14,6 +14,6 @@ export default class SetModeFlow extends ZonneplanFlow<ChargeDevice> {
 	private async handleAction(args: { mode: StartMode }): Promise<void> {
 		const chargePoint = this.device.getChargePoint();
 		await chargePoint.setMode(args.mode);
-		this.device.requestRefresh();
+		await this.device.requestRefresh(2000, 5000);
 	}
 }

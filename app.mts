@@ -1,14 +1,17 @@
 import Homey from "homey";
 import ZonneplanDriver from "./drivers/zonneplan-driver.mjs";
+import DebounceScheduler from "./src/debounce-scheduler.mjs";
 import User from "./src/user.mjs";
 
 const OFFSET_MINUTES = 2;
 const FETCH_EVERY_MINUTES = 5;
 
 export default class ZonneplanApp extends Homey.App {
-	private refreshTimeout: NodeJS.Timeout | null = null;
 	private scheduleTimeout: NodeJS.Timeout | null = null;
-	private pollingInterval: NodeJS.Timeout | null = null;
+
+	private readonly scheduler = new DebounceScheduler<void>(
+		this.refreshDevices.bind(this),
+	);
 
 	/**
 	 * The SGNs send their data every 5 minutes, however, there might be
@@ -30,50 +33,35 @@ export default class ZonneplanApp extends Homey.App {
 		target.setMinutes(minutes + add);
 
 		if (target.getTime() <= from.getTime()) {
-			target.setMinutes(target.getMinutes() + 5);
+			target.setMinutes(target.getMinutes() + FETCH_EVERY_MINUTES);
 		}
 
 		const delay = target.getTime() - from.getTime();
 
-		if (delay > 10 * 1000) {
-			// We schedule the init interval because not all devices are initialized when this method is called.
-			// Let's hope that all devices are initialized within 5 seconds...
-			this.requestRefresh(5000);
-		}
+		// Do not await these calls, they act as a sleep timer
+		this.requestRefresh(500, 3000);
+		this.requestRefresh(delay, delay + 10000);
 
 		this.scheduleTimeout = setTimeout(() => {
-			this.requestRefresh();
-			this.pollingInterval = setInterval(
-				() => this.requestRefresh(),
-				FETCH_EVERY_MINUTES * 60 * 1000,
-			);
+			this.scheduler.startInterval(FETCH_EVERY_MINUTES * 60 * 1000, {
+				minimum: 0,
+				maximum: 10000,
+			});
 		}, delay);
 	}
 
 	public async onUninit(): Promise<void> {
-		if (this.refreshTimeout) {
-			clearInterval(this.refreshTimeout);
-		}
-
 		if (this.scheduleTimeout) {
 			clearInterval(this.scheduleTimeout);
-		}
-
-		if (this.pollingInterval) {
-			clearInterval(this.pollingInterval);
 		}
 	}
 
 	/**
-	 * We request a refresh for all devices, but we delay it
-	 * slightly to allow multiple requests to be batched together.
+	 * Refreshes all devices. Awaiting this method will act as
+	 * a sleep timer until the refresh is complete (or failed).
 	 */
-	public requestRefresh(delay = 3000): void {
-		if (this.refreshTimeout) {
-			clearTimeout(this.refreshTimeout);
-		}
-
-		this.refreshTimeout = setTimeout(() => this.refreshDevices(), delay);
+	public async requestRefresh(minimum: number, maximum: number): Promise<void> {
+		await this.scheduler.schedule({ minimum, maximum });
 	}
 
 	private async refreshDevices(): Promise<void> {

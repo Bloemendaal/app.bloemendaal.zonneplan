@@ -143,7 +143,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 		}
 
 		await chargePoint.startDynamicChargingSession(params);
-		this.device.requestRefresh();
+		await this.device.requestRefresh(2000, 5000);
 	}
 
 	private async handleVehicleAutocomplete(

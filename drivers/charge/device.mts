@@ -59,7 +59,7 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 				}
 			}
 
-			this.requestRefresh();
+			this.requestRefresh(2000, 5000);
 		});
 	}
 
