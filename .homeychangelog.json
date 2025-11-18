@@ -7,5 +7,8 @@
 	},
 	"1.0.2": {
 		"en": "Implement debounce scheduler to bundle requests to the API"
+	},
+	"1.0.3": {
+		"en": "Fix issue where debounce scheduler wasn't destroyed on uninit"
 	}
 }
