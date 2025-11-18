@@ -4,5 +4,8 @@
 	},
 	"1.0.1": {
 		"en": "Add more flow cards to start dynamic charging"
+	},
+	"1.0.2": {
+		"en": "Implement debounce scheduler to bundle requests to the API"
 	}
 }
