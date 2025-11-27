@@ -23,6 +23,11 @@
 				"cable_not_connected": "Laddaren är inte ansluten till ett fordon. Anslut fordonet till laddaren och försök igen."
 			}
 		},
+		"p1": {
+			"errors": {
+				"not_found": "Denna P1-mätare kunde (längre) inte hittas. Kontrollera ditt Zonneplan-konto eller ta bort enheten."
+			}
+		},
 		"pv": {
 			"errors": {
 				"not_found": "Detta solpanelsystem kunde (längre) inte hittas. Kontrollera ditt Zonneplan-konto eller ta bort systemet."

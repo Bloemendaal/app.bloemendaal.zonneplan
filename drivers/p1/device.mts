@@ -5,11 +5,24 @@ import type {
 	P1InstallationMeta,
 } from "../../src/user.mjs";
 import ZonneplanDevice from "../zonneplan-device.mjs";
+import type ZonneplanFlow from "../zonneplan-flow.mjs";
+import OptimalPeriodStartFlow from "./flows/optimal-period-start-flow.mjs";
 
 export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
+	private optimalPeriodStartFlow: OptimalPeriodStartFlow | null = null;
+
 	public getP1Installation(): P1Installation {
 		const { connectionUuid } = this.getData();
 		return new P1Installation(this.homey, connectionUuid);
+	}
+
+	public async onUninit(): Promise<void> {
+		this.optimalPeriodStartFlow?.clearScheduledTriggers();
+	}
+
+	protected override getFlows(): ZonneplanFlow<P1Device>[] {
+		this.optimalPeriodStartFlow = new OptimalPeriodStartFlow(this);
+		return [this.optimalPeriodStartFlow];
 	}
 
 	public async refresh(accountResponse: AccountResponse): Promise<void> {
@@ -24,6 +37,7 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 		}
 
 		const { meta } = contract;
+		const { connectionUuid } = this.getData();
 
 		await this.setAvailable().catch(this.error);
 		await this.setMeterPower(meta).catch(this.error);
@@ -35,6 +49,11 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 				meta.electricity_last_measured_average_value,
 			).catch(this.error);
 		}
+
+		// Schedule optimal period triggers based on current price data
+		await this.optimalPeriodStartFlow
+			?.scheduleOptimalPeriodTriggers(connectionUuid)
+			.catch(this.error);
 	}
 
 	private async setMeterPower(meta: P1InstallationMeta): Promise<void> {

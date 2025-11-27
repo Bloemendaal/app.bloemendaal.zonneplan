@@ -23,6 +23,11 @@
 				"cable_not_connected": "Opladeren er ikke forbundet til et køretøj. Tilslut venligst køretøjet til opladeren og prøv igen."
 			}
 		},
+		"p1": {
+			"errors": {
+				"not_found": "Denne P1-måler kunne ikke (længere) findes. Tjek din Zonneplan-konto eller fjern enheden."
+			}
+		},
 		"pv": {
 			"errors": {
 				"not_found": "Dette solpanelsystem kunne ikke (længere) findes. Tjek din Zonneplan-konto eller fjern systemet."

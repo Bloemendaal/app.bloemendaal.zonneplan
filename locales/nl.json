@@ -23,6 +23,11 @@
 				"cable_not_connected": "De oplader is niet aangesloten op een voertuig. Sluit het voertuig aan op de oplader en probeer het opnieuw."
 			}
 		},
+		"p1": {
+			"errors": {
+				"not_found": "Deze P1 meter kon niet (langer) worden gevonden. Controleer je Zonneplan-account of verwijder het apparaat."
+			}
+		},
 		"pv": {
 			"errors": {
 				"not_found": "Dit zonnepanelen systeem kon niet (langer) worden gevonden. Controleer je Zonneplan-account of verwijder het systeem."

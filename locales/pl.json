@@ -23,6 +23,11 @@
 				"cable_not_connected": "Ładowarka nie jest podłączona do pojazdu. Podłącz pojazd do ładowarki i spróbuj ponownie."
 			}
 		},
+		"p1": {
+			"errors": {
+				"not_found": "Ten licznik P1 nie mógł (i nie będzie już mógł) zostać znaleziony. Sprawdź swoje konto Zonneplan lub usuń urządzenie."
+			}
+		},
 		"pv": {
 			"errors": {
 				"not_found": "System paneli słonecznych nie mógł (i nie będzie już mógł) zostać znaleziony. Sprawdź swoje konto Zonneplan lub usuń system."

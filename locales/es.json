@@ -23,6 +23,11 @@
 				"cable_not_connected": "El cargador no está conectado a un vehículo. Por favor, conecta el vehículo al cargador y vuelve a intentarlo."
 			}
 		},
+		"p1": {
+			"errors": {
+				"not_found": "Este medidor P1 no se pudo (o ya no se puede) encontrar. Revisa tu cuenta de Zonneplan o elimina el dispositivo."
+			}
+		},
 		"pv": {
 			"errors": {
 				"not_found": "Este sistema de paneles solares no se pudo (o ya no se puede) encontrar. Revisa tu cuenta de Zonneplan o elimina el sistema."

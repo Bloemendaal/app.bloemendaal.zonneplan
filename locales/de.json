@@ -23,6 +23,11 @@
 				"cable_not_connected": "Das Ladegerät ist nicht mit einem Fahrzeug verbunden. Bitte verbinden Sie das Fahrzeug mit dem Ladegerät und versuchen Sie es erneut."
 			}
 		},
+		"p1": {
+			"errors": {
+				"not_found": "Dieser P1-Zähler konnte (länger) nicht gefunden werden. Überprüfen Sie Ihr Zonneplan-Konto oder entfernen Sie das Gerät."
+			}
+		},
 		"pv": {
 			"errors": {
 				"not_found": "Diese Solaranlage konnte (länger) nicht gefunden werden. Überprüfen Sie Ihr Zonneplan-Konto oder entfernen Sie die Anlage."

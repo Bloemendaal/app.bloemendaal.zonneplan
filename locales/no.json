@@ -23,6 +23,11 @@
 				"cable_not_connected": "Laderen er ikke koblet til et kjøretøy. Vennligst koble kjøretøyet til laderen og prøv igjen."
 			}
 		},
+		"p1": {
+			"errors": {
+				"not_found": "Denne P1-måleren kunne ikke lenger bli funnet. Sjekk Zonneplan-kontoen din eller fjern enheten."
+			}
+		},
 		"pv": {
 			"errors": {
 				"not_found": "Dette solcelleanlegget kunne ikke lenger bli funnet. Sjekk Zonneplan-kontoen din eller fjern anlegget."
