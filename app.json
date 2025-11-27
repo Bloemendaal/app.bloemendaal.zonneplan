@@ -1690,6 +1690,135 @@
           }
         ]
       }
+    ],
+    "triggers": [
+      {
+        "id": "optimal_period_start",
+        "title": {
+          "en": "The optimal hours start",
+          "nl": "De optimale uren beginnen",
+          "da": "De optimale timer starter",
+          "de": "Die optimalen Stunden beginnen",
+          "es": "Las horas óptimas comienzan",
+          "fr": "Les heures optimales commencent",
+          "it": "Le ore ottimali iniziano",
+          "no": "De optimale timene starter",
+          "sv": "De optimala timmarna börjar",
+          "pl": "Optymalne godziny zaczynają się",
+          "ru": "Оптимальные часы начинаются",
+          "ko": "최적 시간대 시작"
+        },
+        "titleFormatted": {
+          "en": "The [[type]] [[hours]] hours start",
+          "nl": "De [[type]] [[hours]] uren beginnen",
+          "da": "De [[type]] [[hours]] timer starter",
+          "de": "Die [[type]] [[hours]] Stunden beginnen",
+          "es": "Las [[type]] [[hours]] horas comienzan",
+          "fr": "Les [[type]] [[hours]] heures commencent",
+          "it": "Le [[type]] [[hours]] ore iniziano",
+          "no": "De [[type]] [[hours]] timene starter",
+          "sv": "De [[type]] [[hours]] timmarna börjar",
+          "pl": "Optymalne [[type]] [[hours]] godziny zaczynają się",
+          "ru": "[[type]] [[hours]] часов начинаются",
+          "ko": "[[type]] [[hours]] 시간대 시작"
+        },
+        "hint": {
+          "en": "Triggers when the cheapest or most sustainable contiguous hours begin",
+          "nl": "Triggert wanneer de goedkoopste of meest duurzame aaneengesloten uren beginnen",
+          "da": "Udløses, når de billigste eller mest bæredygtige sammenhængende timer begynder",
+          "de": "Wird ausgelöst, wenn die günstigsten oder nachhaltigsten zusammenhängenden Stunden beginnen",
+          "es": "Se activa cuando comienzan las horas continuas más baratas o sostenibles",
+          "fr": "Se déclenche lorsque les heures consécutives les moins chères ou les plus durables commencent",
+          "it": "Si attiva quando iniziano le ore consecutive più economiche o sostenibili",
+          "no": "Utløses når de billigste eller mest bærekraftige sammenhengende timene begynner",
+          "sv": "Utlöses när de billigaste eller mest hållbara sammanhängande timmarna börjar",
+          "pl": "Wyzwala się, gdy zaczynają się najtańsze lub najbardziej zrównoważone kolejne godziny",
+          "ru": "Срабатывает, когда начинаются самые дешёвые или наиболее экологичные непрерывные часы",
+          "ko": "가장 저렴하거나 가장 지속 가능한 연속 시간대가 시작될 때 트리거됩니다"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=p1"
+          },
+          {
+            "type": "dropdown",
+            "name": "type",
+            "title": {
+              "en": "Optimization type",
+              "nl": "Optimalisatie type",
+              "da": "Optimeringstype",
+              "de": "Optimierungstyp",
+              "es": "Tipo de optimización",
+              "fr": "Type d'optimisation",
+              "it": "Tipo di ottimizzazione",
+              "no": "Optimaliseringstype",
+              "sv": "Optimeringstyp",
+              "pl": "Typ optymalizacji",
+              "ru": "Тип оптимизации",
+              "ko": "최적화 유형"
+            },
+            "values": [
+              {
+                "id": "cheapest",
+                "title": {
+                  "en": "Cheapest",
+                  "nl": "Goedkoopste",
+                  "da": "Billigste",
+                  "de": "Günstigste",
+                  "es": "Más barato",
+                  "fr": "Le moins cher",
+                  "it": "Più economico",
+                  "no": "Billigste",
+                  "sv": "Billigaste",
+                  "pl": "Najtańsze",
+                  "ru": "Самые дешёвые",
+                  "ko": "가장 저렴한"
+                }
+              },
+              {
+                "id": "sustainable",
+                "title": {
+                  "en": "Most sustainable",
+                  "nl": "Meest duurzaam",
+                  "da": "Mest bæredygtige",
+                  "de": "Nachhaltigste",
+                  "es": "Más sostenible",
+                  "fr": "Le plus durable",
+                  "it": "Più sostenibile",
+                  "no": "Mest bærekraftig",
+                  "sv": "Mest hållbart",
+                  "pl": "Najbardziej zrównoważone",
+                  "ru": "Самые экологичные",
+                  "ko": "가장 지속 가능한"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "hours",
+            "title": {
+              "en": "Number of hours",
+              "nl": "Aantal uren",
+              "da": "Antal timer",
+              "de": "Anzahl der Stunden",
+              "es": "Número de horas",
+              "fr": "Nombre d'heures",
+              "it": "Numero di ore",
+              "no": "Antall timer",
+              "sv": "Antal timmar",
+              "pl": "Liczba godzin",
+              "ru": "Количество часов",
+              "ko": "시간 수"
+            },
+            "min": 1,
+            "max": 8,
+            "step": 1
+          }
+        ]
+      }
     ]
   },
   "capabilities": {
