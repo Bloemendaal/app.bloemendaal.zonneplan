@@ -16,9 +16,9 @@ export interface PvInstallationMeta {
 	panel_type: string | null;
 	installation_wp: Integer;
 	panel_wp: Integer;
-	first_measured_at: DateTimeString;
-	last_measured_at: DateTimeString;
-	last_measured_power_value: Integer;
+	first_measured_at: DateTimeString | null;
+	last_measured_at: DateTimeString | null;
+	last_measured_power_value: Integer | null;
 	total_power_measured: Integer;
 	sgn_serial_number: string;
 	module_firmware_version: string;

@@ -16,7 +16,7 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 			return;
 		}
 
-		const meta = contract.meta;
+		const { meta } = contract;
 
 		await this.setAvailable().catch(this.error);
 
@@ -36,11 +36,8 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 			this.error,
 		);
 
-		// Update panel_count (number of solar panels)
-		if (meta.panel_count !== null) {
-			await this.setCapabilityValue("panel_count", meta.panel_count).catch(
-				this.error,
-			);
-		}
+		await this.setCapabilityValue("panel_count", meta.panel_count).catch(
+			this.error,
+		);
 	}
 }

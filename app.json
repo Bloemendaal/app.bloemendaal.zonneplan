@@ -327,7 +327,8 @@
       "class": "solarpanel",
       "capabilities": [
         "measure_power",
-        "meter_power"
+        "meter_power",
+        "panel_count"
       ],
       "energy": {
         "meterPowerExportedCapability": "meter_power"
@@ -1692,6 +1693,45 @@
     ]
   },
   "capabilities": {
+    "panel_count": {
+      "type": "number",
+      "title": {
+        "en": "Panel Count",
+        "nl": "Aantal panelen",
+        "da": "Panelantal",
+        "de": "Anzahl der Paneele",
+        "es": "Cantidad de paneles",
+        "fr": "Nombre de panneaux",
+        "it": "Numero di pannelli",
+        "no": "Antall paneler",
+        "sv": "Antal paneler",
+        "pl": "Liczba paneli",
+        "ru": "Количество панелей",
+        "ko": "패널 수"
+      },
+      "units": {
+        "en": "panels",
+        "nl": "panelen",
+        "da": "paneler",
+        "de": "Paneele",
+        "es": "paneles",
+        "fr": "panneaux",
+        "it": "pannelli",
+        "no": "paneler",
+        "sv": "paneler",
+        "pl": "paneli",
+        "ru": "панелей",
+        "ko": "패널"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/panel_count.svg",
+      "insights": false,
+      "min": 0,
+      "step": 1,
+      "decimals": 0
+    },
     "timestamp": {
       "type": "number",
       "title": {
