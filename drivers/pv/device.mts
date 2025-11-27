@@ -35,5 +35,10 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 		await this.setCapabilityValue("meter_power", totalEnergyKwh).catch(
 			this.error,
 		);
+
+		// Update panel_count (number of solar panels)
+		await this.setCapabilityValue("panel_count", meta.panel_count).catch(
+			this.error,
+		);
 	}
 }
