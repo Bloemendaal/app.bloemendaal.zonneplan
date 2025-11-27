@@ -10,5 +10,8 @@
 	},
 	"1.0.3": {
 		"en": "Fix issue where debounce scheduler wasn't destroyed on uninit"
+	},
+	"1.0.4": {
+		"en": "Add panel count to PV"
 	}
 }
