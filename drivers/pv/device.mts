@@ -16,7 +16,7 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 			return;
 		}
 
-		const meta = contract.meta;
+		const { meta } = contract;
 
 		await this.setAvailable().catch(this.error);
 
@@ -33,6 +33,10 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 		// Convert from Wh to kWh by dividing by 1000
 		const totalEnergyKwh = meta.total_power_measured / 1000;
 		await this.setCapabilityValue("meter_power", totalEnergyKwh).catch(
+			this.error,
+		);
+
+		await this.setCapabilityValue("panel_count", meta.panel_count).catch(
 			this.error,
 		);
 	}
