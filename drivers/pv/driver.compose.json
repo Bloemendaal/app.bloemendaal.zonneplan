@@ -1,7 +1,12 @@
 {
 	"name": "Zonnepanelen",
 	"class": "solarpanel",
-	"capabilities": ["measure_power", "meter_power", "panel_count"],
+	"capabilities": [
+		"measure_power",
+		"meter_power",
+		"panel_count",
+		"installation_wp"
+	],
 	"energy": {
 		"meterPowerExportedCapability": "meter_power"
 	},
