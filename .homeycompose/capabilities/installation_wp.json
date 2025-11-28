@@ -1,0 +1,39 @@
+{
+	"type": "number",
+	"title": {
+		"en": "Installation Capacity",
+		"nl": "Installatievermogen",
+		"da": "Installationskapacitet",
+		"de": "Anlagenleistung",
+		"es": "Capacidad de instalación",
+		"fr": "Capacité d'installation",
+		"it": "Capacità di installazione",
+		"no": "Installasjonskapasitet",
+		"sv": "Installationskapacitet",
+		"pl": "Moc instalacji",
+		"ru": "Мощность установки",
+		"ko": "설치 용량"
+	},
+	"units": {
+		"en": "Wp",
+		"nl": "Wp",
+		"da": "Wp",
+		"de": "Wp",
+		"es": "Wp",
+		"fr": "Wp",
+		"it": "Wp",
+		"no": "Wp",
+		"sv": "Wp",
+		"pl": "Wp",
+		"ru": "Вт",
+		"ko": "Wp"
+	},
+	"getable": true,
+	"setable": false,
+	"uiComponent": "sensor",
+	"icon": "/assets/capabilities/installation_wp.svg",
+	"insights": false,
+	"min": 0,
+	"step": 1,
+	"decimals": 0
+}

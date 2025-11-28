@@ -39,5 +39,10 @@ export default class PvDevice extends ZonneplanDevice<PvInstallationContract> {
 		await this.setCapabilityValue("panel_count", meta.panel_count).catch(
 			this.error,
 		);
+
+		await this.setCapabilityValue(
+			"installation_wp",
+			meta.installation_wp,
+		).catch(this.error);
 	}
 }
