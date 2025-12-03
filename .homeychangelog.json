@@ -13,5 +13,8 @@
 	},
 	"1.0.4": {
 		"en": "Add panel count to PV"
+	},
+	"1.0.5": {
+		"en": "Add installation WP"
 	}
 }
