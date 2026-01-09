@@ -19,5 +19,8 @@
 	},
 	"1.0.6": {
 		"en": "Improve icons"
+	},
+	"1.0.7": {
+		"en": "Add user-agent to requests"
 	}
 }
