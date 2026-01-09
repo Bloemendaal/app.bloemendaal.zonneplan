@@ -20,6 +20,7 @@ export default abstract class Authenticatable {
 			baseURL: BASE_URL,
 			headers: {
 				"Content-Type": "application/json",
+				"User-Agent": this.getUserAgent(),
 			},
 		});
 	}
@@ -32,6 +33,7 @@ export default abstract class Authenticatable {
 			headers: {
 				"Content-Type": "application/json",
 				Authorization: `Bearer ${accessToken}`,
+				"User-Agent": this.getUserAgent(),
 			},
 		});
 	}
@@ -40,6 +42,10 @@ export default abstract class Authenticatable {
 		this.homey.settings.set("accessToken", tokens.access_token);
 		this.homey.settings.set("refreshToken", tokens.refresh_token);
 		this.homey.settings.set("expiresAt", Date.now() + tokens.expires_in * 1000);
+	}
+
+	private getUserAgent(): string {
+		return `Homey/v${this.homey.version} app.bloemendaal.volkswagen/v${this.homey.app.manifest.version}`;
 	}
 
 	private async getValidAccessToken(): Promise<string> {

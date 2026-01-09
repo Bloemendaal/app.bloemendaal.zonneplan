@@ -18,7 +18,7 @@ export default abstract class ZonneplanDevice<
 
 	public async onInit(): Promise<void> {
 		for (const flow of this.getFlows()) {
-			await flow.register();
+			await flow.register().catch(this.error);
 		}
 	}
 
