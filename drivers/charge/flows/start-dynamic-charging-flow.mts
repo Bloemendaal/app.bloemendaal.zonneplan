@@ -130,9 +130,9 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 
 		const params: StartDynamicChargingSessionParams = {
 			user_constraints: {
-				desired_end_time: args.endTime.toISOString(),
+				desired_end_time: args.endTime.toLocaleString("sv-SE"),
 				unit: args.unit,
-				value: Math.round(args.value),
+				value: Math.round(args.value * (args.unit === "percentage" ? 10 : 1)),
 			},
 		};
 
