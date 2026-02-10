@@ -52,18 +52,13 @@ export default class BatteryDevice extends ZonneplanDevice<HomeBatteryContract> 
 			`${firstMeasuredInYear}-01-01`,
 		);
 
-		if (cumulativeChart) {
-			// Get the most recent measurement (cumulative data is chronologically ordered)
-			const latestMeasurement = cumulativeChart.measurements.at(-1);
+		if (cumulativeChart.meta) {
+			// Convert Wh to kWh
+			const charged = cumulativeChart.meta.delivery / 1000;
+			const discharged = cumulativeChart.meta.production / 1000;
 
-			if (latestMeasurement?.meta) {
-				// Convert Wh to kWh
-				const charged = latestMeasurement.meta.delivery / 1000;
-				const discharged = latestMeasurement.meta.production / 1000;
-
-				await this.setCapabilityValue("meter_power.charged", charged);
-				await this.setCapabilityValue("meter_power.discharged", discharged);
-			}
+			await this.setCapabilityValue("meter_power.charged", charged);
+			await this.setCapabilityValue("meter_power.discharged", discharged);
 		}
 	}
 }
