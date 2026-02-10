@@ -25,5 +25,8 @@
 	},
 	"1.0.8": {
 		"en": "Fix charge scheduling issues"
+	},
+	"1.0.9": {
+		"en": "Fix meta on cumulative Nexus chart"
 	}
 }
