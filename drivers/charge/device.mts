@@ -3,6 +3,7 @@ import type {
 	ChargePointMeta,
 } from "../../src/charge-point.mjs";
 import ChargePoint from "../../src/charge-point.mjs";
+import type { DateTimeString } from "../../src/types.mjs";
 import ZonneplanDevice from "../zonneplan-device.mjs";
 import type ZonneplanFlow from "../zonneplan-flow.mjs";
 import DisableAlwaysFlexFlow from "./flows/disable-always-flex-flow.mjs";
@@ -15,6 +16,14 @@ import StartDynamicChargingFlow from "./flows/start-dynamic-charging-flow.mjs";
 import StopChargingFlow from "./flows/stop-charging-flow.mjs";
 import StopDynamicChargingFlow from "./flows/stop-dynamic-charging-flow.mjs";
 import UnsuppressAlwaysFlexFlow from "./flows/unsuppress-always-flex-flow.mjs";
+
+const MINIMUM_DELAY_SCHEDULE_MS = 30_000;
+const MAXIMUM_DELAY_SCHEDULE_MS = 45_000;
+
+interface Period {
+	start_time: DateTimeString;
+	end_time?: DateTimeString;
+}
 
 export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 	public getChargePoint(): ChargePoint {
@@ -103,6 +112,14 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 		}
 
 		await this.setCapabilityValue("evcharger_charging_state", chargingState);
+
+		for (const scheduleEntry of state.charge_schedules) {
+			this.refreshAt(scheduleEntry);
+		}
+
+		for (const timelineEntry of meta.charge_timeline) {
+			this.refreshAt(timelineEntry);
+		}
 	}
 
 	protected override getFlows(): ZonneplanFlow<ChargeDevice>[] {
@@ -118,6 +135,25 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 			new StopChargingFlow(this),
 			new UnsuppressAlwaysFlexFlow(this),
 		];
+	}
+
+	private refreshAt({ start_time, end_time }: Period): void {
+		for (const time of [start_time, end_time]) {
+			if (!time) {
+				continue;
+			}
+
+			const delay = new Date(time).getTime() - Date.now();
+
+			if (delay <= MINIMUM_DELAY_SCHEDULE_MS) {
+				continue;
+			}
+
+			this.requestRefresh(
+				delay + MINIMUM_DELAY_SCHEDULE_MS,
+				delay + MAXIMUM_DELAY_SCHEDULE_MS,
+			).catch(this.error);
+		}
 	}
 
 	/**
