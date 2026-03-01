@@ -28,5 +28,8 @@
 	},
 	"1.0.9": {
 		"en": "Fix meta on cumulative Nexus chart"
+	},
+	"1.0.10": {
+		"en": "Automatically refresh the data based on the charging schedule"
 	}
 }
