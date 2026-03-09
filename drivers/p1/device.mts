@@ -1,4 +1,6 @@
-import P1Installation from "../../src/p1-installation.mjs";
+import P1Installation, {
+	type VolumeDataPoint,
+} from "../../src/p1-installation.mjs";
 import type {
 	AccountResponse,
 	P1InstallationContract,
@@ -78,14 +80,16 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 				(this.getCapabilityValue(`timestamp.${imported}`) ?? 0) < year ||
 				(this.getCapabilityValue(`timestamp.${exported}`) ?? 0) < year
 			) {
-				const response = await p1Installation.getElectricityMonthlyCharts(
+				const { chart } = await p1Installation.getElectricityVolumesChart(
 					`${year}-01-01`,
+					`${year}-12-31`,
+					"months",
 				);
 
-				const [chart] = response.measurement_groups;
-
-				importedMeterPower = (chart?.totals?.d ?? 0) / 1000; // Convert Wh to kWh
-				exportedMeterPower = (chart?.totals?.p ?? 0) / 1000; // Convert Wh to kWh
+				importedMeterPower =
+					this.sumVolumes(chart.series.delivery, (v) => v.wh) / 1000; // Wh → kWh
+				exportedMeterPower =
+					this.sumVolumes(chart.series.production, (v) => v.wh) / 1000; // Wh → kWh
 
 				await this.setCapabilityValue(imported, importedMeterPower);
 				await this.setCapabilityValue(exported, exportedMeterPower);
@@ -141,13 +145,14 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 				typeof gasMeterValue !== "number" ||
 				(this.getCapabilityValue(`timestamp.${capability}`) ?? 0) < year
 			) {
-				const response = await p1Installation.getGasMonthlyCharts(
+				const { chart } = await p1Installation.getGasVolumesChart(
 					`${year}-01-01`,
+					`${year}-12-31`,
+					"months",
 				);
 
-				const [chart] = response.measurement_groups;
-
-				gasMeterValue = (chart?.total ?? 0) / 1000;
+				gasMeterValue =
+					this.sumVolumes(chart.series.delivery, (v) => v.dm3) / 1000; // dm3 → m3
 
 				await this.setCapabilityValue(capability, gasMeterValue);
 				await this.setCapabilityValue(`timestamp.${capability}`, currentYear);
@@ -181,5 +186,15 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 		}
 
 		return !hasCapability;
+	}
+
+	private sumVolumes<T>(
+		data: VolumeDataPoint<T>[],
+		getValue: (v: T) => number,
+	): number {
+		return data.reduce(
+			(sum, point) => sum + (point.volume ? getValue(point.volume) : 0),
+			0,
+		);
 	}
 }

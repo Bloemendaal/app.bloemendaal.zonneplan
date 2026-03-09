@@ -1,12 +1,9 @@
 import type Homey from "homey/lib/Homey.js";
 import Authenticatable from "./authenticatable.mjs";
-import type { TariffGroup } from "./connection.mjs";
 import type {
 	DateString,
 	DateTimeString,
-	Float,
 	Integer,
-	PossiblyUnknownString,
 	Response,
 } from "./types.mjs";
 import type { BaseContractData } from "./user.mjs";
@@ -27,90 +24,63 @@ export interface P1InstallationMeta {
 	dsmr_version: string;
 	sgn_serial_number: string;
 	sgn_firmware: string;
-	status_override?: {
-		main_title: string;
-		short_message: string;
-		long_message: string;
-		message_type: "info" | PossiblyUnknownString;
-		url: string | null;
-		url_title: string | null;
-	};
 	show_in_contract_screen: boolean;
 }
 
 export interface P1InstallationContract
 	extends BaseContractData<"p1_installation", P1InstallationMeta> {}
 
-export interface DeliveryProduction<T> {
-	d: T;
-	p: T;
+type Granularity = "hours" | "days" | "months";
+
+interface Range {
+	start_date: DateTimeString;
+	end_date: DateTimeString;
 }
 
-export interface GasMeasurement {
-	value: Integer;
+interface EnergyVolume {
+	wh: Integer;
+}
+
+interface GasVolume {
+	dm3: Integer;
+}
+
+export interface VolumeDataPoint<V> {
 	date: DateTimeString;
-	meta?: {
-		has_supply_contract: 0 | 1;
+	volume: V | null;
+}
+
+export interface ElectricityVolumesChartResponse {
+	chart: {
+		granularity: Granularity;
+		range: Range;
+		series: {
+			delivery: VolumeDataPoint<EnergyVolume>[];
+			production: VolumeDataPoint<EnergyVolume>[];
+		};
 	};
 }
 
-export interface ElectricityMeasurement {
-	values: DeliveryProduction<Integer | null>;
-	date: DateTimeString;
-	meta?:
-		| {
-				has_supply_contract: 0 | 1;
-				result_tax_excluded: Integer;
-				result_tax_included: Integer;
-		  }
-		| {
-				tariff_group: TariffGroup;
-		  };
-}
-
-export interface GasMeasurementGroup {
-	group_type: "normal" | PossiblyUnknownString;
-	date: DateTimeString;
-	meta: {
-		price: null;
-		has_supply_contract: boolean;
-		energy_delivered_sum: Integer;
-		delivery_costs_excl_tax: Integer;
-		delivery_costs_incl_tax: Float;
-		delivery_price_per_unit_excl_tax: Integer;
-		delivery_price_per_unit_incl_tax: Float;
+export interface GasVolumesChartResponse {
+	chart: {
+		granularity: Granularity;
+		range: Range;
+		series: {
+			delivery: VolumeDataPoint<GasVolume>[];
+		};
 	};
-	mutable: boolean;
-	type: "hours" | "days" | "months";
-	measurements: GasMeasurement[];
-	total: Integer;
 }
 
-export interface ElectricityMeasurementGroup {
-	group_type: "multi" | PossiblyUnknownString;
-	date: DateTimeString;
-	meta: {
-		price: null;
-		has_supply_contract: boolean;
-		energy_delivered_sum: Integer;
-		delivery_costs_excl_tax: Integer;
-		delivery_costs_incl_tax: Float;
-		delivery_price_per_unit_excl_tax: Integer;
-		delivery_price_per_unit_incl_tax: Float;
-		result_tax_excluded?: Integer;
-		result_tax_included?: Integer;
+export interface ElectricityProductResultsResponse {
+	electricity: {
+		net_volume: EnergyVolume;
 	};
-	mutable: boolean;
-	type: "live" | "hours" | "days" | "months";
-	measurements: ElectricityMeasurement[];
-	totals: DeliveryProduction<Integer | null>;
-	labels: DeliveryProduction<string>;
 }
 
-export interface ConnectionResponse<T> {
-	contracts: P1InstallationContract[];
-	powerplay: unknown | null;
-	measurement_groups: T[];
+export interface GasProductResultsResponse {
+	gas: {
+		delivery_volume: GasVolume;
+	};
 }
 
 export default class P1Installation extends Authenticatable {
@@ -121,124 +91,62 @@ export default class P1Installation extends Authenticatable {
 		super(homey);
 	}
 
-	public async getElectricityMeasurements(): Promise<
-		ConnectionResponse<ElectricityMeasurementGroup>
-	> {
+	public async getElectricityVolumesChart(
+		start_date: DateString,
+		end_date: DateString,
+		granularity: Granularity,
+	): Promise<ElectricityVolumesChartResponse> {
 		const client = await this.getClient();
 
 		const response = await client.get<
-			Response<ConnectionResponse<ElectricityMeasurementGroup>>
-		>(`/connections/${this.connectionUuid}/electricity`);
+			Response<ElectricityVolumesChartResponse>
+		>(`/api/connections/${this.connectionUuid}/electricity/charts/volumes`, {
+			params: { start_date, end_date, granularity },
+		});
 
 		return response.data.data;
 	}
 
-	public async getElectricityLiveCharts(): Promise<
-		ConnectionResponse<ElectricityMeasurementGroup>
-	> {
+	public async getGasVolumesChart(
+		start_date: DateString,
+		end_date: DateString,
+		granularity: Granularity,
+	): Promise<GasVolumesChartResponse> {
 		const client = await this.getClient();
 
-		const response = await client.get<
-			Response<ConnectionResponse<ElectricityMeasurementGroup>>
-		>(`/connections/${this.connectionUuid}/electricity_delivered/charts/live`);
-
-		return response.data.data;
-	}
-
-	public async getElectricityHourlyCharts(
-		date: DateString,
-	): Promise<ConnectionResponse<ElectricityMeasurementGroup>> {
-		const client = await this.getClient();
-
-		const response = await client.get<
-			Response<ConnectionResponse<ElectricityMeasurementGroup>>
-		>(
-			`/connections/${this.connectionUuid}/electricity_delivered/charts/hours`,
-			{ params: { date } },
+		const response = await client.get<Response<GasVolumesChartResponse>>(
+			`/api/connections/${this.connectionUuid}/gas/charts/volumes`,
+			{ params: { start_date, end_date, granularity } },
 		);
 
 		return response.data.data;
 	}
 
-	public async getElectricityDailyCharts(
-		date: DateString,
-	): Promise<ConnectionResponse<ElectricityMeasurementGroup>> {
+	public async getElectricityProductResults(
+		start_date: DateString,
+		end_date: DateString,
+	): Promise<ElectricityProductResultsResponse> {
 		const client = await this.getClient();
 
 		const response = await client.get<
-			Response<ConnectionResponse<ElectricityMeasurementGroup>>
-		>(`/connections/${this.connectionUuid}/electricity_delivered/charts/days`, {
-			params: { date },
+			Response<ElectricityProductResultsResponse>
+		>(`/api/connections/${this.connectionUuid}/electricity/product/results`, {
+			params: { start_date, end_date },
 		});
 
 		return response.data.data;
 	}
 
-	public async getElectricityMonthlyCharts(
-		date: DateString,
-	): Promise<ConnectionResponse<ElectricityMeasurementGroup>> {
+	public async getGasProductResults(
+		start_date: DateString,
+		end_date: DateString,
+	): Promise<GasProductResultsResponse> {
 		const client = await this.getClient();
 
-		const response = await client.get<
-			Response<ConnectionResponse<ElectricityMeasurementGroup>>
-		>(
-			`/connections/${this.connectionUuid}/electricity_delivered/charts/months`,
-			{ params: { date } },
+		const response = await client.get<Response<GasProductResultsResponse>>(
+			`/api/connections/${this.connectionUuid}/gas/product/results`,
+			{ params: { start_date, end_date } },
 		);
-
-		return response.data.data;
-	}
-
-	public async getGasMeasurements(): Promise<
-		ConnectionResponse<GasMeasurementGroup>
-	> {
-		const client = await this.getClient();
-
-		const response = await client.get<
-			Response<ConnectionResponse<GasMeasurementGroup>>
-		>(`/connections/${this.connectionUuid}/gas`);
-
-		return response.data.data;
-	}
-
-	public async getGasHourlyCharts(
-		date: DateString,
-	): Promise<ConnectionResponse<GasMeasurementGroup>> {
-		const client = await this.getClient();
-
-		const response = await client.get<
-			Response<ConnectionResponse<GasMeasurementGroup>>
-		>(`/connections/${this.connectionUuid}/gas/charts/hours`, {
-			params: { date },
-		});
-
-		return response.data.data;
-	}
-
-	public async getGasDailyCharts(
-		date: DateString,
-	): Promise<ConnectionResponse<GasMeasurementGroup>> {
-		const client = await this.getClient();
-
-		const response = await client.get<
-			Response<ConnectionResponse<GasMeasurementGroup>>
-		>(`/connections/${this.connectionUuid}/gas/charts/days`, {
-			params: { date },
-		});
-
-		return response.data.data;
-	}
-
-	public async getGasMonthlyCharts(
-		date: DateString,
-	): Promise<ConnectionResponse<GasMeasurementGroup>> {
-		const client = await this.getClient();
-
-		const response = await client.get<
-			Response<ConnectionResponse<GasMeasurementGroup>>
-		>(`/connections/${this.connectionUuid}/gas/charts/months`, {
-			params: { date },
-		});
 
 		return response.data.data;
 	}
