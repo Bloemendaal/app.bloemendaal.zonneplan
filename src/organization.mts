@@ -19,7 +19,7 @@ interface FlexCosts {
 }
 
 interface AssetCosts {
-	costs: { data: FlexCosts[] };
+	costs: FlexCosts[];
 	aggregate: FlexCosts;
 }
 
