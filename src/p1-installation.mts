@@ -86,7 +86,8 @@ export interface GasProductResultsResponse {
 export default class P1Installation extends Authenticatable {
 	constructor(
 		homey: Homey,
-		private readonly connectionUuid: string,
+		private readonly electricityConnectionUuid: string,
+		private readonly gasConnectionUuid: string | null = null,
 	) {
 		super(homey);
 	}
@@ -100,9 +101,12 @@ export default class P1Installation extends Authenticatable {
 
 		const response = await client.get<
 			Response<ElectricityVolumesChartResponse>
-		>(`/api/connections/${this.connectionUuid}/electricity/charts/volumes`, {
-			params: { start_date, end_date, granularity },
-		});
+		>(
+			`/api/connections/${this.electricityConnectionUuid}/electricity/charts/volumes`,
+			{
+				params: { start_date, end_date, granularity },
+			},
+		);
 
 		return response.data.data;
 	}
@@ -112,10 +116,20 @@ export default class P1Installation extends Authenticatable {
 		end_date: DateString,
 		granularity: Granularity,
 	): Promise<GasVolumesChartResponse> {
+		if (!this.gasConnectionUuid) {
+			return {
+				chart: {
+					granularity,
+					range: { start_date, end_date },
+					series: { delivery: [] },
+				},
+			};
+		}
+
 		const client = await this.getClient();
 
 		const response = await client.get<Response<GasVolumesChartResponse>>(
-			`/api/connections/${this.connectionUuid}/gas/charts/volumes`,
+			`/api/connections/${this.gasConnectionUuid}/gas/charts/volumes`,
 			{ params: { start_date, end_date, granularity } },
 		);
 
@@ -130,9 +144,12 @@ export default class P1Installation extends Authenticatable {
 
 		const response = await client.get<
 			Response<ElectricityProductResultsResponse>
-		>(`/api/connections/${this.connectionUuid}/electricity/product/results`, {
-			params: { start_date, end_date },
-		});
+		>(
+			`/api/connections/${this.electricityConnectionUuid}/electricity/product/results`,
+			{
+				params: { start_date, end_date },
+			},
+		);
 
 		return response.data.data;
 	}
@@ -141,10 +158,16 @@ export default class P1Installation extends Authenticatable {
 		start_date: DateString,
 		end_date: DateString,
 	): Promise<GasProductResultsResponse> {
+		if (!this.gasConnectionUuid) {
+			return {
+				gas: { delivery_volume: { dm3: 0 } },
+			};
+		}
+
 		const client = await this.getClient();
 
 		const response = await client.get<Response<GasProductResultsResponse>>(
-			`/api/connections/${this.connectionUuid}/gas/product/results`,
+			`/api/connections/${this.gasConnectionUuid}/gas/product/results`,
 			{ params: { start_date, end_date } },
 		);
 

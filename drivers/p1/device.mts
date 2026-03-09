@@ -8,12 +8,12 @@ import type {
 } from "../../src/user.mjs";
 import ZonneplanDevice from "../zonneplan-device.mjs";
 
-export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
-	public getP1Installation(): P1Installation {
-		const { connectionUuid } = this.getData();
-		return new P1Installation(this.homey, connectionUuid);
-	}
+interface Connections {
+	electricity: string;
+	gas: string | null;
+}
 
+export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 	public async refresh(accountResponse: AccountResponse): Promise<void> {
 		const contract = this.getContract(accountResponse);
 
@@ -25,11 +25,19 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 			return;
 		}
 
+		const connections = this.getGasConnectionUuid(accountResponse);
+
+		const p1Installation = new P1Installation(
+			this.homey,
+			connections.electricity,
+			connections.gas,
+		);
+
 		const { meta } = contract;
 
 		await this.setAvailable().catch(this.error);
-		await this.setMeterPower(meta).catch(this.error);
-		await this.setMeterGas(meta).catch(this.error);
+		await this.setMeterPower(meta, p1Installation).catch(this.error);
+		await this.setMeterGas(meta, p1Installation).catch(this.error);
 
 		if (meta.electricity_last_measured_average_value !== null) {
 			await this.setCapabilityValue(
@@ -39,12 +47,52 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 		}
 	}
 
-	private async setMeterPower(meta: P1InstallationMeta): Promise<void> {
+	private getGasConnectionUuid(accountResponse: AccountResponse): Connections {
+		const { connectionUuid: electricityConnectionUuid } = this.getData();
+
+		for (const addressGroup of accountResponse.address_groups) {
+			let hasElectricityConnection = false;
+			let foundGasConnectionUuid: string | null = null;
+
+			for (const connection of addressGroup.connections) {
+				if (connection.uuid === electricityConnectionUuid) {
+					hasElectricityConnection = true;
+
+					if (foundGasConnectionUuid) {
+						return {
+							electricity: electricityConnectionUuid,
+							gas: foundGasConnectionUuid,
+						};
+					}
+				}
+
+				if (connection.market_segment === "gas") {
+					foundGasConnectionUuid = connection.uuid;
+
+					if (hasElectricityConnection) {
+						return {
+							electricity: electricityConnectionUuid,
+							gas: foundGasConnectionUuid,
+						};
+					}
+				}
+			}
+		}
+
+		return {
+			electricity: electricityConnectionUuid,
+			gas: null,
+		};
+	}
+
+	private async setMeterPower(
+		meta: P1InstallationMeta,
+		p1Installation: P1Installation,
+	): Promise<void> {
 		if (!meta.electricity_first_measured_at) {
 			return;
 		}
 
-		const p1Installation = this.getP1Installation();
 		const currentYear = new Date().getFullYear();
 		const firstMeasuredInYear = new Date(
 			meta.electricity_first_measured_at,
@@ -112,7 +160,10 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 		);
 	}
 
-	private async setMeterGas(meta: P1InstallationMeta): Promise<void> {
+	private async setMeterGas(
+		meta: P1InstallationMeta,
+		p1Installation: P1Installation,
+	): Promise<void> {
 		if (!meta.gas_first_measured_at) {
 			return;
 		}
@@ -121,7 +172,6 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 			await this.addCapability("meter_gas");
 		}
 
-		const p1Installation = this.getP1Installation();
 		const currentYear = new Date().getFullYear();
 		const firstMeasuredInYear = new Date(
 			meta.gas_first_measured_at,
