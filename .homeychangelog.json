@@ -34,5 +34,8 @@
 	},
 	"1.0.11": {
 		"en": "Use new API endpoints"
+	},
+	"1.0.12": {
+		"en": "Fix the connection on which gas is fetched"
 	}
 }
