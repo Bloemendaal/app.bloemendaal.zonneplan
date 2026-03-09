@@ -38,7 +38,7 @@
   ],
   "permissions": [],
   "source": "https://github.com/Bloemendaal/app.bloemendaal.zonneplan",
-  "support": "mailto:casperbloemendaal@gmail.com",
+  "support": "mailto:homey@bloemendaal.app",
   "images": {
     "small": "/assets/images/small.png",
     "large": "/assets/images/large.png",
@@ -46,7 +46,7 @@
   },
   "author": {
     "name": "Casper Bloemendaal",
-    "email": "casperbloemendaal@gmail.com"
+    "email": "homey@bloemendaal.app"
   },
   "esm": true,
   "drivers": [
