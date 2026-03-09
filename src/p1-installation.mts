@@ -32,11 +32,6 @@ export interface P1InstallationContract
 
 type Granularity = "hours" | "days" | "months";
 
-interface VolumeDataPoint<V> {
-	date: DateTimeString;
-	volume: V | null;
-}
-
 interface Range {
 	start_date: DateTimeString;
 	end_date: DateTimeString;
@@ -48,6 +43,11 @@ interface EnergyVolume {
 
 interface GasVolume {
 	dm3: Integer;
+}
+
+export interface VolumeDataPoint<V> {
+	date: DateTimeString;
+	volume: V | null;
 }
 
 export interface ElectricityVolumesChartResponse {

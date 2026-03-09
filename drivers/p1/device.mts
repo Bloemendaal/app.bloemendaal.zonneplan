@@ -1,4 +1,6 @@
-import P1Installation from "../../src/p1-installation.mjs";
+import P1Installation, {
+	type VolumeDataPoint,
+} from "../../src/p1-installation.mjs";
 import type {
 	AccountResponse,
 	P1InstallationContract,
@@ -187,7 +189,7 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 	}
 
 	private sumVolumes<T>(
-		data: { date: string; volume: T | null }[],
+		data: VolumeDataPoint<T>[],
 		getValue: (v: T) => number,
 	): number {
 		return data.reduce(
