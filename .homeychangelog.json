@@ -31,5 +31,8 @@
 	},
 	"1.0.10": {
 		"en": "Automatically refresh the data based on the charging schedule"
+	},
+	"1.0.11": {
+		"en": "Use new API endpoints"
 	}
 }
