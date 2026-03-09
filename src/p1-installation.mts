@@ -55,8 +55,8 @@ export interface ElectricityVolumesChartResponse {
 		granularity: Granularity;
 		range: Range;
 		series: {
-			delivery: { data: VolumeDataPoint<EnergyVolume>[] };
-			production: { data: VolumeDataPoint<EnergyVolume>[] };
+			delivery: VolumeDataPoint<EnergyVolume>[];
+			production: VolumeDataPoint<EnergyVolume>[];
 		};
 	};
 }
@@ -66,7 +66,7 @@ export interface GasVolumesChartResponse {
 		granularity: Granularity;
 		range: Range;
 		series: {
-			delivery: { data: VolumeDataPoint<GasVolume>[] };
+			delivery: VolumeDataPoint<GasVolume>[];
 		};
 	};
 }

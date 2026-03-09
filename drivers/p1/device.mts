@@ -87,9 +87,9 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 				);
 
 				importedMeterPower =
-					this.sumVolumes(chart.series.delivery.data, (v) => v.wh) / 1000; // Wh → kWh
+					this.sumVolumes(chart.series.delivery, (v) => v.wh) / 1000; // Wh → kWh
 				exportedMeterPower =
-					this.sumVolumes(chart.series.production.data, (v) => v.wh) / 1000; // Wh → kWh
+					this.sumVolumes(chart.series.production, (v) => v.wh) / 1000; // Wh → kWh
 
 				await this.setCapabilityValue(imported, importedMeterPower);
 				await this.setCapabilityValue(exported, exportedMeterPower);
@@ -152,7 +152,7 @@ export default class P1Device extends ZonneplanDevice<P1InstallationContract> {
 				);
 
 				gasMeterValue =
-					this.sumVolumes(chart.series.delivery.data, (v) => v.dm3) / 1000; // dm3 → m3
+					this.sumVolumes(chart.series.delivery, (v) => v.dm3) / 1000; // dm3 → m3
 
 				await this.setCapabilityValue(capability, gasMeterValue);
 				await this.setCapabilityValue(`timestamp.${capability}`, currentYear);
