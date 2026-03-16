@@ -93,7 +93,7 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 		await this.setMeterPower(chargePoint, meta).catch(this.error);
 		await this.setCapabilityValue("measure_power", state.power_actual);
 
-		const isCharging = state.charging_manually || state.charging_automatically;
+		const isCharging = state.state === "Charging";
 		await this.setCapabilityValue("evcharger_charging", isCharging);
 
 		let chargingState:
