@@ -40,5 +40,8 @@
 	},
 	"1.0.13": {
 		"en": "Fix is charging status"
+	},
+	"1.0.14": {
+		"en": "Fix Home Battery SoC"
 	}
 }
