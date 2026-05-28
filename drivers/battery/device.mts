@@ -31,6 +31,7 @@ export default class BatteryDevice extends ZonneplanDevice<HomeBatteryContract> 
 		await this.setCapabilityValue("measure_power", meta.power_ac);
 		await this.setCapabilityValue("measure_battery", meta.state_of_charge / 10);
 		await this.setCapabilityValue("meter_earned", meta.total_earned / 10000000);
+		await this.setCapabilityValue("meter_cycles", meta.cycle_count);
 	}
 
 	/**

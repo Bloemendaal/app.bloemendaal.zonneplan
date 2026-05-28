@@ -1,0 +1,39 @@
+{
+	"type": "number",
+	"title": {
+		"en": "Cycle Count",
+		"nl": "Aantal Cycli",
+		"da": "Cyklusantal",
+		"de": "Zyklenanzahl",
+		"es": "Número de Ciclos",
+		"fr": "Nombre de Cycles",
+		"it": "Numero di Cicli",
+		"no": "Antall Sykluser",
+		"sv": "Antal Cykler",
+		"pl": "Liczba Cykli",
+		"ru": "Количество Циклов",
+		"ko": "사이클 수"
+	},
+	"units": {
+		"en": "cycles",
+		"nl": "cycli",
+		"da": "cyklusser",
+		"de": "Zyklen",
+		"es": "ciclos",
+		"fr": "cycles",
+		"it": "cicli",
+		"no": "sykluser",
+		"sv": "cykler",
+		"pl": "cykli",
+		"ru": "циклов",
+		"ko": "사이클"
+	},
+	"getable": true,
+	"setable": false,
+	"uiComponent": "sensor",
+	"icon": "/assets/capabilities/meter_cycles.svg",
+	"insights": true,
+	"min": 0,
+	"step": 1,
+	"decimals": 0
+}

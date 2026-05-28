@@ -6,7 +6,8 @@
 		"measure_battery",
 		"meter_power.charged",
 		"meter_power.discharged",
-		"meter_earned"
+		"meter_earned",
+		"meter_cycles"
 	],
 	"capabilitiesOptions": {
 		"meter_power.charged": {
