@@ -1,0 +1,38 @@
+{
+	"type": "number",
+	"title": {
+		"en": "Total Earned",
+		"nl": "Totaal Verdiend",
+		"da": "Samlet Tjent",
+		"de": "Gesamtverdienst",
+		"es": "Total Ganado",
+		"fr": "Total Gagné",
+		"it": "Totale Guadagnato",
+		"no": "Totalt Tjent",
+		"sv": "Totalt Tjänat",
+		"pl": "Łącznie Zarobione",
+		"ru": "Всего Заработано",
+		"ko": "총 수익"
+	},
+	"units": {
+		"en": "€",
+		"nl": "€",
+		"da": "€",
+		"de": "€",
+		"es": "€",
+		"fr": "€",
+		"it": "€",
+		"no": "€",
+		"sv": "€",
+		"pl": "€",
+		"ru": "€",
+		"ko": "€"
+	},
+	"getable": true,
+	"setable": false,
+	"uiComponent": "sensor",
+	"icon": "/assets/capabilities/meter_earned.svg",
+	"insights": true,
+	"min": 0,
+	"decimals": 2
+}
