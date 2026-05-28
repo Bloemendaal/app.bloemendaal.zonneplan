@@ -43,5 +43,8 @@
 	},
 	"1.0.14": {
 		"en": "Fix Home Battery SoC"
+	},
+	"1.0.15": {
+		"en": "Add earnings + cycle count to battery capabilities"
 	}
 }
