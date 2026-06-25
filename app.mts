@@ -3,7 +3,8 @@ import ZonneplanDriver from "./drivers/zonneplan-driver.mjs";
 import DebounceScheduler from "./src/debounce-scheduler.mjs";
 import User from "./src/user.mjs";
 
-const OFFSET_MINUTES = 2;
+const OFFSET_SECONDS_MIN = 60;
+const OFFSET_SECONDS_MAX = 180;
 const FETCH_EVERY_MINUTES = 5;
 
 export default class ZonneplanApp extends Homey.App {
@@ -18,19 +19,24 @@ export default class ZonneplanApp extends Homey.App {
 	 * a delay before the data is available via the API. To ensure that
 	 * the app fetches the latest data after it has been updated, we
 	 * schedule a refresh interval slightly longer than 5 minutes.
+	 *
+	 * A random per-instance offset (60–180 s) spreads users across a
+	 * 2-minute window instead of all hitting at the same second.
 	 */
 	public async onInit(): Promise<void> {
-		const from = new Date();
-		const norm = this.positiveModulo(OFFSET_MINUTES, FETCH_EVERY_MINUTES);
+		const offsetSeconds =
+			OFFSET_SECONDS_MIN +
+			Math.floor(Math.random() * (OFFSET_SECONDS_MAX - OFFSET_SECONDS_MIN + 1));
 
+		const from = new Date();
 		const target = new Date(from.getTime());
 		target.setSeconds(0, 0);
 
 		const minutes = target.getMinutes();
-		const mod = this.positiveModulo(minutes - norm, FETCH_EVERY_MINUTES);
-		const add = (FETCH_EVERY_MINUTES - mod) % FETCH_EVERY_MINUTES;
-
+		const mod = minutes % FETCH_EVERY_MINUTES;
+		const add = mod === 0 ? 0 : FETCH_EVERY_MINUTES - mod;
 		target.setMinutes(minutes + add);
+		target.setSeconds(offsetSeconds, 0);
 
 		if (target.getTime() <= from.getTime()) {
 			target.setMinutes(target.getMinutes() + FETCH_EVERY_MINUTES);
@@ -75,9 +81,5 @@ export default class ZonneplanApp extends Homey.App {
 			.map((driver) => driver.refresh(accountResponse));
 
 		await Promise.all(refreshes);
-	}
-
-	private positiveModulo(value: number, modulo: number): number {
-		return ((value % modulo) + modulo) % modulo;
 	}
 }
