@@ -18,27 +18,5 @@
 		"large": "{{driverAssetsPath}}/images/large.png",
 		"xlarge": "{{driverAssetsPath}}/images/xlarge.png"
 	},
-	"pair": [
-		{
-			"id": "loading",
-			"template": "loading"
-		},
-		{
-			"id": "email_verification"
-		},
-		{
-			"id": "polling"
-		},
-		{
-			"id": "list_devices",
-			"template": "list_devices",
-			"navigation": {
-				"next": "add_devices"
-			}
-		},
-		{
-			"id": "add_devices",
-			"template": "add_devices"
-		}
-	]
+	"$extends": "pair"
 }

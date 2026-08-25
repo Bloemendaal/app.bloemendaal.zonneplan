@@ -78,18 +78,23 @@
 	"pair": {
 		"email_verification": {
 			"title": "Zonneplan",
-			"subtitle": "Wyślemy Ci email z linkiem, poprzez który możesz się bezpośrednio zalogować.",
+			"subtitle": "Wyślemy Ci email z sześciocyfrowym kodem, aby potwierdzić Twój adres email. Nazwa połączenia pojawi się w tym emailu.",
+			"legend": "Zaloguj się",
 			"email": "Adres email",
-			"submit": "Wyślij link do emaila"
-		},
-		"polling": {
-			"title": "Potwierdź swój adres email...",
-			"subtitle": "Otwórz email na komputerze lub telefonie i kliknij przycisk potwierdzenia emaila. Parowanie będzie kontynuowane automatycznie.",
-			"email": "Email wysłany do:",
-			"back": "Zmień adres email",
+			"name": "Nazwa tego połączenia (opcjonalnie)",
+			"name_placeholder": "np. Homey w salonie",
+			"submit": "Wyślij kod",
 			"error": {
-				"timeout": "Przekroczono czas oczekiwania na potwierdzenie emaila. Spróbuj ponownie.",
+				"missing_email": "Wprowadź adres email.",
 				"invalid_email": "Podany adres email jest nieprawidłowy. Spróbuj ponownie.",
+				"rate_limited": "Zbyt wiele prób logowania. Odczekaj chwilę i spróbuj ponownie.",
+				"unknown": "Wystąpił nieznany błąd. Spróbuj ponownie."
+			}
+		},
+		"otp_verification": {
+			"error": {
+				"expired": "Kod wygasł. Wróć i poproś o nowy.",
+				"rate_limited": "Zbyt wiele prób. Odczekaj chwilę i spróbuj ponownie.",
 				"unknown": "Wystąpił nieznany błąd. Spróbuj ponownie."
 			}
 		}

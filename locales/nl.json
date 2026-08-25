@@ -78,18 +78,23 @@
 	"pair": {
 		"email_verification": {
 			"title": "Zonneplan",
-			"subtitle": "We sturen je een e-mail met een link die je direct kunt gebruiken om in te loggen.",
+			"subtitle": "We mailen je een zescijferige code om je e-mailadres te bevestigen. De naam van de verbinding staat in die e-mail.",
+			"legend": "Inloggen",
 			"email": "E-mailadres",
-			"submit": "Verstuur e-maillink"
-		},
-		"polling": {
-			"title": "Bevestig je e-mailadres...",
-			"subtitle": "Open je e-mail op een computer of telefoon en klik op de bevestigingsknop in de e-mail. Het koppelen gaat daarna automatisch verder.",
-			"email": "E-mail verzonden naar:",
-			"back": "E-mailadres wijzigen",
+			"name": "Naam voor deze verbinding (optioneel)",
+			"name_placeholder": "bijv. Homey in de woonkamer",
+			"submit": "Verstuur code",
 			"error": {
-				"timeout": "Time-out bij het wachten op e-mailbevestiging. Probeer het opnieuw.",
+				"missing_email": "Voer een e-mailadres in.",
 				"invalid_email": "Het opgegeven e-mailadres is ongeldig. Probeer het opnieuw.",
+				"rate_limited": "Te veel inlogpogingen. Wacht even en probeer het opnieuw.",
+				"unknown": "Er is een onbekende fout opgetreden. Probeer het opnieuw."
+			}
+		},
+		"otp_verification": {
+			"error": {
+				"expired": "De code is verlopen. Ga terug en vraag een nieuwe aan.",
+				"rate_limited": "Te veel pogingen. Wacht even en probeer het opnieuw.",
 				"unknown": "Er is een onbekende fout opgetreden. Probeer het opnieuw."
 			}
 		}

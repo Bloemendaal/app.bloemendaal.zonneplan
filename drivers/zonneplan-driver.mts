@@ -1,16 +1,13 @@
+import { isAxiosError } from "axios";
 import Homey from "homey";
 import type { PairSession } from "homey/lib/Driver.js";
-import type { LoginResponse } from "../src/user.mjs";
-import User, { type AccountResponse } from "../src/user.mjs";
+import User, {
+	type AccountResponse,
+	NoLoginChallengeError,
+} from "../src/user.mjs";
 import ZonneplanDevice from "./zonneplan-device.mjs";
 
-const POLLING_INTERVAL = 5000;
-
-interface PollingOptions {
-	onPoll(): Promise<LoginResponse>;
-	onSuccess(password: string): Promise<void> | void;
-	onFailure(reason: "expired" | "unknown"): Promise<void> | void;
-}
+const SOURCE_NAME_SEPARATOR = " – ";
 
 export interface ZonneplanDeviceData {
 	name: string;
@@ -24,8 +21,6 @@ export interface ZonneplanDeviceData {
 }
 
 export default abstract class ZonneplanDriver extends Homey.Driver {
-	private pollingInterval: NodeJS.Timeout | null = null;
-
 	public async refresh(accountResponse: AccountResponse): Promise<void> {
 		const refreshes = this.getDevices()
 			.filter((device) => device instanceof ZonneplanDevice)
@@ -34,12 +29,7 @@ export default abstract class ZonneplanDriver extends Homey.Driver {
 		await Promise.all(refreshes);
 	}
 
-	public async onUninit(): Promise<void> {
-		this.stopPolling();
-	}
-
 	public async onPair(session: PairSession): Promise<void> {
-		let uuid: string | null = null;
 		let accountResponse: AccountResponse | null = null;
 
 		const user = new User(this.homey);
@@ -57,50 +47,60 @@ export default abstract class ZonneplanDriver extends Homey.Driver {
 				}
 			}
 
-			if (viewId === "polling") {
-				this.startPolling({
-					onPoll: async () => {
-						if (!uuid) {
-							throw new Error("UUID not set");
-						}
+			if (viewId === "email_verification") {
+				user.cancelLoginChallenge();
+			}
 
-						return await user.getOneTimePassword(uuid);
-					},
-					onSuccess: async (password) => {
-						try {
-							await user.setTokensByPassword(password);
-							await session.showView("list_devices");
-						} catch {
-							await session.emit("polling_error", {
-								message: this.__(`pair.polling.error.unknown`),
-							});
-
-							await session.showView("email_verification");
-						}
-					},
-					onFailure: async (reason) => {
-						await session.emit("polling_error", {
-							message: this.__(`pair.polling.error.${reason}`),
-						});
-
-						await session.showView("email_verification");
-					},
-				});
+			if (viewId === "otp_verification" && !user.hasLoginChallenge) {
+				await session.showView("email_verification");
 			}
 		});
 
-		session.setHandler("submit_email", async (data: { email: string }) => {
-			const response = await user.getAuthentication(data.email);
-			uuid = response.uuid;
+		session.setHandler(
+			"submit_email",
+			async (data: { email: string; name: string }) => {
+				const sourceName = this.toSourceName(data.name);
 
-			await session.showView("polling");
-		});
-		session.setHandler("disconnect", async () => this.stopPolling());
-		session.setHandler("cancel_polling", async () => this.stopPolling());
+				try {
+					await user.requestOneTimePassword(data.email, sourceName);
+				} catch (error) {
+					this.error("Failed to request a one-time password:", error);
 
-		session.setHandler("get_email", async () =>
-			this.homey.settings.get("email"),
+					throw new Error(
+						this.__(
+							`pair.email_verification.error.${this.toEmailErrorReason(error)}`,
+						),
+					);
+				}
+
+				this.homey.settings.set("sourceName", data.name.trim());
+
+				await session.showView("otp_verification");
+			},
 		);
+
+		session.setHandler("pincode", async (pincode: string[]) => {
+			try {
+				await user.setTokensByOneTimePassword(pincode.join(""));
+			} catch (error) {
+				this.error("Failed to complete the login attempt:", error);
+
+				const reason = this.toOtpErrorReason(error);
+
+				if (reason === "invalid_otp") {
+					return false;
+				}
+
+				throw new Error(this.__(`pair.otp_verification.error.${reason}`));
+			}
+
+			return true;
+		});
+
+		session.setHandler("get_login", async () => ({
+			email: this.homey.settings.get("email") ?? "",
+			name: this.homey.settings.get("sourceName") ?? "",
+		}));
 
 		session.setHandler("list_devices", async () => {
 			try {
@@ -124,41 +124,48 @@ export default abstract class ZonneplanDriver extends Homey.Driver {
 		return this.homey.__(key, tags);
 	}
 
-	private stopPolling(): void {
-		if (this.pollingInterval) {
-			clearInterval(this.pollingInterval);
-		}
+	private toSourceName(name: string): string {
+		const reference = name.trim() || this.__(this.manifest.name);
 
-		this.pollingInterval = null;
+		return [
+			`Homey Zonneplan v${this.homey.app.manifest.version}`,
+			reference,
+		].join(SOURCE_NAME_SEPARATOR);
 	}
 
-	private startPolling({ onPoll, onSuccess, onFailure }: PollingOptions): void {
-		this.stopPolling();
+	private toEmailErrorReason(
+		error: unknown,
+	): "invalid_email" | "rate_limited" | "unknown" {
+		const status = isAxiosError(error) ? error.response?.status : undefined;
 
-		this.pollingInterval = setInterval(async () => {
-			try {
-				const response = await onPoll();
+		if (status === 400 || status === 404 || status === 422) {
+			return "invalid_email";
+		}
 
-				if (response.is_activated) {
-					this.stopPolling();
+		if (status === 429) {
+			return "rate_limited";
+		}
 
-					await onSuccess(response.password);
+		return "unknown";
+	}
 
-					return;
-				}
+	private toOtpErrorReason(
+		error: unknown,
+	): "invalid_otp" | "expired" | "rate_limited" | "unknown" {
+		if (error instanceof NoLoginChallengeError) {
+			return "expired";
+		}
 
-				if (new Date() > new Date(response.expires_at)) {
-					this.stopPolling();
+		const status = isAxiosError(error) ? error.response?.status : undefined;
 
-					await onFailure("expired");
-				}
-			} catch (error) {
-				this.stopPolling();
+		if (status === 400 || status === 401 || status === 403 || status === 422) {
+			return "invalid_otp";
+		}
 
-				this.error("Polling error:", error);
+		if (status === 429) {
+			return "rate_limited";
+		}
 
-				await onFailure("unknown");
-			}
-		}, POLLING_INTERVAL);
+		return "unknown";
 	}
 }

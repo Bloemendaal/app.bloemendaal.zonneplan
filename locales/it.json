@@ -78,18 +78,23 @@
 	"pair": {
 		"email_verification": {
 			"title": "Zonneplan",
-			"subtitle": "Ti invieremo un'email con un link che puoi utilizzare per accedere direttamente.",
+			"subtitle": "Ti invieremo un'email con un codice a sei cifre per confermare il tuo indirizzo. Il nome della connessione compare in quell'email.",
+			"legend": "Accedi",
 			"email": "Indirizzo email",
-			"submit": "Invia link email"
-		},
-		"polling": {
-			"title": "Conferma il tuo indirizzo email...",
-			"subtitle": "Apri la tua email su un computer o telefono e clicca sul pulsante per confermare l'email. Il processo di abbinamento continuerà automaticamente.",
-			"email": "Email inviata a:",
-			"back": "Cambia indirizzo email",
+			"name": "Nome di questa connessione (facoltativo)",
+			"name_placeholder": "es. Homey in soggiorno",
+			"submit": "Invia codice",
 			"error": {
-				"timeout": "Tempo scaduto in attesa della conferma email. Riprova.",
+				"missing_email": "Inserisci un indirizzo email.",
 				"invalid_email": "L'indirizzo email fornito non è valido. Riprova.",
+				"rate_limited": "Troppi tentativi di accesso. Attendi un momento e riprova.",
+				"unknown": "Si è verificato un errore sconosciuto. Riprova."
+			}
+		},
+		"otp_verification": {
+			"error": {
+				"expired": "Il codice è scaduto. Torna indietro e richiedine uno nuovo.",
+				"rate_limited": "Troppi tentativi. Attendi un momento e riprova.",
 				"unknown": "Si è verificato un errore sconosciuto. Riprova."
 			}
 		}

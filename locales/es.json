@@ -78,18 +78,23 @@
 	"pair": {
 		"email_verification": {
 			"title": "Zonneplan",
-			"subtitle": "Vamos a enviarte un correo electrónico con un enlace que puedes usar para iniciar sesión directamente.",
+			"subtitle": "Te enviaremos un correo electrónico con un código de seis dígitos para confirmar tu dirección. El nombre de la conexión aparece en ese correo.",
+			"legend": "Iniciar sesión",
 			"email": "Dirección de correo electrónico",
-			"submit": "Enviar enlace por correo"
-		},
-		"polling": {
-			"title": "Confirma tu dirección de correo...",
-			"subtitle": "Abre tu correo en una computadora o teléfono y haz clic en el botón de confirmar correo. El emparejamiento continuará automáticamente después.",
-			"email": "Correo enviado a:",
-			"back": "Cambiar dirección de correo",
+			"name": "Nombre de esta conexión (opcional)",
+			"name_placeholder": "p. ej. Homey del salón",
+			"submit": "Enviar código",
 			"error": {
-				"timeout": "El tiempo de espera para la confirmación del correo ha expirado. Por favor, inténtalo de nuevo.",
+				"missing_email": "Introduce una dirección de correo electrónico.",
 				"invalid_email": "La dirección de correo proporcionada es inválida. Por favor, inténtalo de nuevo.",
+				"rate_limited": "Demasiados intentos de inicio de sesión. Espera un momento e inténtalo de nuevo.",
+				"unknown": "Ocurrió un error desconocido. Por favor, inténtalo de nuevo."
+			}
+		},
+		"otp_verification": {
+			"error": {
+				"expired": "El código ha caducado. Vuelve atrás y solicita uno nuevo.",
+				"rate_limited": "Demasiados intentos. Espera un momento e inténtalo de nuevo.",
 				"unknown": "Ocurrió un error desconocido. Por favor, inténtalo de nuevo."
 			}
 		}

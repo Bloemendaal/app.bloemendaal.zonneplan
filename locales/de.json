@@ -78,18 +78,23 @@
 	"pair": {
 		"email_verification": {
 			"title": "Zonneplan",
-			"subtitle": "Wir senden Ihnen eine E-Mail mit einem Link, den Sie zur direkten Anmeldung verwenden können.",
+			"subtitle": "Wir senden Ihnen eine E-Mail mit einem sechsstelligen Code, um Ihre E-Mail-Adresse zu bestätigen. Der Name der Verbindung wird in dieser E-Mail angezeigt.",
+			"legend": "Anmelden",
 			"email": "E-Mail-Adresse",
-			"submit": "E-Mail-Link senden"
-		},
-		"polling": {
-			"title": "Bestätigen Sie Ihre E-Mail-Adresse...",
-			"subtitle": "Öffnen Sie Ihre E-Mails auf einem Computer oder Telefon und klicken Sie auf die E-Mail bestätigen Schaltfläche. Das Pairing wird danach automatisch fortgesetzt.",
-			"email": "E-Mail gesendet an:",
-			"back": "E-Mail-Adresse ändern",
+			"name": "Name für diese Verbindung (optional)",
+			"name_placeholder": "z. B. Homey im Wohnzimmer",
+			"submit": "Code senden",
 			"error": {
-				"timeout": "Zeitüberschreitung beim Warten auf E-Mail-Bestätigung. Bitte versuchen Sie es erneut.",
+				"missing_email": "Bitte geben Sie eine E-Mail-Adresse ein.",
 				"invalid_email": "Die angegebene E-Mail-Adresse ist ungültig. Bitte versuchen Sie es erneut.",
+				"rate_limited": "Zu viele Anmeldeversuche. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
+				"unknown": "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
+			}
+		},
+		"otp_verification": {
+			"error": {
+				"expired": "Der Code ist abgelaufen. Gehen Sie zurück und fordern Sie einen neuen an.",
+				"rate_limited": "Zu viele Versuche. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
 				"unknown": "Ein unbekannter Fehler ist aufgetreten. Bitte versuchen Sie es erneut."
 			}
 		}

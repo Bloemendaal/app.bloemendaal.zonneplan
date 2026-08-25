@@ -3,6 +3,7 @@ import type {
 	ChargeScheduleEntry,
 	ChargeTimelineEntry,
 } from "./charge-point.mjs";
+import createPkcePair, { CODE_CHALLENGE_METHOD } from "./pkce.mjs";
 import type {
 	DateString,
 	DateTimeString,
@@ -11,22 +12,37 @@ import type {
 	Response,
 } from "./types.mjs";
 
-interface LoginBlockedResponse {
-	uuid: string;
-	email: string;
-	is_activated: false;
-	expires_at: DateTimeString;
+const SOURCE_NAME_MAX_LENGTH = 255;
+
+/**
+ * Starting a challenge is answered with a 403, which is the success path
+ * of that step rather than an error.
+ */
+const CHALLENGE_STARTED_STATUS = 403;
+
+interface ChallengeStartedResponse {
+	error: "insufficient_authorization" | PossiblyUnknownString;
+	auth_session: string;
+	otp_required: boolean;
+	expires_in: Integer;
 }
 
-interface LoginActivatedResponse {
-	uuid: string;
-	email: string;
-	password: string;
-	is_activated: true;
-	expires_at: DateTimeString;
+interface ChallengeCompletedResponse {
+	authorization_code: string;
 }
 
-export type LoginResponse = LoginBlockedResponse | LoginActivatedResponse;
+interface LoginChallenge {
+	authSession: string;
+	codeVerifier: string;
+	expiresAt: Integer;
+}
+
+/**
+ * Thrown when the one-time password is submitted without a challenge to
+ * complete, or after that challenge has expired. Either way the user has
+ * to request a new code.
+ */
+export class NoLoginChallengeError extends Error {}
 
 type ButtonData = unknown;
 
@@ -267,6 +283,16 @@ export interface AccountResponse {
 }
 
 export default class User extends Authenticatable {
+	private challenge: LoginChallenge | null = null;
+
+	public get hasLoginChallenge(): boolean {
+		return this.challenge !== null && Date.now() < this.challenge.expiresAt;
+	}
+
+	public cancelLoginChallenge(): void {
+		this.challenge = null;
+	}
+
 	public async getAccount(): Promise<AccountResponse> {
 		const client = await this.getClient();
 
@@ -276,38 +302,75 @@ export default class User extends Authenticatable {
 		return response.data.data;
 	}
 
-	public async getAuthentication(email: string): Promise<LoginResponse> {
-		const response = await this.loginClient.post<Response<LoginResponse>>(
-			"/auth/request",
-			{ email },
+	public async requestOneTimePassword(
+		email: string,
+		sourceName: string,
+	): Promise<void> {
+		const { codeVerifier, codeChallenge } = createPkcePair();
+
+		const response = await this.loginClient.post<ChallengeStartedResponse>(
+			"/oauth/authorize-challenge",
+			{
+				response_type: "code",
+				email,
+				code_challenge: codeChallenge,
+				code_challenge_method: CODE_CHALLENGE_METHOD,
+				source_name: sourceName.slice(0, SOURCE_NAME_MAX_LENGTH),
+			},
+			{
+				validateStatus: (status) =>
+					status === CHALLENGE_STARTED_STATUS ||
+					(status >= 200 && status < 300),
+			},
 		);
+
+		const { auth_session: authSession, expires_in: expiresIn } = response.data;
+
+		if (typeof authSession !== "string" || authSession === "") {
+			throw new Error("No authorization session returned");
+		}
+
+		this.challenge = {
+			authSession,
+			codeVerifier,
+			expiresAt: Date.now() + expiresIn * 1000,
+		};
 
 		this.homey.settings.set("email", email);
-
-		return response.data.data;
 	}
 
-	public async getOneTimePassword(uuid: string): Promise<LoginResponse> {
-		const response = await this.loginClient.get<Response<LoginResponse>>(
-			`/auth/request/${uuid}`,
-		);
+	public async setTokensByOneTimePassword(otp: string): Promise<void> {
+		const challenge = this.challenge;
 
-		return response.data.data;
-	}
-
-	public async setTokensByPassword(password: string): Promise<void> {
-		const email = this.homey.settings.get("email");
-
-		if (typeof email !== "string") {
-			throw new Error("No email available");
+		if (challenge === null) {
+			throw new NoLoginChallengeError("No login attempt in progress");
 		}
+
+		if (Date.now() >= challenge.expiresAt) {
+			this.challenge = null;
+
+			throw new NoLoginChallengeError("The login attempt has expired");
+		}
+
+		const challengeResponse =
+			await this.loginClient.post<ChallengeCompletedResponse>(
+				"/oauth/authorize-challenge",
+				{
+					auth_session: challenge.authSession,
+					otp,
+				},
+			);
+
+		// The challenge is consumed the moment a code is issued, so it can
+		// never produce a second one.
+		this.challenge = null;
 
 		const response = await this.loginClient.post<TokensResponse>(
 			"/oauth/token",
 			{
-				email,
-				password,
-				grant_type: "one_time_password",
+				grant_type: "authorization_code",
+				code: challengeResponse.data.authorization_code,
+				code_verifier: challenge.codeVerifier,
 			},
 		);
 

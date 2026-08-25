@@ -69,8 +69,8 @@ homey app run
 
 1. After installing the app, add a device
 1. Select the type of Zonneplan device you want to add
-1. Enter your Zonneplan email address
-1. Check your email and click the confirmation link
+1. Enter your Zonneplan email address, and optionally a name for this connection
+1. Check your email for the six-digit code and enter it in Homey
 1. Select your device(s) from the list
 
 All devices linked to your Zonneplan account will use the same authentication, so you only need to verify your email once per device type.

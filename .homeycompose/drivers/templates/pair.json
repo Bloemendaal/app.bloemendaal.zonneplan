@@ -1,0 +1,58 @@
+{
+	"pair": [
+		{
+			"id": "loading",
+			"template": "loading"
+		},
+		{
+			"id": "email_verification"
+		},
+		{
+			"id": "otp_verification",
+			"template": "pincode",
+			"options": {
+				"title": {
+					"en": "Enter your login code",
+					"nl": "Voer je inlogcode in",
+					"da": "Indtast din loginkode",
+					"de": "Geben Sie Ihren Anmeldecode ein",
+					"es": "Introduce tu código de acceso",
+					"fr": "Saisissez votre code de connexion",
+					"it": "Inserisci il codice di accesso",
+					"ko": "로그인 코드 입력",
+					"no": "Skriv inn innloggingskoden",
+					"pl": "Wprowadź kod logowania",
+					"ru": "Введите код для входа",
+					"sv": "Ange din inloggningskod"
+				},
+				"hint": {
+					"en": "Open your email and enter the six-digit code below to finish logging in.",
+					"nl": "Open je e-mail en voer hieronder de zescijferige code in om het inloggen af te ronden.",
+					"da": "Åbn din e-mail og indtast den sekscifrede kode nedenfor for at fuldføre login.",
+					"de": "Öffnen Sie Ihre E-Mails und geben Sie unten den sechsstelligen Code ein, um die Anmeldung abzuschließen.",
+					"es": "Abre tu correo e introduce abajo el código de seis dígitos para completar el inicio de sesión.",
+					"fr": "Ouvrez votre e-mail et saisissez ci-dessous le code à six chiffres pour terminer la connexion.",
+					"it": "Apri la tua email e inserisci qui sotto il codice a sei cifre per completare l'accesso.",
+					"ko": "이메일을 열고 아래에 여섯 자리 코드를 입력하여 로그인을 완료하세요.",
+					"no": "Åpne e-posten din og skriv inn den sekssifrede koden nedenfor for å fullføre innloggingen.",
+					"pl": "Otwórz email i wprowadź poniżej sześciocyfrowy kod, aby zakończyć logowanie.",
+					"ru": "Откройте письмо и введите ниже шестизначный код, чтобы завершить вход.",
+					"sv": "Öppna din e-post och ange den sexsiffriga koden nedan för att slutföra inloggningen."
+				},
+				"type": "number",
+				"length": 6
+			}
+		},
+		{
+			"id": "list_devices",
+			"template": "list_devices",
+			"navigation": {
+				"next": "add_devices"
+			}
+		},
+		{
+			"id": "add_devices",
+			"template": "add_devices"
+		}
+	]
+}

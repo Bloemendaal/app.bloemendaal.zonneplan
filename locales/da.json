@@ -78,18 +78,23 @@
 	"pair": {
 		"email_verification": {
 			"title": "Zonneplan",
-			"subtitle": "Vi sender dig en e-mail med et link, du kan bruge til at logge ind direkte.",
+			"subtitle": "Vi sender dig en e-mail med en sekscifret kode for at bekræfte din e-mailadresse. Forbindelsens navn vises i den e-mail.",
+			"legend": "Log ind",
 			"email": "E-mail adresse",
-			"submit": "Send e-maillink"
-		},
-		"polling": {
-			"title": "Bekræft din e-mailadresse...",
-			"subtitle": "Åbn din e-mail på en computer eller telefon og klik på bekræft e-mail-knappen. Parringen fortsætter automatisk bagefter.",
-			"email": "E-mail sendt til:",
-			"back": "Skift e-mailadresse",
+			"name": "Navn på denne forbindelse (valgfrit)",
+			"name_placeholder": "f.eks. Homey i stuen",
+			"submit": "Send kode",
 			"error": {
-				"timeout": "Timeout ved venten på e-mailbekræftelse. Prøv venligst igen.",
+				"missing_email": "Indtast venligst en e-mailadresse.",
 				"invalid_email": "Den angivne e-mailadresse er ugyldig. Prøv venligst igen.",
+				"rate_limited": "For mange loginforsøg. Vent et øjeblik og prøv igen.",
+				"unknown": "Der opstod en ukendt fejl. Prøv venligst igen."
+			}
+		},
+		"otp_verification": {
+			"error": {
+				"expired": "Koden er udløbet. Gå tilbage og anmod om en ny.",
+				"rate_limited": "For mange forsøg. Vent et øjeblik og prøv igen.",
 				"unknown": "Der opstod en ukendt fejl. Prøv venligst igen."
 			}
 		}

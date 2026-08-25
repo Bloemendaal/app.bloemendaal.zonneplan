@@ -78,18 +78,23 @@
 	"pair": {
 		"email_verification": {
 			"title": "Zonneplan",
-			"subtitle": "Nous vous enverrons un e-mail avec un lien que vous pourrez utiliser pour vous connecter directement.",
+			"subtitle": "Nous vous enverrons un e-mail contenant un code à six chiffres pour confirmer votre adresse. Le nom de la connexion apparaît dans cet e-mail.",
+			"legend": "Connexion",
 			"email": "Adresse e-mail",
-			"submit": "Envoyer le lien par email"
-		},
-		"polling": {
-			"title": "Confirmez votre adresse e-mail...",
-			"subtitle": "Ouvrez votre email sur un ordinateur ou un téléphone et cliquez sur le bouton de confirmation d'email. L'appairage se poursuivra automatiquement par la suite.",
-			"email": "Email envoyé à :",
-			"back": "Changer d'adresse email",
+			"name": "Nom de cette connexion (facultatif)",
+			"name_placeholder": "p. ex. Homey du salon",
+			"submit": "Envoyer le code",
 			"error": {
-				"timeout": "Délai d'attente de confirmation d'email écoulé. Veuillez réessayer.",
+				"missing_email": "Veuillez saisir une adresse e-mail.",
 				"invalid_email": "L'adresse email fournie est invalide. Veuillez réessayer.",
+				"rate_limited": "Trop de tentatives de connexion. Veuillez patienter un instant et réessayer.",
+				"unknown": "Une erreur inconnue s'est produite. Veuillez réessayer."
+			}
+		},
+		"otp_verification": {
+			"error": {
+				"expired": "Le code a expiré. Revenez en arrière et demandez-en un nouveau.",
+				"rate_limited": "Trop de tentatives. Veuillez patienter un instant et réessayer.",
 				"unknown": "Une erreur inconnue s'est produite. Veuillez réessayer."
 			}
 		}

@@ -45,7 +45,9 @@ export default abstract class Authenticatable {
 	}
 
 	private getUserAgent(): string {
-		return `Homey/v${this.homey.version} app.bloemendaal.volkswagen/v${this.homey.app.manifest.version}`;
+		const { id, version } = this.homey.app.manifest;
+
+		return `Homey/v${this.homey.version} ${id}/v${version}`;
 	}
 
 	private async getValidAccessToken(): Promise<string> {
