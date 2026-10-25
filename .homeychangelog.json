@@ -52,5 +52,8 @@
 	},
 	"1.1.0": {
 		"en": "Use new login method"
+	},
+	"1.2.0": {
+		"en": "Add solar charging settings & schedule resolution support"
 	}
 }
