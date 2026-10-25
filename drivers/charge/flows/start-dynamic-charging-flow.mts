@@ -1,4 +1,7 @@
-import type { StartDynamicChargingSessionParams } from "../../../src/charge-point.mjs";
+import type {
+	ScheduleResolution,
+	StartDynamicChargingSessionParams,
+} from "../../../src/charge-point.mjs";
 import type { DateString, TimeString } from "../../../src/types.mjs";
 import ZonneplanFlow from "../../zonneplan-flow.mjs";
 import type ChargeDevice from "../device.mjs";
@@ -40,6 +43,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 		unit: "kilometers" | "percentage";
 		value: number;
 		vehicle?: VehicleOption;
+		schedule_resolution?: ScheduleResolution;
 	}): Promise<void> {
 		const [day, month, year] = args.end_date.split("-").map(Number);
 		const [hours, minutes] = args.end_time.split(":").map(Number);
@@ -51,6 +55,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 			unit: args.unit,
 			value: args.value,
 			vehicle: args.vehicle,
+			scheduleResolution: args.schedule_resolution,
 		});
 	}
 
@@ -60,6 +65,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 		value: number;
 		unit: "kilometers" | "percentage";
 		vehicle?: VehicleOption;
+		schedule_resolution?: ScheduleResolution;
 	}): Promise<void> {
 		const endTime = new Date();
 
@@ -76,6 +82,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 			unit: args.unit,
 			value: args.value,
 			vehicle: args.vehicle,
+			scheduleResolution: args.schedule_resolution,
 		});
 	}
 
@@ -85,6 +92,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 		value: number;
 		unit: "kilometers" | "percentage";
 		vehicle?: VehicleOption;
+		schedule_resolution?: ScheduleResolution;
 	}): Promise<void> {
 		const endTime = new Date();
 
@@ -101,6 +109,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 			unit: args.unit,
 			value: args.value,
 			vehicle: args.vehicle,
+			scheduleResolution: args.schedule_resolution,
 		});
 	}
 
@@ -109,6 +118,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 		value: number;
 		unit: "kilometers" | "percentage";
 		vehicle?: VehicleOption;
+		schedule_resolution?: ScheduleResolution;
 	}): Promise<void> {
 		const endTime = new Date(args.end_date_time);
 
@@ -117,6 +127,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 			unit: args.unit,
 			value: args.value,
 			vehicle: args.vehicle,
+			scheduleResolution: args.schedule_resolution,
 		});
 	}
 
@@ -125,6 +136,7 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 		value: number;
 		unit: "kilometers" | "percentage";
 		vehicle?: VehicleOption;
+		scheduleResolution?: ScheduleResolution;
 	}): Promise<void> {
 		const chargePoint = this.device.getChargePoint();
 
@@ -135,6 +147,10 @@ export default class StartDynamicChargingFlow extends ZonneplanFlow<ChargeDevice
 				value: Math.round(args.value * (args.unit === "percentage" ? 10 : 1)),
 			},
 		};
+
+		if (args.scheduleResolution) {
+			params.user_constraints.schedule_resolution = args.scheduleResolution;
+		}
 
 		if (args.vehicle) {
 			params.vehicle = {

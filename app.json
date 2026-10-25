@@ -525,18 +525,18 @@
           "ko": "동적 충전 세션 시작 (절대 날짜 및 시간)"
         },
         "titleFormatted": {
-          "en": "Start Powerplay charging until [[end_date]] [[end_time]], charge [[value]] [[unit]][[vehicle]]",
-          "nl": "Start Powerplay laden tot [[end_date]] [[end_time]], laad [[value]] [[unit]][[vehicle]]",
-          "da": "Start dynamisk opladning indtil [[end_date]] [[end_time]], oplad [[value]] [[unit]][[vehicle]]",
-          "de": "Beginnen Sie das dynamische Laden bis [[end_date]] [[end_time]], laden Sie [[value]] [[unit]][[vehicle]]",
-          "es": "Comience la carga dinámica hasta [[end_date]] [[end_time]], cargue [[value]] [[unit]][[vehicle]]",
-          "fr": "Commencer la charge dynamique jusqu'à [[end_date]] [[end_time]], chargez [[value]] [[unit]][[vehicle]]",
-          "it": "Inizia la carica dinamica fino a [[end_date]] [[end_time]], carica [[value]] [[unit]][[vehicle]]",
-          "no": "Start dynamisk lading til [[end_date]] [[end_time]], lad [[value]] [[unit]][[vehicle]]",
-          "sv": "Starta dynamisk laddning till [[end_date]] [[end_time]], ladda [[value]] [[unit]][[vehicle]]",
-          "pl": "Rozpocznij ładowanie dynamiczne do [[end_date]] [[end_time]], naładuj [[value]] [[unit]][[vehicle]]",
-          "ru": "Начните динамическую зарядку до [[end_date]] [[end_time]], зарядить [[value]] [[unit]][[vehicle]]",
-          "ko": "[[end_date]] [[end_time]] 까지 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전"
+          "en": "Start Powerplay charging until [[end_date]] [[end_time]], charge [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "nl": "Start Powerplay laden tot [[end_date]] [[end_time]], laad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "da": "Start dynamisk opladning indtil [[end_date]] [[end_time]], oplad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "de": "Beginnen Sie das dynamische Laden bis [[end_date]] [[end_time]], laden Sie [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "es": "Comience la carga dinámica hasta [[end_date]] [[end_time]], cargue [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "fr": "Commencer la charge dynamique jusqu'à [[end_date]] [[end_time]], chargez [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "it": "Inizia la carica dinamica fino a [[end_date]] [[end_time]], carica [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "no": "Start dynamisk lading til [[end_date]] [[end_time]], lad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "sv": "Starta dynamisk laddning till [[end_date]] [[end_time]], ladda [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "pl": "Rozpocznij ładowanie dynamiczne do [[end_date]] [[end_time]], naładuj [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "ru": "Начните динамическую зарядку до [[end_date]] [[end_time]], зарядить [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "ko": "[[end_date]] [[end_time]] 까지 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전[[schedule_resolution]]"
         },
         "hint": {
           "en": "Schedule smart charging with a specific goal and end time",
@@ -716,6 +716,61 @@
               "ru": "Выберите транспортное средство (необязательно)",
               "ko": "차량 선택 (선택 사항)"
             }
+          },
+          {
+            "type": "dropdown",
+            "name": "schedule_resolution",
+            "required": false,
+            "title": {
+              "en": "Schedule resolution",
+              "nl": "Schemaresolutie",
+              "da": "Tidsplanopløsning",
+              "de": "Zeitplanauflösung",
+              "es": "Resolución del horario",
+              "fr": "Résolution de la planification",
+              "it": "Risoluzione della pianificazione",
+              "no": "Tidsplanoppløsning",
+              "sv": "Schemaupplösning",
+              "pl": "Rozdzielczość harmonogramu",
+              "ru": "Разрешение расписания",
+              "ko": "일정 해상도"
+            },
+            "values": [
+              {
+                "id": "PT15M",
+                "title": {
+                  "en": "Quarter-hourly (15 min)",
+                  "nl": "Per kwartier (15 min)",
+                  "da": "Hvert kvarter (15 min)",
+                  "de": "Viertelstündlich (15 Min.)",
+                  "es": "Cada cuarto de hora (15 min)",
+                  "fr": "Par quart d'heure (15 min)",
+                  "it": "Ogni quarto d'ora (15 min)",
+                  "no": "Hvert kvarter (15 min)",
+                  "sv": "Varje kvart (15 min)",
+                  "pl": "Co kwadrans (15 min)",
+                  "ru": "Каждые четверть часа (15 мин)",
+                  "ko": "15분 단위"
+                }
+              },
+              {
+                "id": "PT60M",
+                "title": {
+                  "en": "Hourly (60 min)",
+                  "nl": "Per uur (60 min)",
+                  "da": "Hver time (60 min)",
+                  "de": "Stündlich (60 Min.)",
+                  "es": "Cada hora (60 min)",
+                  "fr": "Par heure (60 min)",
+                  "it": "Ogni ora (60 min)",
+                  "no": "Hver time (60 min)",
+                  "sv": "Varje timme (60 min)",
+                  "pl": "Co godzinę (60 min)",
+                  "ru": "Каждый час (60 мин)",
+                  "ko": "60분 단위"
+                }
+              }
+            ]
           }
         ]
       },
@@ -736,18 +791,18 @@
           "ko": "동적 충전 세션 시작 (상대 시간)"
         },
         "titleFormatted": {
-          "en": "Start Powerplay charging in [[length_from_now]] [[length_unit]], charge [[value]] [[unit]][[vehicle]]",
-          "nl": "Start Powerplay laden over [[length_from_now]] [[length_unit]], laad [[value]] [[unit]][[vehicle]]",
-          "da": "Start dynamisk opladning om [[length_from_now]] [[length_unit]], oplad [[value]] [[unit]][[vehicle]]",
-          "de": "Beginnen Sie das dynamische Laden in [[length_from_now]] [[length_unit]], laden Sie [[value]] [[unit]][[vehicle]]",
-          "es": "Comience la carga dinámica en [[length_from_now]] [[length_unit]], cargue [[value]] [[unit]][[vehicle]]",
-          "fr": "Commencer la charge dynamique dans [[length_from_now]] [[length_unit]], chargez [[value]] [[unit]][[vehicle]]",
-          "it": "Inizia la carica dinamica in [[length_from_now]] [[length_unit]], carica [[value]] [[unit]][[vehicle]]",
-          "no": "Start dynamisk lading om [[length_from_now]] [[length_unit]], lad [[value]] [[unit]][[vehicle]]",
-          "sv": "Starta dynamisk laddning om [[length_from_now]] [[length_unit]], ladda [[value]] [[unit]][[vehicle]]",
-          "pl": "Rozpocznij ładowanie dynamiczne za [[length_from_now]] [[length_unit]], naładuj [[value]] [[unit]][[vehicle]]",
-          "ru": "Начните динамическую зарядку через [[length_from_now]] [[length_unit]], зарядить [[value]] [[unit]][[vehicle]]",
-          "ko": "[[length_from_now]] [[length_unit]] 후 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전"
+          "en": "Start Powerplay charging in [[length_from_now]] [[length_unit]], charge [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "nl": "Start Powerplay laden over [[length_from_now]] [[length_unit]], laad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "da": "Start dynamisk opladning om [[length_from_now]] [[length_unit]], oplad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "de": "Beginnen Sie das dynamische Laden in [[length_from_now]] [[length_unit]], laden Sie [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "es": "Comience la carga dinámica en [[length_from_now]] [[length_unit]], cargue [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "fr": "Commencer la charge dynamique dans [[length_from_now]] [[length_unit]], chargez [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "it": "Inizia la carica dinamica in [[length_from_now]] [[length_unit]], carica [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "no": "Start dynamisk lading om [[length_from_now]] [[length_unit]], lad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "sv": "Starta dynamisk laddning om [[length_from_now]] [[length_unit]], ladda [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "pl": "Rozpocznij ładowanie dynamiczne za [[length_from_now]] [[length_unit]], naładuj [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "ru": "Начните динамическую зарядку через [[length_from_now]] [[length_unit]], зарядить [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "ko": "[[length_from_now]] [[length_unit]] 후 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전[[schedule_resolution]]"
         },
         "hint": {
           "en": "Schedule smart charging with a specific goal and relative end time",
@@ -977,6 +1032,61 @@
               "ru": "Выберите транспортное средство (необязательно)",
               "ko": "차량 선택 (선택 사항)"
             }
+          },
+          {
+            "type": "dropdown",
+            "name": "schedule_resolution",
+            "required": false,
+            "title": {
+              "en": "Schedule resolution",
+              "nl": "Schemaresolutie",
+              "da": "Tidsplanopløsning",
+              "de": "Zeitplanauflösung",
+              "es": "Resolución del horario",
+              "fr": "Résolution de la planification",
+              "it": "Risoluzione della pianificazione",
+              "no": "Tidsplanoppløsning",
+              "sv": "Schemaupplösning",
+              "pl": "Rozdzielczość harmonogramu",
+              "ru": "Разрешение расписания",
+              "ko": "일정 해상도"
+            },
+            "values": [
+              {
+                "id": "PT15M",
+                "title": {
+                  "en": "Quarter-hourly (15 min)",
+                  "nl": "Per kwartier (15 min)",
+                  "da": "Hvert kvarter (15 min)",
+                  "de": "Viertelstündlich (15 Min.)",
+                  "es": "Cada cuarto de hora (15 min)",
+                  "fr": "Par quart d'heure (15 min)",
+                  "it": "Ogni quarto d'ora (15 min)",
+                  "no": "Hvert kvarter (15 min)",
+                  "sv": "Varje kvart (15 min)",
+                  "pl": "Co kwadrans (15 min)",
+                  "ru": "Каждые четверть часа (15 мин)",
+                  "ko": "15분 단위"
+                }
+              },
+              {
+                "id": "PT60M",
+                "title": {
+                  "en": "Hourly (60 min)",
+                  "nl": "Per uur (60 min)",
+                  "da": "Hver time (60 min)",
+                  "de": "Stündlich (60 Min.)",
+                  "es": "Cada hora (60 min)",
+                  "fr": "Par heure (60 min)",
+                  "it": "Ogni ora (60 min)",
+                  "no": "Hver time (60 min)",
+                  "sv": "Varje timme (60 min)",
+                  "pl": "Co godzinę (60 min)",
+                  "ru": "Каждый час (60 мин)",
+                  "ko": "60분 단위"
+                }
+              }
+            ]
           }
         ]
       },
@@ -997,18 +1107,18 @@
           "ko": "동적 충전 세션 시작 (상대 일수)"
         },
         "titleFormatted": {
-          "en": "Start Powerplay charging in [[days_from_now]] days at [[time]], charge [[value]] [[unit]][[vehicle]]",
-          "nl": "Start Powerplay laden over [[days_from_now]] dagen om [[time]], laad [[value]] [[unit]][[vehicle]]",
-          "da": "Start dynamisk opladning om [[days_from_now]] dage kl. [[time]], oplad [[value]] [[unit]][[vehicle]]",
-          "de": "Beginnen Sie das dynamische Laden in [[days_from_now]] Tagen um [[time]], laden Sie [[value]] [[unit]][[vehicle]]",
-          "es": "Comience la carga dinámica en [[days_from_now]] días a las [[time]], cargue [[value]] [[unit]][[vehicle]]",
-          "fr": "Commencer la charge dynamique dans [[days_from_now]] jours à [[time]], chargez [[value]] [[unit]][[vehicle]]",
-          "it": "Inizia la carica dinamica in [[days_from_now]] giorni alle [[time]], carica [[value]] [[unit]][[vehicle]]",
-          "no": "Start dynamisk lading om [[days_from_now]] dager kl. [[time]], lad [[value]] [[unit]][[vehicle]]",
-          "sv": "Starta dynamisk laddning om [[days_from_now]] dagar kl. [[time]], ladda [[value]] [[unit]][[vehicle]]",
-          "pl": "Rozpocznij ładowanie dynamiczne za [[days_from_now]] dni o [[time]], naładuj [[value]] [[unit]][[vehicle]]",
-          "ru": "Начните динамическую зарядку через [[days_from_now]] дней в [[time]], зарядить [[value]] [[unit]][[vehicle]]",
-          "ko": "[[days_from_now]] 일 후 [[time]] 에 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전"
+          "en": "Start Powerplay charging in [[days_from_now]] days at [[time]], charge [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "nl": "Start Powerplay laden over [[days_from_now]] dagen om [[time]], laad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "da": "Start dynamisk opladning om [[days_from_now]] dage kl. [[time]], oplad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "de": "Beginnen Sie das dynamische Laden in [[days_from_now]] Tagen um [[time]], laden Sie [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "es": "Comience la carga dinámica en [[days_from_now]] días a las [[time]], cargue [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "fr": "Commencer la charge dynamique dans [[days_from_now]] jours à [[time]], chargez [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "it": "Inizia la carica dinamica in [[days_from_now]] giorni alle [[time]], carica [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "no": "Start dynamisk lading om [[days_from_now]] dager kl. [[time]], lad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "sv": "Starta dynamisk laddning om [[days_from_now]] dagar kl. [[time]], ladda [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "pl": "Rozpocznij ładowanie dynamiczne za [[days_from_now]] dni o [[time]], naładuj [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "ru": "Начните динамическую зарядку через [[days_from_now]] дней в [[time]], зарядить [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "ko": "[[days_from_now]] 일 후 [[time]] 에 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전[[schedule_resolution]]"
         },
         "hint": {
           "en": "Schedule smart charging with a specific goal for a certain number of days from now",
@@ -1203,6 +1313,61 @@
               "ru": "Выберите транспортное средство (необязательно)",
               "ko": "차량 선택 (선택 사항)"
             }
+          },
+          {
+            "type": "dropdown",
+            "name": "schedule_resolution",
+            "required": false,
+            "title": {
+              "en": "Schedule resolution",
+              "nl": "Schemaresolutie",
+              "da": "Tidsplanopløsning",
+              "de": "Zeitplanauflösung",
+              "es": "Resolución del horario",
+              "fr": "Résolution de la planification",
+              "it": "Risoluzione della pianificazione",
+              "no": "Tidsplanoppløsning",
+              "sv": "Schemaupplösning",
+              "pl": "Rozdzielczość harmonogramu",
+              "ru": "Разрешение расписания",
+              "ko": "일정 해상도"
+            },
+            "values": [
+              {
+                "id": "PT15M",
+                "title": {
+                  "en": "Quarter-hourly (15 min)",
+                  "nl": "Per kwartier (15 min)",
+                  "da": "Hvert kvarter (15 min)",
+                  "de": "Viertelstündlich (15 Min.)",
+                  "es": "Cada cuarto de hora (15 min)",
+                  "fr": "Par quart d'heure (15 min)",
+                  "it": "Ogni quarto d'ora (15 min)",
+                  "no": "Hvert kvarter (15 min)",
+                  "sv": "Varje kvart (15 min)",
+                  "pl": "Co kwadrans (15 min)",
+                  "ru": "Каждые четверть часа (15 мин)",
+                  "ko": "15분 단위"
+                }
+              },
+              {
+                "id": "PT60M",
+                "title": {
+                  "en": "Hourly (60 min)",
+                  "nl": "Per uur (60 min)",
+                  "da": "Hver time (60 min)",
+                  "de": "Stündlich (60 Min.)",
+                  "es": "Cada hora (60 min)",
+                  "fr": "Par heure (60 min)",
+                  "it": "Ogni ora (60 min)",
+                  "no": "Hver time (60 min)",
+                  "sv": "Varje timme (60 min)",
+                  "pl": "Co godzinę (60 min)",
+                  "ru": "Каждый час (60 мин)",
+                  "ko": "60분 단위"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1223,18 +1388,18 @@
           "ko": "동적 충전 세션 시작 (날짜 문자열)"
         },
         "titleFormatted": {
-          "en": "Start Powerplay charging until [[end_date_time]], charge [[value]] [[unit]][[vehicle]]",
-          "nl": "Start Powerplay laden tot [[end_date_time]], laad [[value]] [[unit]][[vehicle]]",
-          "da": "Start dynamisk opladning indtil [[end_date_time]], oplad [[value]] [[unit]][[vehicle]]",
-          "de": "Beginnen Sie das dynamische Laden bis [[end_date_time]], laden Sie [[value]] [[unit]][[vehicle]]",
-          "es": "Comience la carga dinámica hasta [[end_date_time]], cargue [[value]] [[unit]][[vehicle]]",
-          "fr": "Commencer la charge dynamique jusqu'à [[end_date_time]], chargez [[value]] [[unit]][[vehicle]]",
-          "it": "Inizia la carica dinamica fino a [[end_date_time]], carica [[value]] [[unit]][[vehicle]]",
-          "no": "Start dynamisk lading til [[end_date_time]], lad [[value]] [[unit]][[vehicle]]",
-          "sv": "Starta dynamisk laddning till [[end_date_time]], ladda [[value]] [[unit]][[vehicle]]",
-          "pl": "Rozpocznij ładowanie dynamiczne do [[end_date_time]], naładuj [[value]] [[unit]][[vehicle]]",
-          "ru": "Начните динамическую зарядку до [[end_date_time]], зарядить [[value]] [[unit]][[vehicle]]",
-          "ko": "[[end_date_time]] 까지 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전"
+          "en": "Start Powerplay charging until [[end_date_time]], charge [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "nl": "Start Powerplay laden tot [[end_date_time]], laad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "da": "Start dynamisk opladning indtil [[end_date_time]], oplad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "de": "Beginnen Sie das dynamische Laden bis [[end_date_time]], laden Sie [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "es": "Comience la carga dinámica hasta [[end_date_time]], cargue [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "fr": "Commencer la charge dynamique jusqu'à [[end_date_time]], chargez [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "it": "Inizia la carica dinamica fino a [[end_date_time]], carica [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "no": "Start dynamisk lading til [[end_date_time]], lad [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "sv": "Starta dynamisk laddning till [[end_date_time]], ladda [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "pl": "Rozpocznij ładowanie dynamiczne do [[end_date_time]], naładuj [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "ru": "Начните динамическую зарядку до [[end_date_time]], зарядить [[value]] [[unit]][[vehicle]][[schedule_resolution]]",
+          "ko": "[[end_date_time]] 까지 동적 충전 시작, [[value]] [[unit]][[vehicle]] 충전[[schedule_resolution]]"
         },
         "hint": {
           "en": "Schedule smart charging with a specific goal and end time (using date string or token)",
@@ -1408,6 +1573,61 @@
               "ru": "Выберите транспортное средство (необязательно)",
               "ko": "차량 선택 (선택 사항)"
             }
+          },
+          {
+            "type": "dropdown",
+            "name": "schedule_resolution",
+            "required": false,
+            "title": {
+              "en": "Schedule resolution",
+              "nl": "Schemaresolutie",
+              "da": "Tidsplanopløsning",
+              "de": "Zeitplanauflösung",
+              "es": "Resolución del horario",
+              "fr": "Résolution de la planification",
+              "it": "Risoluzione della pianificazione",
+              "no": "Tidsplanoppløsning",
+              "sv": "Schemaupplösning",
+              "pl": "Rozdzielczość harmonogramu",
+              "ru": "Разрешение расписания",
+              "ko": "일정 해상도"
+            },
+            "values": [
+              {
+                "id": "PT15M",
+                "title": {
+                  "en": "Quarter-hourly (15 min)",
+                  "nl": "Per kwartier (15 min)",
+                  "da": "Hvert kvarter (15 min)",
+                  "de": "Viertelstündlich (15 Min.)",
+                  "es": "Cada cuarto de hora (15 min)",
+                  "fr": "Par quart d'heure (15 min)",
+                  "it": "Ogni quarto d'ora (15 min)",
+                  "no": "Hvert kvarter (15 min)",
+                  "sv": "Varje kvart (15 min)",
+                  "pl": "Co kwadrans (15 min)",
+                  "ru": "Каждые четверть часа (15 мин)",
+                  "ko": "15분 단위"
+                }
+              },
+              {
+                "id": "PT60M",
+                "title": {
+                  "en": "Hourly (60 min)",
+                  "nl": "Per uur (60 min)",
+                  "da": "Hver time (60 min)",
+                  "de": "Stündlich (60 Min.)",
+                  "es": "Cada hora (60 min)",
+                  "fr": "Par heure (60 min)",
+                  "it": "Ogni ora (60 min)",
+                  "no": "Hver time (60 min)",
+                  "sv": "Varje timme (60 min)",
+                  "pl": "Co godzinę (60 min)",
+                  "ru": "Каждый час (60 мин)",
+                  "ko": "60분 단위"
+                }
+              }
+            ]
           }
         ]
       },
@@ -1592,6 +1812,409 @@
           "pl": "Wyłącz elastyczny tryb inteligentnego ładowania",
           "ru": "Отключить гибкий режим интеллектуальной зарядки",
           "ko": "유연한 스마트 충전 모드 비활성화"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          }
+        ]
+      },
+      {
+        "id": "enable_charge_on_solar",
+        "title": {
+          "en": "Enable solar charging",
+          "nl": "Laden op zonne-energie inschakelen",
+          "da": "Aktivér solopladning",
+          "de": "Solarladen aktivieren",
+          "es": "Activar carga solar",
+          "fr": "Activer la charge solaire",
+          "it": "Abilita ricarica solare",
+          "no": "Aktiver sollading",
+          "sv": "Aktivera solladdning",
+          "pl": "Włącz ładowanie energią słoneczną",
+          "ru": "Включить зарядку от солнца",
+          "ko": "태양광 충전 활성화"
+        },
+        "titleFormatted": {
+          "en": "Enable solar charging between [[start_time]] and [[end_time]] when the solar surplus is at least [[solar_surplus_threshold_w]] W, charging for at least [[min_charge_duration]]",
+          "nl": "Laden op zonne-energie inschakelen tussen [[start_time]] en [[end_time]] bij een zonne-overschot van minimaal [[solar_surplus_threshold_w]] W, minimaal [[min_charge_duration]] laden",
+          "da": "Aktivér solopladning mellem [[start_time]] og [[end_time]] ved et soloverskud på mindst [[solar_surplus_threshold_w]] W, oplad i mindst [[min_charge_duration]]",
+          "de": "Solarladen zwischen [[start_time]] und [[end_time]] aktivieren bei einem Solarüberschuss von mindestens [[solar_surplus_threshold_w]] W, mindestens [[min_charge_duration]] laden",
+          "es": "Activar carga solar entre [[start_time]] y [[end_time]] con un excedente solar de al menos [[solar_surplus_threshold_w]] W, cargando durante al menos [[min_charge_duration]]",
+          "fr": "Activer la charge solaire entre [[start_time]] et [[end_time]] avec un surplus solaire d'au moins [[solar_surplus_threshold_w]] W, en chargeant pendant au moins [[min_charge_duration]]",
+          "it": "Abilita ricarica solare tra [[start_time]] e [[end_time]] con un surplus solare di almeno [[solar_surplus_threshold_w]] W, ricaricando per almeno [[min_charge_duration]]",
+          "no": "Aktiver sollading mellom [[start_time]] og [[end_time]] ved et soloverskudd på minst [[solar_surplus_threshold_w]] W, lad i minst [[min_charge_duration]]",
+          "sv": "Aktivera solladdning mellan [[start_time]] och [[end_time]] vid ett solöverskott på minst [[solar_surplus_threshold_w]] W, ladda i minst [[min_charge_duration]]",
+          "pl": "Włącz ładowanie energią słoneczną między [[start_time]] a [[end_time]] przy nadwyżce energii słonecznej co najmniej [[solar_surplus_threshold_w]] W, ładując przez co najmniej [[min_charge_duration]]",
+          "ru": "Включить зарядку от солнца с [[start_time]] до [[end_time]] при избытке солнечной энергии не менее [[solar_surplus_threshold_w]] Вт, заряжая не менее [[min_charge_duration]]",
+          "ko": "[[start_time]]부터 [[end_time]]까지 태양광 잉여 전력이 [[solar_surplus_threshold_w]] W 이상일 때 최소 [[min_charge_duration]] 동안 태양광 충전 활성화"
+        },
+        "hint": {
+          "en": "Charge the vehicle on surplus solar energy within the given time window. Charging starts once the surplus exceeds the threshold and continues for at least the minimum duration.",
+          "nl": "Laad het voertuig op met overtollige zonne-energie binnen het opgegeven tijdvenster. Het laden start zodra het overschot boven de drempel komt en duurt minimaal de ingestelde tijd.",
+          "da": "Oplad køretøjet med overskydende solenergi inden for det angivne tidsvindue. Opladningen starter, når overskuddet overstiger grænsen, og fortsætter i mindst minimumsvarigheden.",
+          "de": "Lädt das Fahrzeug innerhalb des angegebenen Zeitfensters mit überschüssiger Solarenergie. Das Laden beginnt, sobald der Überschuss den Schwellenwert überschreitet, und dauert mindestens die Mindestdauer.",
+          "es": "Carga el vehículo con el excedente de energía solar dentro de la ventana de tiempo indicada. La carga comienza cuando el excedente supera el umbral y continúa durante al menos la duración mínima.",
+          "fr": "Charge le véhicule avec le surplus d'énergie solaire pendant la plage horaire indiquée. La charge démarre dès que le surplus dépasse le seuil et se poursuit pendant au moins la durée minimale.",
+          "it": "Ricarica il veicolo con l'energia solare in eccesso nella finestra oraria indicata. La ricarica inizia quando il surplus supera la soglia e continua per almeno la durata minima.",
+          "no": "Lad kjøretøyet med overskytende solenergi innenfor det angitte tidsvinduet. Ladingen starter når overskuddet overstiger terskelen og fortsetter i minst minimumsvarigheten.",
+          "sv": "Ladda fordonet med överskott av solenergi inom det angivna tidsfönstret. Laddningen startar när överskottet överstiger tröskeln och fortsätter i minst den minsta varaktigheten.",
+          "pl": "Ładuj pojazd nadwyżką energii słonecznej w podanym oknie czasowym. Ładowanie rozpoczyna się, gdy nadwyżka przekroczy próg, i trwa co najmniej przez minimalny czas.",
+          "ru": "Заряжает автомобиль избыточной солнечной энергией в указанном временном окне. Зарядка начинается, когда избыток превышает порог, и продолжается не менее минимальной длительности.",
+          "ko": "지정된 시간 범위 내에서 잉여 태양광 에너지로 차량을 충전합니다. 잉여 전력이 임계값을 초과하면 충전이 시작되어 최소 지속 시간 동안 계속됩니다."
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=charge"
+          },
+          {
+            "type": "dropdown",
+            "name": "start_time",
+            "title": {
+              "en": "Start of time window",
+              "nl": "Begin van tijdvenster",
+              "da": "Start på tidsvindue",
+              "de": "Beginn des Zeitfensters",
+              "es": "Inicio de la ventana de tiempo",
+              "fr": "Début de la plage horaire",
+              "it": "Inizio della finestra oraria",
+              "no": "Start på tidsvindu",
+              "sv": "Tidsfönstrets start",
+              "pl": "Początek okna czasowego",
+              "ru": "Начало временного окна",
+              "ko": "시간 범위 시작"
+            },
+            "values": [
+              {
+                "id": "05:00",
+                "title": {
+                  "en": "05:00"
+                }
+              },
+              {
+                "id": "06:00",
+                "title": {
+                  "en": "06:00"
+                }
+              },
+              {
+                "id": "07:00",
+                "title": {
+                  "en": "07:00"
+                }
+              },
+              {
+                "id": "08:00",
+                "title": {
+                  "en": "08:00"
+                }
+              },
+              {
+                "id": "09:00",
+                "title": {
+                  "en": "09:00"
+                }
+              },
+              {
+                "id": "10:00",
+                "title": {
+                  "en": "10:00"
+                }
+              },
+              {
+                "id": "11:00",
+                "title": {
+                  "en": "11:00"
+                }
+              },
+              {
+                "id": "12:00",
+                "title": {
+                  "en": "12:00"
+                }
+              },
+              {
+                "id": "13:00",
+                "title": {
+                  "en": "13:00"
+                }
+              },
+              {
+                "id": "14:00",
+                "title": {
+                  "en": "14:00"
+                }
+              },
+              {
+                "id": "15:00",
+                "title": {
+                  "en": "15:00"
+                }
+              },
+              {
+                "id": "16:00",
+                "title": {
+                  "en": "16:00"
+                }
+              },
+              {
+                "id": "17:00",
+                "title": {
+                  "en": "17:00"
+                }
+              },
+              {
+                "id": "18:00",
+                "title": {
+                  "en": "18:00"
+                }
+              },
+              {
+                "id": "19:00",
+                "title": {
+                  "en": "19:00"
+                }
+              },
+              {
+                "id": "20:00",
+                "title": {
+                  "en": "20:00"
+                }
+              },
+              {
+                "id": "21:00",
+                "title": {
+                  "en": "21:00"
+                }
+              },
+              {
+                "id": "22:00",
+                "title": {
+                  "en": "22:00"
+                }
+              },
+              {
+                "id": "23:00",
+                "title": {
+                  "en": "23:00"
+                }
+              }
+            ]
+          },
+          {
+            "type": "dropdown",
+            "name": "end_time",
+            "title": {
+              "en": "End of time window",
+              "nl": "Einde van tijdvenster",
+              "da": "Slut på tidsvindue",
+              "de": "Ende des Zeitfensters",
+              "es": "Fin de la ventana de tiempo",
+              "fr": "Fin de la plage horaire",
+              "it": "Fine della finestra oraria",
+              "no": "Slutt på tidsvindu",
+              "sv": "Tidsfönstrets slut",
+              "pl": "Koniec okna czasowego",
+              "ru": "Конец временного окна",
+              "ko": "시간 범위 종료"
+            },
+            "values": [
+              {
+                "id": "05:00",
+                "title": {
+                  "en": "05:00"
+                }
+              },
+              {
+                "id": "06:00",
+                "title": {
+                  "en": "06:00"
+                }
+              },
+              {
+                "id": "07:00",
+                "title": {
+                  "en": "07:00"
+                }
+              },
+              {
+                "id": "08:00",
+                "title": {
+                  "en": "08:00"
+                }
+              },
+              {
+                "id": "09:00",
+                "title": {
+                  "en": "09:00"
+                }
+              },
+              {
+                "id": "10:00",
+                "title": {
+                  "en": "10:00"
+                }
+              },
+              {
+                "id": "11:00",
+                "title": {
+                  "en": "11:00"
+                }
+              },
+              {
+                "id": "12:00",
+                "title": {
+                  "en": "12:00"
+                }
+              },
+              {
+                "id": "13:00",
+                "title": {
+                  "en": "13:00"
+                }
+              },
+              {
+                "id": "14:00",
+                "title": {
+                  "en": "14:00"
+                }
+              },
+              {
+                "id": "15:00",
+                "title": {
+                  "en": "15:00"
+                }
+              },
+              {
+                "id": "16:00",
+                "title": {
+                  "en": "16:00"
+                }
+              },
+              {
+                "id": "17:00",
+                "title": {
+                  "en": "17:00"
+                }
+              },
+              {
+                "id": "18:00",
+                "title": {
+                  "en": "18:00"
+                }
+              },
+              {
+                "id": "19:00",
+                "title": {
+                  "en": "19:00"
+                }
+              },
+              {
+                "id": "20:00",
+                "title": {
+                  "en": "20:00"
+                }
+              },
+              {
+                "id": "21:00",
+                "title": {
+                  "en": "21:00"
+                }
+              },
+              {
+                "id": "22:00",
+                "title": {
+                  "en": "22:00"
+                }
+              },
+              {
+                "id": "23:00",
+                "title": {
+                  "en": "23:00"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "solar_surplus_threshold_w",
+            "title": {
+              "en": "Solar surplus threshold (W)",
+              "nl": "Drempel zonne-overschot (W)",
+              "da": "Grænse for soloverskud (W)",
+              "de": "Schwellenwert Solarüberschuss (W)",
+              "es": "Umbral de excedente solar (W)",
+              "fr": "Seuil de surplus solaire (W)",
+              "it": "Soglia surplus solare (W)",
+              "no": "Terskel for soloverskudd (W)",
+              "sv": "Tröskel för solöverskott (W)",
+              "pl": "Próg nadwyżki energii słonecznej (W)",
+              "ru": "Порог избытка солнечной энергии (Вт)",
+              "ko": "태양광 잉여 임계값 (W)"
+            },
+            "placeholder": {
+              "en": "3100"
+            },
+            "min": 0
+          },
+          {
+            "type": "range",
+            "name": "min_charge_duration",
+            "title": {
+              "en": "Minimum charge duration",
+              "nl": "Minimale laadduur",
+              "da": "Minimum opladningsvarighed",
+              "de": "Mindestladedauer",
+              "es": "Duración mínima de carga",
+              "fr": "Durée de charge minimale",
+              "it": "Durata minima di ricarica",
+              "no": "Minste ladevarighet",
+              "sv": "Minsta laddningstid",
+              "pl": "Minimalny czas ładowania",
+              "ru": "Минимальная длительность зарядки",
+              "ko": "최소 충전 시간"
+            },
+            "min": 15,
+            "max": 60,
+            "step": 5,
+            "label": " min",
+            "labelDecimals": 0
+          }
+        ]
+      },
+      {
+        "id": "disable_charge_on_solar",
+        "title": {
+          "en": "Disable solar charging",
+          "nl": "Laden op zonne-energie uitschakelen",
+          "da": "Deaktivér solopladning",
+          "de": "Solarladen deaktivieren",
+          "es": "Desactivar carga solar",
+          "fr": "Désactiver la charge solaire",
+          "it": "Disabilita ricarica solare",
+          "no": "Deaktiver sollading",
+          "sv": "Inaktivera solladdning",
+          "pl": "Wyłącz ładowanie energią słoneczną",
+          "ru": "Отключить зарядку от солнца",
+          "ko": "태양광 충전 비활성화"
+        },
+        "hint": {
+          "en": "Stop charging the vehicle on surplus solar energy",
+          "nl": "Stop met het laden van het voertuig op overtollige zonne-energie",
+          "da": "Stop opladning af køretøjet med overskydende solenergi",
+          "de": "Laden des Fahrzeugs mit überschüssiger Solarenergie beenden",
+          "es": "Dejar de cargar el vehículo con el excedente de energía solar",
+          "fr": "Arrêter de charger le véhicule avec le surplus d'énergie solaire",
+          "it": "Interrompi la ricarica del veicolo con l'energia solare in eccesso",
+          "no": "Stopp lading av kjøretøyet med overskytende solenergi",
+          "sv": "Sluta ladda fordonet med överskott av solenergi",
+          "pl": "Przestań ładować pojazd nadwyżką energii słonecznej",
+          "ru": "Прекратить зарядку автомобиля избыточной солнечной энергией",
+          "ko": "잉여 태양광 에너지로 차량 충전 중지"
         },
         "args": [
           {

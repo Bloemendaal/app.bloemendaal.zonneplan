@@ -20,7 +20,8 @@
 		"charge": {
 			"errors": {
 				"not_found": "This charger could not (longer) be found. Check your Zonneplan account or remove the charger.",
-				"cable_not_connected": "The charger is not connected to a vehicle. Please connect the vehicle to the charger and try again."
+				"cable_not_connected": "The charger is not connected to a vehicle. Please connect the vehicle to the charger and try again.",
+				"invalid_allowed_window": "The end of the time window must be later than the start."
 			}
 		},
 		"pv": {

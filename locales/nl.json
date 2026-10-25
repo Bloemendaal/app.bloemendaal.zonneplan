@@ -20,7 +20,8 @@
 		"charge": {
 			"errors": {
 				"not_found": "Deze oplader kon niet (langer) worden gevonden. Controleer je Zonneplan-account of verwijder de oplader.",
-				"cable_not_connected": "De oplader is niet aangesloten op een voertuig. Sluit het voertuig aan op de oplader en probeer het opnieuw."
+				"cable_not_connected": "De oplader is niet aangesloten op een voertuig. Sluit het voertuig aan op de oplader en probeer het opnieuw.",
+				"invalid_allowed_window": "Het einde van het tijdvenster moet later zijn dan het begin."
 			}
 		},
 		"pv": {

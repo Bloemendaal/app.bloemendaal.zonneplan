@@ -20,7 +20,8 @@
 		"charge": {
 			"errors": {
 				"not_found": "Dieses Ladegerät konnte (länger) nicht gefunden werden. Überprüfen Sie Ihr Zonneplan-Konto oder entfernen Sie das Ladegerät.",
-				"cable_not_connected": "Das Ladegerät ist nicht mit einem Fahrzeug verbunden. Bitte verbinden Sie das Fahrzeug mit dem Ladegerät und versuchen Sie es erneut."
+				"cable_not_connected": "Das Ladegerät ist nicht mit einem Fahrzeug verbunden. Bitte verbinden Sie das Fahrzeug mit dem Ladegerät und versuchen Sie es erneut.",
+				"invalid_allowed_window": "Das Ende des Zeitfensters muss nach dem Beginn liegen."
 			}
 		},
 		"pv": {

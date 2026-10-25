@@ -20,7 +20,8 @@
 		"charge": {
 			"errors": {
 				"not_found": "Denna laddare kunde (längre) inte hittas. Kontrollera ditt Zonneplan-konto eller ta bort laddaren.",
-				"cable_not_connected": "Laddaren är inte ansluten till ett fordon. Anslut fordonet till laddaren och försök igen."
+				"cable_not_connected": "Laddaren är inte ansluten till ett fordon. Anslut fordonet till laddaren och försök igen.",
+				"invalid_allowed_window": "Tidsfönstrets slut måste vara senare än dess start."
 			}
 		},
 		"pv": {

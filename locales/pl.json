@@ -20,7 +20,8 @@
 		"charge": {
 			"errors": {
 				"not_found": "Ładowarka nie mogła (i nie będzie już mogła) zostać znaleziona. Sprawdź swoje konto Zonneplan lub usuń ładowarkę.",
-				"cable_not_connected": "Ładowarka nie jest podłączona do pojazdu. Podłącz pojazd do ładowarki i spróbuj ponownie."
+				"cable_not_connected": "Ładowarka nie jest podłączona do pojazdu. Podłącz pojazd do ładowarki i spróbuj ponownie.",
+				"invalid_allowed_window": "Koniec okna czasowego musi być późniejszy niż początek."
 			}
 		},
 		"pv": {

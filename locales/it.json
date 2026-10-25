@@ -20,7 +20,8 @@
 		"charge": {
 			"errors": {
 				"not_found": "Questo caricatore non è stato più trovato. Controlla il tuo account Zonneplan o rimuovi il caricatore.",
-				"cable_not_connected": "Il caricatore non è collegato a un veicolo. Collega il veicolo al caricatore e riprova."
+				"cable_not_connected": "Il caricatore non è collegato a un veicolo. Collega il veicolo al caricatore e riprova.",
+				"invalid_allowed_window": "La fine della finestra oraria deve essere successiva all'inizio."
 			}
 		},
 		"pv": {

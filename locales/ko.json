@@ -20,7 +20,8 @@
 		"charge": {
 			"errors": {
 				"not_found": "이 충전기를 더 이상 찾을 수 없습니다. Zonneplan 계정을 확인하거나 충전기를 제거하세요.",
-				"cable_not_connected": "충전기가 차량에 연결되어 있지 않습니다. 차량을 충전기에 연결하고 다시 시도하세요."
+				"cable_not_connected": "충전기가 차량에 연결되어 있지 않습니다. 차량을 충전기에 연결하고 다시 시도하세요.",
+				"invalid_allowed_window": "시간 범위의 종료는 시작보다 늦어야 합니다."
 			}
 		},
 		"pv": {

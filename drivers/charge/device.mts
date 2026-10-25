@@ -7,8 +7,10 @@ import type { DateTimeString } from "../../src/types.mjs";
 import ZonneplanDevice from "../zonneplan-device.mjs";
 import type ZonneplanFlow from "../zonneplan-flow.mjs";
 import DisableAlwaysFlexFlow from "./flows/disable-always-flex-flow.mjs";
+import DisableChargeOnSolarFlow from "./flows/disable-charge-on-solar-flow.mjs";
 import DisablePlugAndChargeFlow from "./flows/disable-plug-and-charge-flow.mjs";
 import EnableAlwaysFlexFlow from "./flows/enable-always-flex-flow.mjs";
+import EnableChargeOnSolarFlow from "./flows/enable-charge-on-solar-flow.mjs";
 import EnablePlugAndChargeFlow from "./flows/enable-plug-and-charge-flow.mjs";
 import SetModeFlow from "./flows/set-mode-flow.mjs";
 import StartBoostFlow from "./flows/start-boost-flow.mjs";
@@ -130,6 +132,8 @@ export default class ChargeDevice extends ZonneplanDevice<ChargePointContract> {
 			new DisablePlugAndChargeFlow(this),
 			new EnableAlwaysFlexFlow(this),
 			new DisableAlwaysFlexFlow(this),
+			new EnableChargeOnSolarFlow(this),
+			new DisableChargeOnSolarFlow(this),
 			new SetModeFlow(this),
 			new StartBoostFlow(this),
 			new StopChargingFlow(this),

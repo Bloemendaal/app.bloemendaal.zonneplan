@@ -3,9 +3,11 @@ import Authenticatable from "./authenticatable.mjs";
 import type {
 	DateString,
 	DateTimeString,
+	DurationString,
 	Integer,
 	PossiblyUnknownString,
 	Response,
+	TimeString,
 } from "./types.mjs";
 import type { BaseContractData } from "./user.mjs";
 
@@ -18,6 +20,12 @@ export type ChargePointStateType =
 export type DynamicLoadBalancingHealth = "HEALTHY" | PossiblyUnknownString;
 
 export type StartMode = "AlwaysFlex" | "StartWithApp" | "PlugAndCharge";
+
+/**
+ * Resolution of the schedule of a dynamic charging session:
+ * quarter-hourly (PT15M) or hourly (PT60M) blocks.
+ */
+export type ScheduleResolution = "PT15M" | "PT60M";
 
 export interface DynamicChargingUserConstraints {
 	desired_distance_in_kilometers: Integer | null;
@@ -110,6 +118,7 @@ export interface StartDynamicChargingSessionParams {
 		desired_end_time: DateTimeString;
 		unit: "kilometers" | "percentage";
 		value: Integer;
+		schedule_resolution?: ScheduleResolution;
 	};
 	vehicle?: {
 		vehicle_uuid: string;
@@ -118,6 +127,18 @@ export interface StartDynamicChargingSessionParams {
 
 export interface SetScheduleParams {
 	schedule: ChargeScheduleEntry[];
+}
+
+export interface ChargeOnSolarParams {
+	/** Solar surplus in watts that must be available before charging starts. */
+	solar_surplus_threshold_w: Integer;
+	/** Between PT15M and PT60M in steps of 5 minutes. */
+	min_charge_duration: DurationString;
+	/** Whole hours between 05:00 and 23:00. */
+	allowed_window: {
+		start_time: TimeString;
+		end_time: TimeString;
+	};
 }
 
 export interface ChartMeasurement {
@@ -277,6 +298,28 @@ export default class ChargePoint extends Authenticatable {
 
 		await client.post(
 			`/connections/${this.connectionUuid}/charge-points/${this.contractUuid}/actions/disable_always_flex`,
+		);
+	}
+
+	/**
+	 * Charge on surplus solar energy within the allowed window. Unlike the
+	 * other charge point actions, the control mode endpoints are prefixed
+	 * with /api and are keyed by the contract only.
+	 */
+	public async enableChargeOnSolar(params: ChargeOnSolarParams): Promise<void> {
+		const client = await this.getClient();
+
+		await client.put(
+			`/api/contracts/${this.contractUuid}/charge-point/control-mode/charge_on_solar/enable`,
+			params,
+		);
+	}
+
+	public async disableChargeOnSolar(): Promise<void> {
+		const client = await this.getClient();
+
+		await client.put(
+			`/api/contracts/${this.contractUuid}/charge-point/control-mode/charge_on_solar/disable`,
 		);
 	}
 

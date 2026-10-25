@@ -15,7 +15,8 @@ Transform your home into a smarter, more sustainable living space with seamless 
 
 Take full advantage of dynamic charging to optimize costs and sustainability:
 
-- **Dynamic Charging Sessions** - Schedule smart charging with specific goals (kilometers or battery percentage) and end times
+- **Dynamic Charging Sessions** - Schedule smart charging with specific goals (kilometers or battery percentage), end times and a quarter-hourly or hourly schedule resolution
+- **Solar Charging** - Charge on surplus solar energy within a time window of your choice, with a configurable surplus threshold and minimum charge duration
 - **Boost Charging** - Start immediate charging when needed
 - **Charge Modes** - Switch between Always Flex, Plug & Charge, and Start with App modes
 - **Powerplay Integration** - Automatically manage flexible smart charging
@@ -38,6 +39,7 @@ Create powerful automations with comprehensive Flow card support:
 - Stop charging
 - Enable/disable plug & charge mode
 - Enable/disable always flex mode
+- Enable/disable solar charging
 - Set charge mode
 - Unsuppress always flex mode
 

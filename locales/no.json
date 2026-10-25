@@ -20,7 +20,8 @@
 		"charge": {
 			"errors": {
 				"not_found": "Denne laderen kunne ikke lenger bli funnet. Sjekk Zonneplan-kontoen din eller fjern laderen.",
-				"cable_not_connected": "Laderen er ikke koblet til et kjøretøy. Vennligst koble kjøretøyet til laderen og prøv igjen."
+				"cable_not_connected": "Laderen er ikke koblet til et kjøretøy. Vennligst koble kjøretøyet til laderen og prøv igjen.",
+				"invalid_allowed_window": "Slutten på tidsvinduet må være senere enn starten."
 			}
 		},
 		"pv": {
